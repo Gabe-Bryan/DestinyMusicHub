@@ -4,7 +4,7 @@ import AutoScalingText from './AutoScalingText.js'
 //import {ScaleText} from 'react-scale-text';
 import seasonOfPlunder from "./season_of_plunder.jpg";
 import lightfall from './lightfall.jpg';
-
+//hi does this work
 const seasonOfPlunderText = 'Season of plunder was released in 2022. The composers for the soundtrack were: Michael Salvatori, Skye Lewin, Josh Wosser, and Michael Sechrist.';
 const lightfallText = 'Lightfall was released in 2022. The composers for the soundtrack were: Michael Salvatori, Sky Lewin, Josh Mosser, Michael Sechrist, Rotem Moav, and Peter Schlosser';
 
