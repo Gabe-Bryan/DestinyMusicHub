@@ -1,0 +1,218 @@
+
+* {
+    margin: 0;
+}
+
+
+body {
+    color:wheat;
+    background-color: rgb(37, 32, 39);
+    height: fit-content;
+    z-index:0;
+}
+header {
+    height: 300px;
+    background: url('marc-thompson-sanctum-18.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center -190px;
+    position: sticky;
+    top: -252px;
+    z-index: 1;
+}
+/* .App-header {
+    color:azure;
+    font-style: 'Times New Roman'
+} */
+
+h1 {
+    text-align: center;
+    font-family: futura-pt, sans-serif;
+    font-variant: small-caps;
+    font-size: 48pt;
+    padding-top: 100px;
+}
+
+h2 {
+    text-align: center;
+    padding-top: 2%;
+    font-size: 32pt;
+    font-family: futura-pt, sans-serif;
+    color: white;
+
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    overflow: hidden;
+    position: sticky;
+    top: 0px;
+    font-size: 16pt;
+    font-family: futura-pt, sans-serif;
+    justify-content:center;
+}
+
+li {
+    float: right;
+}
+  
+li a {
+    display: block;
+    padding-inline: 24px;
+    height: 36px;
+    padding-top: 12px;
+    color: white;
+    text-decoration: none;
+    position: relative;
+}
+
+ul.solid li a:hover,
+ul.transp li a:hover {
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.10) 40%);
+                /* linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1) 20%, rgba(0, 0, 0, 0.1) 80%, rgba(0, 0, 0, 0) 100%); */
+}
+
+li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    width: 80%;
+    height: 0.1em;
+    background-color: rgb(165, 119, 231);
+    opacity: 0;
+    transform: scale(0);
+    transition: opacity 150ms, transform 300ms;
+  }
+  
+a:hover::after,
+a:focus::after {
+    opacity: 1;
+    transform: scale(1) translate3d(0, -0.2em, 0) ;  
+}
+
+/* ul.solid li a:hover::after,
+ul.transp li a:hover::after {
+    transform: scale(1);
+    opacity: 1;
+} */
+
+ul.solid, ul.solid li a{
+    background-color: rgb(62, 53, 69);
+}
+
+ul.transp{
+    background: linear-gradient(rgba(14, 198, 198, 0.0), rgba(47, 5, 74, 0.15) 40%);
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 12px;
+}
+  
+/* Track */
+::-webkit-scrollbar-track {
+    background: #332e35;
+}
+  
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #6c5a6f;
+    border-radius:20px
+}
+  
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #a78bac;
+}
+
+.slideshow-container {
+    font-family: futura-pt, sans-serif;
+    color: white;
+    width: 1000px;
+    margin: auto;
+}
+
+/* Slideshow image rules */
+.slideshow-img {
+    width: 400px;
+    height: 400px;
+}
+
+.slideshow-img img {
+    width: 100%;
+}
+
+.slideshow-imgs {
+    /* background-color: #332e35; */
+    color:aliceblue;
+    width:400px;
+    height: 450px;
+    max-height: 450px;
+    /* overflow: hidden; */
+    display: block;
+    position:relative;
+}
+
+  /* Next & previous buttons */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 45%;
+    width: auto;
+    margin-top: -22px;
+    margin-right: 5px;
+    margin-left: 5px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 24px;
+    transition: 0.6s ease;
+    border-radius: 30px;
+    user-select: none;
+}
+.next{
+    right: 0;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.slideshow-imgs:hover .prev, .slideshow-imgs:hover .next{
+    background-color: rgba(0,0,0,0.8);
+}
+
+.slideshow-imgs .prev:hover, .slideshow-imgs .next:hover{
+    background-color: rgba(204, 1, 255, 0.8);
+}
+
+.dot {
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+    margin: 4px 4px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.dot:hover{
+    background-color: #ffffff;
+}
+
+.footer {
+    background: #332e35;
+    width: 100%;
+    min-height: 50px;
+    position: static;
+    bottom: 0;
+}
+
+.footer p {
+    color: white;
+    font-family: futura-pt, sans-serif;
+    text-align: left;
+    text-indent: 4em;
+    /* margin:20%; */
+    position: relative;
+    top: 1em;
+}
