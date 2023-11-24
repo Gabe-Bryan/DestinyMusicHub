@@ -4,12 +4,14 @@ import App from './App';
 import Test from './Test';
 import reportWebVitals from './reportWebVitals';
 import './style.css'
+import AddSongForm from './AddSongForm';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <App />
     <Test />
+    <AddSongForm />
   </React.StrictMode>
 );
 
