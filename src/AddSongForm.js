@@ -2,13 +2,17 @@ import React from "react";
 import {Button, Layout, Input, Space, ConfigProvider,theme} from "antd";
 import { Content } from "antd/es/layout/layout";
 
-function enter(){
-    console.out("this")
-}
+
 
 function AddSongForm(){
-    
+    //const [buttonName] = useState(0)
+    function enterButton (buttonName){
+        console.log(buttonName)
+        console.log("function enterButton is working")
+        return;
+    }
     return(
+       
         <ConfigProvider
     theme={{
       token: {
@@ -22,15 +26,15 @@ function AddSongForm(){
         <Content>
             <Space.Compact style={{width:'100%'}}>
             <Input placeholder="Song Title" />
-            <Button ghost>Enter</Button>
             </Space.Compact>
         </Content>
         <Content>
             <Space.Compact style={{width:'100%'}}>
             <Input placeholder="Lead Composer" />
-            <Button ghost>Enter</Button>
             </Space.Compact>
         </Content>
+        <Button ghost>Add New Source</Button>
+        <Button ghost onClick={this.enterButton.bind(this,"song")}>Enter Song and Sources Into Database</Button>
         </ConfigProvider>
     )
 }
