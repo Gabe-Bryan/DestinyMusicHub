@@ -9,7 +9,7 @@ function AddSongForm(){
     function enterButton (buttonName){
         console.log(buttonName)
         console.log("function enterButton is working")
-        return;
+        
     }
     return(
        
@@ -34,7 +34,7 @@ function AddSongForm(){
             </Space.Compact>
         </Content>
         <Button ghost>Add New Source</Button>
-        <Button ghost onClick={this.enterButton.bind(this,"song")}>Enter Song and Sources Into Database</Button>
+        <Button ghost onClick={()=>enterButton('song')}>Enter Song and Sources Into Database</Button>
         </ConfigProvider>
     )
 }
