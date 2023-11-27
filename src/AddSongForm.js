@@ -5,7 +5,7 @@ import { Content } from "antd/es/layout/layout";
 
 
 function AddSongForm(){
-    const [buttonName] = React.useState(false)
+    //const [buttonName] = React.useState(false)
     function enterButton (buttonName){
         console.log(buttonName)
         console.log("function enterButton is working")
@@ -18,7 +18,10 @@ function AddSongForm(){
         
     }
     return( 
-       
+       <AddSongForm
+       theme={{
+
+       }}>
         <ConfigProvider
     theme={{
       token: {
@@ -42,6 +45,7 @@ function AddSongForm(){
         <Button ghost onClick={()=>newSource}>Add New Source</Button>
         <Button ghost onClick={()=>enterButton('song')}>Enter Song and Sources Into Database</Button>
         </ConfigProvider>
+        </AddSongForm>
     )
 }
 export default AddSongForm
