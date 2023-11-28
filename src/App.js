@@ -1,6 +1,5 @@
 import React, { createElement } from 'react';
 import {useState} from 'react';
-import AutoScalingText from './AutoScalingText.js'
 //import {ScaleText} from 'react-scale-text';
 import seasonOfPlunder from "./season_of_plunder.jpg";
 import lightfall from './lightfall.jpg';
