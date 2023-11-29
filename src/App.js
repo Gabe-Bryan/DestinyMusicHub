@@ -1,8 +1,10 @@
 import React, { createElement } from 'react';
 import {useState} from 'react';
 //import {ScaleText} from 'react-scale-text';
+import './MusicPlayer.js';
 import seasonOfPlunder from "./season_of_plunder.jpg";
 import lightfall from './lightfall.jpg';
+import { YTPlayer } from './MusicPlayer.js';
 //hi does this work
 const seasonOfPlunderText = 'Season of plunder was released in 2022. The composers for the soundtrack were: Michael Salvatori, Skye Lewin, Josh Wosser, and Michael Sechrist.';
 const lightfallText = 'Lightfall was released in 2022. The composers for the soundtrack were: Michael Salvatori, Sky Lewin, Josh Mosser, Michael Sechrist, Rotem Moav, and Peter Schlosser';
@@ -16,9 +18,11 @@ function App() {
     </header>
     <body>       
       <h2> Featured Tracks</h2> 
+      <YTPlayer />
       <Slideshow images ={[seasonOfPlunder, lightfall]} texts = {[seasonOfPlunderText, lightfallText]} fontsizes = {['24pt', '22pt']}/>
-
+      
       <Slideshow images ={[seasonOfPlunder, lightfall]} texts = {[seasonOfPlunderText, lightfallText]} fontsizes = {['24pt', '22pt']}/>
+      
       <div class = 'footer'>
         <p>Created by Gabriel Bryan 2023</p>
       </div>
