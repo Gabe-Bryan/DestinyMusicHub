@@ -1,0 +1,26 @@
+
+.music-bar {
+    display :           grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    background-color: #332e35; 
+    border-color:     blue;
+    text-align:         center;
+    transition:         all 0.25s ease;
+    height: 75px;
+}
+
+.music-bar.expanded {
+    height: 400px;
+}
+
+.music-bar-container{
+    position:   fixed; 
+    width:      100%;
+    bottom:     0px; 
+    z-index:    3; 
+    text-align: left;
+}
+
+/* div {
+    border: solid 1px red;
+} */
