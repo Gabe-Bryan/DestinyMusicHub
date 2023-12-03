@@ -1,10 +1,18 @@
 import { useEffect, useState } from 'react';
 import YouTube from 'react-youtube';
 import {CaretRightOutlined, PauseOutlined, StepBackwardOutlined, StepForwardOutlined, UpOutlined, DownOutlined} from '@ant-design/icons'
-import {Button, Space, ConfigProvider, Tooltip, Progress} from 'antd';
+import {Button, Space, ConfigProvider, Tooltip, Progress, Slider} from 'antd';
 import '../stylesheets/musicPlayerStyle.css';
 
 function YTPlayer () {
+    let ytOpts = {
+        width: 200, 
+        height: 110,
+        playerVars: {
+            controls: 0
+        }
+    };
+
     const [ytPlayer, setYtPlayer] = useState(null);
     const [pIcon, setPIcon] = useState(<CaretRightOutlined/>);
     const [pSize, setPSize] = useState(['200', '110']);
@@ -44,15 +52,10 @@ function YTPlayer () {
         ytPlayer.previousVideo();
     }
 
-    let ytOpts = {
-        width: 200, 
-        height: 110,
-        playerVars: {
-            controls: 0
-        }
-    };
-
-
+    const ytSeek = (timeStamp) => {
+        console.log(timeStamp);
+        ytPlayer.seekTo(timeStamp);
+    }
 
     const expand = () => {
         setExpanded(!expanded);
@@ -102,8 +105,9 @@ function YTPlayer () {
                             <Button buttonType = 'primary' onClick = {playYt} shape = 'circle' icon = {pIcon} />
                             <Button buttonType = 'primary' onClick = {nextSong} shape = 'circle' icon = {<StepForwardOutlined />} />
                         </Space>
-                        <Progress percent={parseInt(time/duration * 100)} status="active" />
-
+                        {/* <Progress percent={parseInt(time/duration * 100)} status="active" /> */}
+                        {/* <progress max = {duration} value = {time}></progress> */}
+                        <Slider value={time} max = {duration} onChange={ytSeek}/>
                     </div>
                     <div>
                     </div>
