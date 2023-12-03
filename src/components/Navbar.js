@@ -1,5 +1,6 @@
 import React, { createElement } from 'react';
 import {useState} from 'react';
+import {Link} from 'react-router-dom';
 
 function Navbar(){
   
@@ -15,10 +16,10 @@ function Navbar(){
     }
     window.addEventListener('scroll', onScroll(252));
     return (
-      <ul className = {solid ? 'solid' : 'transp'}>
-        <li><a href="OfficialMusic">Officially Released</a></li>
-        <li><a href="CompleteMusic">Complete Music Archive</a></li>
-        <li><a href="">Home</a></li>
+      <ul className = {`navbar ${solid ? 'solid' : 'transp'}`}>
+        <li><Link to = 'OfficialMusic'>Official Music</Link></li>
+        <li><Link to = 'CompleteMusic'>Complete Music</Link></li>
+        <li><Link to = ''>Home</Link></li>
       </ul>
     );
 }

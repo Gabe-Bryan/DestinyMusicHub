@@ -42,22 +42,25 @@ h2 {
 
 }
 
-ul {
+
+.navbar {
     list-style-type: none;
     padding: 0;
     overflow: hidden;
-    position: sticky;
     top: 0px;
     font-size: 16pt;
     font-family: futura-pt, sans-serif;
     justify-content:center;
+    position: sticky;
+    margin-top: -48px;
+    z-index: 2;
 }
 
-li {
+.navbar li {
     float: right;
 }
   
-li a {
+.navbar li a {
     display: block;
     padding-inline: 24px;
     height: 36px;
@@ -67,13 +70,13 @@ li a {
     position: relative;
 }
 
-ul.solid li a:hover,
-ul.transp li a:hover {
+.navbar.solid li a:hover,
+.navbar.transp li a:hover {
     background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.10) 40%);
                 /* linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1) 20%, rgba(0, 0, 0, 0.1) 80%, rgba(0, 0, 0, 0) 100%); */
 }
 
-li a::after {
+.navbar li a::after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -86,8 +89,8 @@ li a::after {
     transition: opacity 150ms, transform 300ms;
   }
   
-a:hover::after,
-a:focus::after {
+.navbar li a:hover::after,
+.navbar li a:focus::after {
     opacity: 1;
     transform: scale(1) translate3d(0, -0.2em, 0) ;  
 }
@@ -98,11 +101,11 @@ ul.transp li a:hover::after {
     opacity: 1;
 } */
 
-ul.solid, ul.solid li a{
+.navbar.solid, .navbar.solid li a{
     background-color: rgb(62, 53, 69);
 }
 
-ul.transp{
+.navbar.transp{
     background: linear-gradient(rgba(14, 198, 198, 0.0), rgba(47, 5, 74, 0.15) 40%);
 }
 
