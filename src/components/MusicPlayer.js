@@ -14,7 +14,7 @@ function YTPlayer () {
     };
 
     const [ytPlayer, setYtPlayer] = useState(null);
-    const [pIcon, setPIcon] = useState(<CaretRightOutlined/>);
+    const [playing, setPlaying] = useState(false);
     const [pSize, setPSize] = useState(['200', '110']);
     const [expanded, setExpanded] = useState(false);
     const [expIcon, setExpIcon] = useState(<UpOutlined/>);
@@ -38,11 +38,11 @@ function YTPlayer () {
     };
 
     const ytPlay = () => {
-        setPIcon(<PauseOutlined />);
+        setPlaying(true);
     }
 
     const ytPause = () => {
-        setPIcon(<CaretRightOutlined/>)
+        setPlaying(false);
     }
 
     const nextSong = () => {
@@ -70,7 +70,7 @@ function YTPlayer () {
     }
 
     useEffect(() => {
-        if (ytPlayer){
+        if (playing && ytPlayer){
             setInterval(() => {
                 setTime(ytPlayer.getCurrentTime());
             }, 10)
@@ -102,7 +102,7 @@ function YTPlayer () {
                     <div style = {{display: 'block', textAlign: 'center', margin: '10px'}}>
                         <Space style={{}}>
                             <Button buttonType = 'primary' onClick = {prevSong} shape = 'circle' icon = {<StepBackwardOutlined />} />
-                            <Button buttonType = 'primary' onClick = {playYt} shape = 'circle' icon = {pIcon} />
+                            <Button buttonType = 'primary' onClick = {playYt} shape = 'circle' icon = {playing? <PauseOutlined/> : <CaretRightOutlined/>} />
                             <Button buttonType = 'primary' onClick = {nextSong} shape = 'circle' icon = {<StepForwardOutlined />} />
                         </Space>
                         {/* <Progress percent={parseInt(time/duration * 100)} status="active" /> */}
