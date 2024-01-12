@@ -1,0 +1,63 @@
+/* ### debug stuff here ### */
+#fakebody:current {
+    margin-top: 10rem;
+    margin-left: 10rem;
+}
+/* ######################## */
+
+
+:root {
+    --dropdown-border-radius: 1rem;
+    --image-height: 150px;
+    --cover-img-width: var(--image-height);
+    --banner-img-width: 500px;
+    --total-container-width: calc(var(--cover-img-width) + var(--banner-img-width));
+}
+
+img {
+    vertical-align: bottom;
+}
+
+#cover img {
+    width: var(--cover-img-width);
+    height: var(--image-height);
+}
+
+#banner img {
+    object-fit: cover;
+    width:  var(--banner-img-width);
+    height: var(--image-height);
+}
+
+#container{
+    display: block;
+    width: var(--total-container-width);
+    /* border: solid 1px #f00; */
+}
+
+#top {
+    display: block;
+    /* border: solid 1px #0f0; */
+}
+
+#top:hover {
+    cursor: pointer;
+}
+
+#cover {
+    display: inline-block;
+    width: var(--cover-img-size)
+}
+
+#banner {
+    display: inline-block;
+}
+
+#dropdown {
+    display: none;
+    /* border: solid 1px #00f; */
+    border-radius: 0rem 0rem var(--dropdown-border-radius) var(--dropdown-border-radius);
+    padding: 3rem;
+    background-color: #111;
+}
+

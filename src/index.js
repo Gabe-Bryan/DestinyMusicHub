@@ -2,11 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import App from './App';
+import { SoundtrackBanner } from './components/SoundtrackBanner';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-      <App/>
+      {/* <App/> */}
+      <center style={{margin: '10rem'}}>
+      <SoundtrackBanner coverSrc="./res/lightfall.jpg" bannerSrc="./res/marc-thompson-sanctum-18.jpg" />
+      <SoundtrackBanner coverSrc="./res/season_of_plunder.jpg" bannerSrc="./res/marc-thompson-sanctum-18.jpg" />
+      <SoundtrackBanner coverSrc="./res/destiny1soundtrack.jpg" bannerSrc="./res/marc-thompson-sanctum-18.jpg" />
+      </center>
     </React.StrictMode>
 );
 
