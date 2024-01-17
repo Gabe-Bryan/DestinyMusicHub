@@ -51,6 +51,33 @@ img {
 
 #banner {
     display: inline-block;
+    position: relative;
+}
+
+#banner-text-container {
+    /* background: linear-gradient( to right, 
+        rgba(0, 0, 0, 1),
+        rgba(255, 255, 255, 0)
+        
+    ); */
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    text-align: left;
+}
+
+#banner-text {
+    padding-left: 2rem;
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    transform: translate(0%, -50%);
+    font: 2rem arial;
+    color: #fff;
+    user-select: none;
+    /* filter: drop-shadow(rgba(0, 0, 0, .5) .1rem .1rem); */
 }
 
 #dropdown {

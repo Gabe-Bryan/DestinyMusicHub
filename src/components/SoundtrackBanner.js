@@ -20,6 +20,9 @@ export function SoundtrackBanner({ coverSrc, bannerSrc }) {
                 </div>
                 <div id="banner">
                     <img src={bannerSrc} alt="" />
+                    <div id="banner-text-container">
+                        <div id="banner-text">Soundtrack title</div>
+                    </div>
                 </div>
             </div>
             <div id="dropdown">
