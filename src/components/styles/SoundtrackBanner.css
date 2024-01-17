@@ -1,60 +1,57 @@
-/* ### debug stuff here ### */
-#fakebody:current {
-    margin-top: 10rem;
-    margin-left: 10rem;
-}
-/* ######################## */
-
-
+/* ===== CSS VARS THAT CAN BE TWEAKED ===== */
 :root {
     --dropdown-border-radius: 1rem;
     --image-height: 150px;
     --cover-img-width: var(--image-height);
     --banner-img-width: 500px;
     --total-container-width: calc(var(--cover-img-width) + var(--banner-img-width));
-}
 
-img {
+    --dropdown-min-height: 8rem;
+    --dropdown-max-height: 16rem;
+}
+/* ======================================== */
+
+#songbanner-container img {
     vertical-align: bottom;
 }
 
-#cover img {
+#songbanner-container  #cover img {
     width: var(--cover-img-width);
     height: var(--image-height);
 }
 
-#banner img {
+#songbanner-container  #banner img {
     object-fit: cover;
     width:  var(--banner-img-width);
     height: var(--image-height);
 }
 
-#container{
+#songbanner-container{
     display: block;
     width: var(--total-container-width);
     /* border: solid 1px #f00; */
 }
 
-#top {
+#songbanner-container #top {
     display: block;
     /* border: solid 1px #0f0; */
 }
 
-#top:hover {
+#songbanner-container #top:hover {
     cursor: pointer;
 }
 
-#cover {
+#songbanner-container #cover {
     display: inline-block;
     width: var(--cover-img-size)
 }
 
-#banner {
+#songbanner-container #banner {
     display: inline-block;
     position: relative;
 }
 
-#banner-text-container {
+#songbanner-container #banner-text-container {
     /* background: linear-gradient( to right, 
         rgba(0, 0, 0, 1),
         rgba(255, 255, 255, 0)
@@ -68,7 +65,7 @@ img {
     text-align: left;
 }
 
-#banner-text {
+#songbanner-container #banner-text {
     padding-left: 2rem;
     position: absolute;
     top: 50%;
@@ -77,14 +74,31 @@ img {
     font: 2rem arial;
     color: #fff;
     user-select: none;
-    /* filter: drop-shadow(rgba(0, 0, 0, .5) .1rem .1rem); */
+    filter: drop-shadow(rgba(0, 0, 0, .5) .1rem .1rem);
 }
 
-#dropdown {
-    display: none;
+#songbanner-container #dropdown {
     /* border: solid 1px #00f; */
-    border-radius: 0rem 0rem var(--dropdown-border-radius) var(--dropdown-border-radius);
-    padding: 3rem;
+    
+    padding: 0.25rem;
     background-color: #111;
+    min-height: var(--dropdown-min-height);
+    max-height: var(--dropdown-max-height);
+    overflow-y: scroll;
+}
+
+#songbanner-container #overflow-cap {
+    display: block;
+    border-radius: 0rem 0rem var(--dropdown-border-radius) var(--dropdown-border-radius);
+    height: 1rem;
+    background-color: #111;
+}
+
+#songbanner-container .hidden {
+    display: none;
+}
+
+#songbanner-container .shown {
+    display: block;
 }
 

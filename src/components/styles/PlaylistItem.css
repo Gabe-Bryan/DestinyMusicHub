@@ -1,0 +1,36 @@
+#playlist-item-container {
+    display: block;
+    background-color: #222;
+    color: #fff;
+    /* border: solid 1px #000; */
+    border-radius: 0.5rem 1rem;
+    padding: 0.25rem 1rem;
+    margin: 0.25rem;
+    user-select: none;
+}
+
+#playlist-item-container:hover {
+    background-color: #182b44;
+    cursor: pointer;
+}
+
+#playlist-item-container span {
+    font: 0.8rem verdana;
+    display: inline-block;
+}
+
+#playlist-item-container span:nth-child(1) {
+    width: 20%;
+    text-align: left;
+}
+
+#playlist-item-container span:nth-child(2) {
+    width: 50%;
+    text-align: left;
+}
+
+#playlist-item-container span:nth-child(3) {
+    width: 30%;
+    text-align: right;
+}
+

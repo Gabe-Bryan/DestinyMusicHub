@@ -8,11 +8,21 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
       {/* <App/> */}
-      <center style={{margin: '10rem'}}>
-      <SoundtrackBanner coverSrc="./res/lightfall.jpg" bannerSrc="./res/marc-thompson-sanctum-18.jpg" />
-      <SoundtrackBanner coverSrc="./res/season_of_plunder.jpg" bannerSrc="./res/marc-thompson-sanctum-18.jpg" />
-      <SoundtrackBanner coverSrc="./res/destiny1soundtrack.jpg" bannerSrc="./res/marc-thompson-sanctum-18.jpg" />
-      </center>
+      <div style={{
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+      }}>
+
+      <SoundtrackBanner 
+        expanded
+        coverSrc="./res/destiny1soundtrack.jpg" 
+        bannerSrc="./res/marc-thompson-sanctum-18.jpg" 
+        bannerText="Destiny Original Soundtrack"
+      />
+      
+      </div>
     </React.StrictMode>
 );
 
