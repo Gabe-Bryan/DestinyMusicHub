@@ -9,24 +9,25 @@
     --dropdown-min-height: 8rem;
     --dropdown-max-height: 16rem;
 }
+
 /* ======================================== */
 
 #songbanner-container img {
     vertical-align: bottom;
 }
 
-#songbanner-container  #cover img {
+#songbanner-container #cover img {
     width: var(--cover-img-width);
     height: var(--image-height);
 }
 
-#songbanner-container  #banner img {
+#songbanner-container #banner img {
     object-fit: cover;
-    width:  var(--banner-img-width);
+    width: var(--banner-img-width);
     height: var(--image-height);
 }
 
-#songbanner-container{
+#songbanner-container {
     display: block;
     width: var(--total-container-width);
     /* border: solid 1px #f00; */
@@ -79,7 +80,7 @@
 
 #songbanner-container #dropdown {
     /* border: solid 1px #00f; */
-    
+
     padding: 0.25rem;
     background-color: #111;
     min-height: var(--dropdown-min-height);
@@ -88,7 +89,6 @@
 }
 
 #songbanner-container #overflow-cap {
-    display: block;
     border-radius: 0rem 0rem var(--dropdown-border-radius) var(--dropdown-border-radius);
     height: 1rem;
     background-color: #111;
@@ -101,4 +101,3 @@
 #songbanner-container .shown {
     display: block;
 }
-

@@ -43,7 +43,7 @@ export function SoundtrackBanner({ expanded = false, coverSrc, bannerSrc, banner
             album: "Destiny 1 Official Soundtrack",
         },
         {
-            track: 4,
+            track: 5,
             title: 'The Fallen',
             length: '4:37',
             composers: ["Micheal Salvatori", "Martin O'Donnell", "Paul McCartney"],
@@ -105,7 +105,7 @@ export function SoundtrackBanner({ expanded = false, coverSrc, bannerSrc, banner
             <div id="dropdown" className={isExpanded}>
                 <Playlist playlistData={playlistData} />
             </div>
-            <div id="overflow-cap"/>
+            <div id="overflow-cap" className={isExpanded}/>
         </div>
     )
 }

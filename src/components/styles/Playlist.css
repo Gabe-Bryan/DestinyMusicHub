@@ -2,14 +2,12 @@ div#playlist-container {
     display: block;
     /* border: solid 1px #fff; */
     border-radius: 0rem 0rem 1rem 1rem;
-    margin-bottom: 1rem;
 }
 
 #playlist-container #song-list {
     position: relative;
     left: -1.25rem;
     list-style-type: none;
-    overflow-y: scroll;
 }
 
 #playlist-container #header {
