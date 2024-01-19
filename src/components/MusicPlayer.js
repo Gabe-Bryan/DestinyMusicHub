@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { createElement, useEffect, useState } from 'react';
 import YouTube from 'react-youtube';
 import {CaretRightOutlined, PauseOutlined, StepBackwardOutlined, StepForwardOutlined, UpOutlined, DownOutlined} from '@ant-design/icons'
 import {Button, Space, ConfigProvider, Tooltip, Progress, Slider} from 'antd';
@@ -20,6 +20,8 @@ function YTPlayer () {
     const [expIcon, setExpIcon] = useState(<UpOutlined/>);
     const [duration, setDuration] = useState(1);
     const [time, setTime] = useState(0);
+
+    
 
     const readyPlayer = (event) => {
         setYtPlayer(event.target);
@@ -97,7 +99,8 @@ function YTPlayer () {
                 }}> 
                 <div className = {`music-bar${expanded? ' expanded' : ''}`}>
             
-                    <div></div>
+                    <div>
+                    </div>
                     
                     <div style = {{display: 'block', textAlign: 'center', margin: '10px'}}>
                         <Space style={{}}>
@@ -114,6 +117,14 @@ function YTPlayer () {
                 </div>
             </ConfigProvider>
         </div>);
+}
+
+function Playlist() {
+
+}
+
+function SongInfo() {
+    
 }
 
 export {YTPlayer};
