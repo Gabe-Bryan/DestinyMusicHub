@@ -10,10 +10,10 @@ const expand= () => {
     setExpanded(!expanded);
 }
     return(
-        <div className="Complete-Song-Outer-Div${expanded}?">
+        <div className={`complete-song-outer-div${expanded?" expanded":""}`}>
             <script>
             <ul>
-                <li onClick={expand}></li>
+                <li onClick={expand} className={`complete-song-outer-div${expanded?" expanded":""}`}></li>
             </ul>
             </script>
         </div>
