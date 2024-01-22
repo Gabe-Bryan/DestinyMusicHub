@@ -21,6 +21,26 @@
     text-align: left;
 }
 
+.Yt-block {
+    display: block;
+    width: 1fr;
+}
+
+.player-options{
+    display :           grid;
+    grid-template-columns: 1fr 1fr 2fr;
+}
+
+.player-options.expanded{
+
+}
+
+.volume-bar{
+    width: 80%;
+    top: 50%;
+    position: relative;
+}
+
 
 /* div {
     border: solid 1px red;
