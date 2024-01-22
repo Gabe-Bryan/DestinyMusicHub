@@ -1,0 +1,37 @@
+div#playlist-container {
+    display: block;
+    /* border: solid 1px #fff; */
+    border-radius: 0rem 0rem 1rem 1rem;
+}
+
+#playlist-container #song-list {
+    position: relative;
+    left: -1.25rem;
+    list-style-type: none;
+}
+
+#playlist-container #header {
+    font: bold 0.6rem verdana;
+    color: #ccc;
+    padding: 0.25rem 1rem;
+    user-select: none;
+}
+
+#playlist-container #header span {
+    display: inline-block;
+}
+
+#playlist-container #header span:nth-child(1) {
+    text-align: left;
+    width: 20%;
+}
+
+#playlist-container #header span:nth-child(2) {
+    text-align: left;
+    width: 50%;
+}
+
+#playlist-container #header span:nth-child(3) {
+    text-align: right;
+    width: 30%;
+}

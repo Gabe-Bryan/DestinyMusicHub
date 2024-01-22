@@ -2,11 +2,27 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import App from './App';
+import { SoundtrackBanner } from './components/SoundtrackBanner';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-      <App/>
+      {/* <App/> */}
+      <div style={{
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+      }}>
+
+      <SoundtrackBanner 
+        expanded
+        coverSrc="./res/destiny1soundtrack.jpg" 
+        bannerSrc="./res/marc-thompson-sanctum-18.jpg" 
+        bannerText="Destiny Original Soundtrack"
+      />
+      
+      </div>
     </React.StrictMode>
 );
 
