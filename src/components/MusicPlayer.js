@@ -3,17 +3,10 @@ import YouTube from 'react-youtube';
 import {CaretRightOutlined, PauseOutlined, StepBackwardOutlined, StepForwardOutlined, UpOutlined, DownOutlined, SoundOutlined} from '@ant-design/icons'
 import {Button, Space, ConfigProvider, Tooltip, Progress, Slider, Row, Col, Flex} from 'antd';
 import '../stylesheets/musicPlayerStyle.css';
+import { PlaylistItem } from './PlaylistItem';
+import { secondsToTimestamp } from '../util';
+import { getVideoDuration } from '../apicalls';
 
-const secondsToTimestamp = (time) => {
-    const minutes = Math.floor(time / 60);
-    const seconds = time % 60;
-    let timeStamp = minutes + ':';
-    if (seconds < 10) {
-        timeStamp += '0'
-    }
-    timeStamp += seconds;
-    return timeStamp;
-}
 
 
 /**
@@ -139,6 +132,8 @@ function YTPlayer ({songQueue, setSongQueue, prevQueue, setPrevQueue}) {
                 <div className = {`music-bar${expanded? ' expanded' : ''}`}>
             
                     <div>
+                        <PlayerQueue songQueue = {songQueue}
+                            disabled = {!expanded}/>
                     </div>
                     
                     <div style = {{display: 'block', textAlign: 'center', margin: '10px'}}>
@@ -160,8 +155,42 @@ function YTPlayer ({songQueue, setSongQueue, prevQueue, setPrevQueue}) {
         </div>);
 }
 
-function PlayerQueue() {
-
+function PlayerQueue({songQueue, disabled}) {
+    const [queue, setQueue] = useState([]);
+    
+    useEffect(() => {
+        const buildQueue = () => {
+            let newQueue = [];
+            let count = 1;
+            for(let song of songQueue){
+                console.log("Duration: ", queue)
+                newQueue.push(
+                <li key = {count}>
+                    <PlaylistItem songData = {
+                        {track: count, 
+                        title: song.title, 
+                        length: secondsToTimestamp(song.duration)}}
+                    /> 
+                </li>);
+                count++;
+            }
+            setQueue(newQueue);
+        }
+        if (queue.length != songQueue.length)
+            buildQueue();
+    }, []);
+    return  (
+            <div id="playlist-container" style={{display: disabled ? "none" : "block"}}>
+                <ul id="song-list">
+                    <li id="header">
+                        <span>queue</span>
+                        <span>title</span>
+                        <span>length</span>
+                    </li>
+                    {queue}
+                </ul>
+            </div>
+            );
 }
 
 function PlayerOptions({expanded = false, ytPlayer}) {
