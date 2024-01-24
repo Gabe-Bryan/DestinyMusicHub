@@ -6,6 +6,7 @@ import { YTPlayer } from './components/MusicPlayer.js';
 import {CompleteDisplay} from "./components/CompleteSoundtrackDisplay.js"
 //import {ScaleText} from 'react-scale-text';
 import './stylesheets/style.css'
+import './stylesheets/Complete-Soundtrack-Container.css'
 
 function App() {
   return (
