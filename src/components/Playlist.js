@@ -5,12 +5,16 @@ import { PlaylistItem } from "./PlaylistItem"
 
 export function Playlist({ playlistData }) {
 
+    function clickHandler(event, songItem) {
+        console.log(`Do play action for [${songItem.track}. ${songItem.title}`)
+    }
+
     function getSongList(playlistDataIn) {
         let songList = []
         for (let songItem of playlistDataIn)
             songList.push(
                 <li key={songItem.track}> 
-                    <PlaylistItem  songData={songItem} />
+                    <PlaylistItem hasPlayButton songData={songItem}/>
                 </li>
             )
         return songList
@@ -23,6 +27,7 @@ export function Playlist({ playlistData }) {
             <ul id="song-list">
                 <div id="header">
                     <span id="track">track</span>
+                    <span id="play-button"></span>
                     <span id="title">title</span>
                     <span id="intensity">intensity</span>
                     <span id="length">length</span>

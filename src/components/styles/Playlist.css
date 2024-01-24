@@ -23,7 +23,12 @@ div#playlist-container {
 
 #playlist-container #header span#track {
     text-align: left;
-    width: 20%;
+    width: 10%;
+}
+
+#playlist-container #header span#play-button {
+    text-align: left;
+    width: 10%;
 }
 
 #playlist-container #header span#title {
