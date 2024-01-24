@@ -21,11 +21,12 @@ export function Playlist({ playlistData }) {
     return (
         <div id="playlist-container">
             <ul id="song-list">
-                <li id="header">
-                    <span>track</span>
-                    <span>title</span>
-                    <span>length</span>
-                </li>
+                <div id="header">
+                    <span id="track">track</span>
+                    <span id="title">title</span>
+                    <span id="intensity">intensity</span>
+                    <span id="length">length</span>
+                </div>
                 {songList}
             </ul>
         </div>

@@ -21,17 +21,22 @@ div#playlist-container {
     display: inline-block;
 }
 
-#playlist-container #header span:nth-child(1) {
+#playlist-container #header span#track {
     text-align: left;
     width: 20%;
 }
 
-#playlist-container #header span:nth-child(2) {
+#playlist-container #header span#title {
     text-align: left;
     width: 50%;
 }
 
-#playlist-container #header span:nth-child(3) {
+#playlist-container #header span#intensity {
+    text-align: left;
+    width: 20%;
+}
+
+#playlist-container #header span#length {
     text-align: right;
-    width: 30%;
+    width: 10%;
 }

@@ -19,18 +19,23 @@
     display: inline-block;
 }
 
-#playlist-item-container span:nth-child(1) {
+#playlist-item-container span#track {
     width: 20%;
     text-align: left;
 }
 
-#playlist-item-container span:nth-child(2) {
+#playlist-item-container span#title {
     width: 50%;
     text-align: left;
 }
 
-#playlist-item-container span:nth-child(3) {
-    width: 30%;
+#playlist-item-container span#intensity {
+    width: 20%;
+    text-align: left;
+}
+
+#playlist-item-container span#length {
+    width: 10%;
     text-align: right;
 }
 
