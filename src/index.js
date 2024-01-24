@@ -8,8 +8,8 @@ import { Playlist } from './components/Playlist';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    {/* <App/> */}
-    <div style={{
+    <App/>
+    {/* <div style={{
       position: 'absolute',
       top: '50%',
       left: '50%',
@@ -83,7 +83,7 @@ root.render(
         />
       </SoundtrackBanner>
 
-    </div>
+    </div> */}
   </React.StrictMode>
 );
 
