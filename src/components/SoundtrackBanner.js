@@ -4,88 +4,12 @@ import './styles/SoundtrackBanner.css'
 
 import { Playlist } from "./Playlist"
 
-export function SoundtrackBanner({ expanded = false, coverSrc, bannerSrc, bannerText = "" }, playlistData ) {
+export function SoundtrackBanner({ expanded = false, coverSrc, bannerSrc, bannerText = "" , children}) {
 
     const [isExpanded, setIsExpanded] = useState(expanded ? "shown" : "hidden")
 
-    /*
-            FAKE TEST PLAYLIST DATA
-        REMOVE BEFORE DEPLOYING/MERGING
-        v  v  v  v  v  v  v  v  v  v  v
-    */
-    playlistData = [
-        {
-            track: 1,
-            title: 'The Traveler',
-            length: '2:30',
-            composers: ["Micheal Salvatori", "Martin O'Donnell", "Paul McCartney"],
-            album: "Destiny 1 Official Soundtrack",
-        },
-        {
-            track: 2,
-            title: 'The Fallen',
-            length: '4:37',
-            composers: ["Micheal Salvatori", "Martin O'Donnell", "Paul McCartney"],
-            album: "Destiny 1 Official Soundtrack",
-        },
-        {
-            track: 3,
-            title: 'Excerpt from the Hope',
-            length: '2:16',
-            composers: ["Micheal Salvatori", "Martin O'Donnell"],
-            album: "Destiny 1 Official Soundtrack",
-        },
-        {
-            track: 4,
-            title: 'The Traveler',
-            length: '2:30',
-            composers: ["Micheal Salvatori", "Martin O'Donnell", "Paul McCartney"],
-            album: "Destiny 1 Official Soundtrack",
-        },
-        {
-            track: 5,
-            title: 'The Fallen',
-            length: '4:37',
-            composers: ["Micheal Salvatori", "Martin O'Donnell", "Paul McCartney"],
-            album: "Destiny 1 Official Soundtrack",
-        },
-        {
-            track: 6,
-            title: 'Excerpt from the Hope',
-            length: '2:16',
-            composers: ["Micheal Salvatori", "Martin O'Donnell"],
-            album: "Destiny 1 Official Soundtrack",
-        },
-        {
-            track: 7,
-            title: 'The Traveler',
-            length: '2:30',
-            composers: ["Micheal Salvatori", "Martin O'Donnell", "Paul McCartney"],
-            album: "Destiny 1 Official Soundtrack",
-        },
-        {
-            track: 8,
-            title: 'The Fallen',
-            length: '4:37',
-            composers: ["Micheal Salvatori", "Martin O'Donnell", "Paul McCartney"],
-            album: "Destiny 1 Official Soundtrack",
-        },
-        {
-            track: 9,
-            title: 'Excerpt from the Hope',
-            length: '2:16',
-            composers: ["Micheal Salvatori", "Martin O'Donnell"],
-            album: "Destiny 1 Official Soundtrack",
-        }
-    ]
-    /*
-        ^  ^  ^  ^  ^  ^  ^  ^  ^  ^  ^  
-        REMOVE BEFORE DEPLOYING/MERGING
-            FAKE TEST PLAYLIST DATA
-    */
-
     function toggleDropdown(event) {
-        if (isExpanded==="shown") setIsExpanded("hidden")
+        if (isExpanded === "shown") setIsExpanded("hidden")
         else setIsExpanded("shown")
     }
 
@@ -103,9 +27,9 @@ export function SoundtrackBanner({ expanded = false, coverSrc, bannerSrc, banner
                 </div>
             </div>
             <div id="dropdown" className={isExpanded}>
-                <Playlist playlistData={playlistData} />
+                {children}
             </div>
-            <div id="overflow-cap" className={isExpanded}/>
+            <div id="overflow-cap" className={isExpanded} />
         </div>
     )
 }
