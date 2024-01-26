@@ -3,15 +3,14 @@ import {Route, BrowserRouter, Routes} from 'react-router-dom';
 import {Home} from './pages/home.js';
 import Navbar from './components/Navbar.js';
 import { YTPlayer } from './components/MusicPlayer.js';
-import {getVideoDuration} from './apicalls.js';
 //import {ScaleText} from 'react-scale-text';
 import './stylesheets/style.css'
-
+const songQueue =[  {title: "Inner Light", intensity: "Action", videoId: '7Qyu5TtvhfA', duration: 500}, 
+                    {title: "The Hunted", intensity: "Action, High Action", videoId: 'YKQvTsHIVAg', duration: 230}, 
+                    {title: "Inner Light", intensity: "Soundtrack Edit", videoId: '4jQ_NbelyZE', duration: 191}];
+const prevQueue = [];
 function App() {
-  const [songQueue, setSongQueue] = useState([ {title: "Inner Light", intensity: "Action", videoId: '7Qyu5TtvhfA', duration: "7:34"}, 
-                                               {title: "The Hunted", intensity: "Action, High Action", videoId: 'YKQvTsHIVAg', duration: "3:34"}, 
-                                               {title: "Inner Light", intensity: "Soundtrack Edit", videoId: '4jQ_NbelyZE', duration: "3:34"}]);
-  const [prevQueue, setPrevQueue] = useState([]);
+  
   return (
     <div>
       <BrowserRouter>
@@ -21,7 +20,7 @@ function App() {
           <Route path = '/OfficialMusic' element = {<Home/>}/>
           <Route path = '/CompleteMusic' element = {<Home/>}/>
         </Routes>
-        <YTPlayer songQueue={songQueue} setSongQueue={setSongQueue} prevQueue={prevQueue} setPrevQueue={setPrevQueue}/>
+        <YTPlayer songQueue={songQueue} prevQueue={prevQueue}/>
       </BrowserRouter>
     </div>
   );

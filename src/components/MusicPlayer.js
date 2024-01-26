@@ -5,8 +5,9 @@ import {Button, Space, ConfigProvider, Tooltip, Progress, Slider, Row, Col, Flex
 import '../stylesheets/musicPlayerStyle.css';
 import { PlaylistItem } from './PlaylistItem';
 import { secondsToTimestamp } from '../util';
-import { getVideoDuration } from '../apicalls';
 
+const expandTransition = 600;//ms for youtube embed to change size/shape
+const expandPercent = 135/63;
 
 
 /**
@@ -15,24 +16,25 @@ import { getVideoDuration } from '../apicalls';
  * prevQueue: [source1, source2, ...sourceM],  -- This is the list of songs that have been played already
  * The song queue is always plaing songQueue[0]
  */
-function YTPlayer ({songQueue, setSongQueue, prevQueue, setPrevQueue}) {
-    let ytOpts = {
-        width: 200, 
-        height: 110,
-        playerVars: {
-            controls: 0
-        }
-    };
-
-    const [ytPlayer, setYtPlayer] = useState(null);
-    const [playing, setPlaying] = useState(false);
-    const [pSize, setPSize] = useState(['200', '110']);
+function YTPlayer ({songQueue, prevQueue}) {
+    //Expansion info
     const [expanded, setExpanded] = useState(false);
     const [expIcon, setExpIcon] = useState(<UpOutlined/>);
+    //Player info
+    const [ytPlayer, setYtPlayer] = useState(null);
+    const [playing, setPlaying] = useState(false);
+    const [pSize, setPSize] = useState(1);
+    //Info about video playing
     const [duration, setDuration] = useState(1);
     const [time, setTime] = useState(0);
 
-    
+    const ytOpts = {
+        width: 112 * pSize, 
+        height: 63 * pSize,
+        playerVars: {
+            controls: 0
+        }
+    }
 
     const readyPlayer = (event) => {
         if(songQueue.length > 0){
@@ -40,11 +42,9 @@ function YTPlayer ({songQueue, setSongQueue, prevQueue, setPrevQueue}) {
         }
         //Assigns the player as soon as it's ready
         setYtPlayer(event.target);
-        console.log(ytPlayer, ' event: ', event.target);
     };
 
     const playYt = () => {
-        console.log(ytPlayer);
         const pState = ytPlayer.getPlayerState();
         if(pState == 1 || pState == 3) {
             ytPlayer.pauseVideo();
@@ -62,28 +62,25 @@ function YTPlayer ({songQueue, setSongQueue, prevQueue, setPrevQueue}) {
     const nextSong = () => {
         if(songQueue.length > 1) {
             const currSong = songQueue.shift();
-            setSongQueue(songQueue);
             prevQueue.push(currSong);
-            setPrevQueue(prevQueue);
             ytPlayer.loadVideoById({videoId: songQueue[0].videoId, startSeconds: 0});
         }
     }
     const prevSong = () => {
         if (prevQueue.length > 0) {
             const prevSong = prevQueue.pop();
-            setPrevQueue(prevQueue);
             songQueue.unshift(prevSong);
-            setSongQueue(songQueue);
             ytPlayer.loadVideoById({videoId: songQueue[0].videoId, startSeconds: 0});
         }
     }
 
     const ytSeek = (timeStamp) => {
-        console.log(timeStamp);
         ytPlayer.seekTo(timeStamp);
     }
 
     const expand = () => {
+        
+        setStartTime(new Date().getTime());
         setExpanded(!expanded);
         if(expanded){
             //setPSize(['200', '110']);
@@ -98,10 +95,24 @@ function YTPlayer ({songQueue, setSongQueue, prevQueue, setPrevQueue}) {
     useEffect(() => {
         if (playing && ytPlayer){
             const loop = setInterval(() => {
-                console.log('effect happened');
                 setTime(ytPlayer.getCurrentTime());
                 setDuration(ytPlayer.getDuration());
             }, 200)
+            return () => clearInterval(loop);
+        }
+    });
+    //This is used for animating the yt player size changes
+    const [startTime, setStartTime] = useState(0);
+    const interval = 5;
+    useEffect(() => {
+        if ((expanded && pSize != expandPercent) || (!expanded && pSize != 1)) {
+            const loop = setInterval(() => {
+                const currTime = new Date().getTime();
+                const change = (currTime-startTime)/expandTransition * (expandPercent - 1) * (expanded ? 1 : -1);
+                const base = expanded ? 1 : expandPercent;
+                const newSize = base + change;
+                setPSize(Math.max(Math.min(newSize, expandPercent), 1));
+            }, interval)
             return () => clearInterval(loop);
         }
     });
@@ -111,14 +122,7 @@ function YTPlayer ({songQueue, setSongQueue, prevQueue, setPrevQueue}) {
             <Tooltip position = 'top' title = 'Expand music bar' mouseLeaveDelay={0.1}>
                 <Button shape = 'circle' size = 'large' icon = {expIcon} style = {{margin: '10px 20px'}} onClick = {expand} ghost />
             </Tooltip>
-            <div className='Yt-block'>
-                <YouTube opts = {ytOpts} style = {{ padding: '10px'}} 
-                    onReady = {readyPlayer} 
-                    onPause={() => setPlaying(false)} 
-                    onPlay={() => setPlaying(true)} 
-                    onStateChange={ytStateChange}
-                YouTube/>
-            </div>
+            
             <ConfigProvider
                 theme={{
                     components:{
@@ -131,9 +135,16 @@ function YTPlayer ({songQueue, setSongQueue, prevQueue, setPrevQueue}) {
                 }}> 
                 <div className = {`music-bar${expanded? ' expanded' : ''}`}>
             
-                    <div>
-                        <PlayerQueue songQueue = {songQueue}
-                            disabled = {!expanded}/>
+                    <div className='current-song-container'>
+                        <div className={`yt-block${expanded ? ' expanded' : ''}`}>
+                            <YouTube className = 'yt-player' opts = {ytOpts} 
+                                onReady = {readyPlayer} 
+                                onPause={() => setPlaying(false)} 
+                                onPlay={() => setPlaying(true)} 
+                                onStateChange={ytStateChange}
+                                YouTube/>
+                        </div>
+                        <CurrentSongDisplay currentSong={songQueue[0]} expanded = {expanded}/>
                     </div>
                     
                     <div style = {{display: 'block', textAlign: 'center', margin: '10px'}}>
@@ -145,7 +156,8 @@ function YTPlayer ({songQueue, setSongQueue, prevQueue, setPrevQueue}) {
                         <Slider value={time} max = {duration} 
                             onChange={ytSeek}
                             tooltip={{formatter: secondsToTimestamp}}/>
-
+                        <PlayerQueue songQueue = {songQueue}
+                            disabled = {!expanded}/>
                     </div>
                     <div>
                         <PlayerOptions expanded = {expanded} ytPlayer={ytPlayer}/>
@@ -156,38 +168,36 @@ function YTPlayer ({songQueue, setSongQueue, prevQueue, setPrevQueue}) {
 }
 
 function PlayerQueue({songQueue, disabled}) {
-    const [queue, setQueue] = useState([]);
     
-    useEffect(() => {
-        const buildQueue = () => {
-            let newQueue = [];
-            let count = 1;
-            for(let song of songQueue){
-                console.log("Duration: ", queue)
-                newQueue.push(
-                <li key = {count}>
-                    <PlaylistItem songData = {
-                        {track: count, 
-                        title: song.title, 
-                        length: secondsToTimestamp(song.duration)}}
-                    /> 
-                </li>);
-                count++;
-            }
-            setQueue(newQueue);
+    const buildQueue = () => {
+        let newQueue = [];
+        let count = 1;
+        for(let song of songQueue){
+            newQueue.push(
+            <li key = {count}>
+                <PlaylistItem songData = {
+                    {track: count, 
+                    title: song.title, 
+                    intensity: song.intensity,
+                    length: secondsToTimestamp(song.duration)}}
+                /> 
+            </li>);
+            count++;
         }
-        if (queue.length != songQueue.length)
-            buildQueue();
-    }, []);
+        return newQueue;
+    }
+
     return  (
             <div id="playlist-container" style={{display: disabled ? "none" : "block"}}>
                 <ul id="song-list">
                     <li id="header">
-                        <span>queue</span>
-                        <span>title</span>
-                        <span>length</span>
+                        <span id="track">track</span>
+                        <span id="play-button"></span>
+                        <span id="title">title</span>
+                        <span id="intensity">intensity</span>
+                        <span id="length">length</span>
                     </li>
-                    {queue}
+                    {buildQueue()}
                 </ul>
             </div>
             );
@@ -208,6 +218,19 @@ function PlayerOptions({expanded = false, ytPlayer}) {
                     onChange = {setVolume}
                     tooltip={{formatter: (value) => `${value}%`}}/>
             </Flex>
+        </div>
+    );
+}
+
+function CurrentSongDisplay({currentSong, expanded}) {
+    return (
+        <div className = {`current-song-display${expanded ? ' expanded' : ''}`}>
+            <div className = 'song-title'>
+                {currentSong.title}
+            </div>
+            <div className = 'song-intensity'>
+                {currentSong.intensity}
+            </div>
         </div>
     );
 }
