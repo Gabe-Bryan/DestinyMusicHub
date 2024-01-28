@@ -4,12 +4,15 @@ import {CaretRightOutlined, PauseOutlined, StepBackwardOutlined, StepForwardOutl
 import {Button, Space, ConfigProvider, Tooltip, Progress, Slider, Row, Col, Flex} from 'antd';
 import '../stylesheets/musicPlayerStyle.css';
 import { PlaylistItem } from './PlaylistItem';
-import { secondsToTimestamp } from '../util';
+import { linearVectorInterpolation, secondsToTimestamp } from '../util';
 
-const expandTransition = 600;//ms for youtube embed to change size/shape
-const expandPercent = 135/63;
+const expandTransition = 300;//ms for youtube embed to change size/shape
+const expandPercent = 135/63;//height ratio max/min
+const minDim = {width: 63, height: 63};
+const maxDim = {width: 240, height: 135};
+const ytMinimizationShift = (112 - minDim.height) / 2 / minDim.height * 100;//(112 - 63)/112
 
-
+//
 /**
  * Song queue and prevQueue are structured as followed
  * songQueue: [source1, source2, ...sourceN],      -- This is the current queue
@@ -83,11 +86,8 @@ function YTPlayer ({songQueue, prevQueue}) {
         setStartTime(new Date().getTime());
         setExpanded(!expanded);
         if(expanded){
-            //setPSize(['200', '110']);
-            
             setExpIcon(<UpOutlined/>);
         } else {
-            //setPSize(['0', '0']);
             setExpIcon(<DownOutlined/>);
         }
     }
@@ -112,11 +112,15 @@ function YTPlayer ({songQueue, prevQueue}) {
                 const base = expanded ? 1 : expandPercent;
                 const newSize = base + change;
                 setPSize(Math.max(Math.min(newSize, expandPercent), 1));
-            }, interval)
+            }, interval);
             return () => clearInterval(loop);
         }
     });
+    const expansionAmount = (pSize - 1)/(expandPercent - 1)
+    const ytBlockDim = linearVectorInterpolation(minDim, maxDim, expansionAmount);
+    const borderRadius = 50 + (15-50) * expansionAmount;
 
+    console.log("max shift" + ytMinimizationShift);
     return (
         <div className = 'music-bar-container'>
             <Tooltip position = 'top' title = 'Expand music bar' mouseLeaveDelay={0.1}>
@@ -136,12 +140,14 @@ function YTPlayer ({songQueue, prevQueue}) {
                 <div className = {`music-bar${expanded? ' expanded' : ''}`}>
             
                     <div className='current-song-container'>
-                        <div className={`yt-block${expanded ? ' expanded' : ''}`}>
+                        <div className={`yt-block${expanded ? ' expanded' : ''}`} 
+                            style = {{width: ytBlockDim.x + "px", height: ytBlockDim.y + "px", borderRadius: borderRadius}}>
                             <YouTube className = 'yt-player' opts = {ytOpts} 
                                 onReady = {readyPlayer} 
                                 onPause={() => setPlaying(false)} 
                                 onPlay={() => setPlaying(true)} 
                                 onStateChange={ytStateChange}
+                                style = {{left: - ytMinimizationShift + ytMinimizationShift * expansionAmount + "%"}}
                                 YouTube/>
                         </div>
                         <CurrentSongDisplay currentSong={songQueue[0]} expanded = {expanded}/>
@@ -149,9 +155,12 @@ function YTPlayer ({songQueue, prevQueue}) {
                     
                     <div style = {{display: 'block', textAlign: 'center', margin: '10px'}}>
                         <Space>
-                            <Button buttonType = 'primary' onClick = {prevSong} shape = 'circle' icon = {<StepBackwardOutlined />} disabled = {prevQueue.length == 0}/>
-                            <Button buttonType = 'primary' onClick = {playYt} shape = 'circle' icon = {playing? <PauseOutlined/> : <CaretRightOutlined/>} disabled = {songQueue.length == 0}/>
-                            <Button buttonType = 'primary' onClick = {nextSong} shape = 'circle' icon = {<StepForwardOutlined />} disabled = {songQueue.length < 2} />
+                            <Button buttonType = 'primary' onClick = {prevSong} 
+                                    shape = 'circle' icon = {<StepBackwardOutlined />} disabled = {prevQueue.length == 0}/>
+                            <Button buttonType = 'primary' onClick = {playYt} 
+                                    shape = 'circle' icon = {playing? <PauseOutlined/> : <CaretRightOutlined/>} disabled = {songQueue.length == 0}/>
+                            <Button buttonType = 'primary' onClick = {nextSong} 
+                                    shape = 'circle' icon = {<StepForwardOutlined />} disabled = {songQueue.length < 2} />
                         </Space>
                         <Slider value={time} max = {duration} 
                             onChange={ytSeek}
@@ -210,7 +219,6 @@ function PlayerOptions({expanded = false, ytPlayer}) {
     return (
         <div className = {`player-options${expanded ? ' expanded' : ''}`}>
             <div></div>
-            <div></div>
             <Flex className = 'volume-bar'>
                 <SoundOutlined style = {{paddingRight: '10px', color: '#ffffff'}}/>
                 <Slider defaultValue={100} max = {100} 
@@ -218,6 +226,7 @@ function PlayerOptions({expanded = false, ytPlayer}) {
                     onChange = {setVolume}
                     tooltip={{formatter: (value) => `${value}%`}}/>
             </Flex>
+            <div></div>
         </div>
     );
 }

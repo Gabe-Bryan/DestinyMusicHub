@@ -133,7 +133,7 @@ ul.transp li a:hover::after {
 .slideshow-container {
     font-family: futura-pt, sans-serif;
     color: white;
-    width: 1000px;
+    /* width: 1000px; */
     margin: auto;
 }
 
@@ -186,6 +186,11 @@ ul.transp li a:hover::after {
 
 .slideshow-imgs .prev:hover, .slideshow-imgs .next:hover{
     background-color: rgba(204, 1, 255, 0.8);
+}
+
+.slideshow-text {
+    overflow-wrap: break-word;
+    margin: 2%;
 }
 
 .dot {

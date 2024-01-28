@@ -1,5 +1,5 @@
 :root {
-    --yt-minimization-time: 700ms;
+    --yt-minimization-time: 0ms;
 
     /* yt dimension vars are for the youtube embed specificially */
     --yt-min-height: 63;
@@ -36,46 +36,46 @@
 
 .music-bar-container .player-options{
     display :           grid;
-    grid-template-columns: 1fr 1fr 3fr;
+    grid-template-columns: 1fr 3fr 1fr;
 }
 
 .yt-block{
     margin-top: 7px;
     margin-bottom: 7px;
     display: block;
-    width:  calc(var(--yt-min-height) * 1px);
-    height:  calc(var(--yt-min-height) * 1px);
-    border-radius: 50%;
+    /* width:  calc(var(--yt-min-height) * 1px); */
+    /* height:  calc(var(--yt-min-height) * 1px); */
+    /* border-radius: 50%; */
     overflow: hidden;
     position: relative;
     /* animation-name: spin; */
     animation-delay: var(--yt-minimization-time);
     animation-duration: 7000ms;
     animation-iteration-count: infinite;
-    animation-timing-function: linear; 
+    animation-timing-function: linear;
     left: 10px;
-    transition: all var(--yt-minimization-time) ease;
+    /* transition: border-radius var(--yt-minimization-time) ease; */
 }
 
 .yt-block.expanded {
     animation: none;
-    border-radius: 15%;
-    width: calc(var(--yt-max-width) * 1px);
-    height:  calc(var(--yt-max-height) * 1px);;
-    transition: all var(--yt-minimization-time) ease;
+    /* border-radius: 15%; */
+    /* width: calc(var(--yt-max-width) * 1px); */
+    /* height:  calc(var(--yt-max-height) * 1px);; */
+    /* transition: all var(--yt-minimization-time) ease; */
 }
 
 .yt-block .yt-player {
     position: absolute;
     /* left: -38.8888889%; */
     /* left: var(--yt-minimization-time); */
-    transition: all var(--yt-minimization-time);
-    transform: translate(var(--yt-minimized-offset), 0%);
+    /* transition: all var(--yt-minimization-time); */
+    /* transform: translate(var(--yt-minimized-offset), 0%); */
 }
 
 .yt-block.expanded .yt-player {
     
-    transform: translate(0%, 0%);
+    /* transform: translate(0%, 0%); */
 }
 
 .music-bar-container .player-options.expanded{

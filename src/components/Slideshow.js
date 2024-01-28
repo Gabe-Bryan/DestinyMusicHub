@@ -32,7 +32,7 @@ function Slideshow(props){
   
     //setText('Does any aaaa aaaaaaaaaaaaaaaaaa  a aa  a a a a a a a a a a a a a a a a a aa  a a a a a a  a  aa  hjahj hj hjhj hj hj hjhj j hj  hj   kj ljlkjlkjlkj  jlklkj lkj lkj lkj lkjlkj lkj lkj lkjlkj lkj lkj lkjjlklj lkj lkj lkjlkj lkj  lkjlkjlkj lkj lkj lkj lkjlkjlkj lkj  lkj lkj lklkj lkj lkj lkj lkj lkj lkj of this bs even work?');
     return (
-      <div class = 'slideshow-container' style = {{display: 'flex'}}>
+      <div class = 'slideshow-container' style = {{display: 'flex', flexWrap: "wrap"}}>
         <div className = 'slideshow-imgs' style = {{margin: '5%'}}>
           {jsxImgs}
           <a class="prev" onClick={() => changeElement(true)}>&#10094;</a>
@@ -41,7 +41,10 @@ function Slideshow(props){
             {dots}
           </div>
         </div>
-        <p style = {{margin: 'auto 2%', fontSize: props.fontsizes[element]}}>{props.texts[element]}</p>
+        <p className ='slideshow-text' 
+            style = {{fontSize: props.fontsizes[element]}}>
+            {props.texts[element]}
+        </p>
       </div>);
   }
   

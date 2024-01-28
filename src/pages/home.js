@@ -25,10 +25,10 @@ function Home() {
             
             <Slideshow images ={[seasonOfPlunder, lightfall]} texts = {[seasonOfPlunderText, lightfallText]} fontsizes = {['24pt', '22pt']}/>
             
-            <div class = 'footer'>
+            {/* <div class = 'footer'>
                 <p>Created by Gabriel Bryan 2023</p>
                 
-            </div>
+            </div> */}
         </body>
     </div>
   );
