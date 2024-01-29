@@ -15,9 +15,11 @@ header {
     background: url('../resources/marc-thompson-sanctum-18.jpg');
     background-size: cover;
     background-attachment: fixed;
-    background-position: center -190px;
-    position: sticky;
-    top: -252px;
+    background-repeat: no-repeat;
+    background-position: left bottom 200px;
+    position: static;
+    /* top: -252px; */
+    top: 0px;
     z-index: 1;
 }
 /* .App-header {
@@ -29,7 +31,7 @@ h1 {
     text-align: center;
     font-family: futura-pt, sans-serif;
     font-variant: small-caps;
-    font-size: 48pt;
+    font-size: 4em;
     padding-top: 100px;
 }
 
@@ -48,7 +50,7 @@ h2 {
     padding: 0;
     overflow: hidden;
     top: 0px;
-    font-size: 16pt;
+    font-size: 1.25em;
     font-family: futura-pt, sans-serif;
     justify-content:center;
     position: sticky;
@@ -62,7 +64,7 @@ h2 {
   
 .navbar li a {
     display: block;
-    padding-inline: 24px;
+    padding-inline: 0.7em;
     height: 36px;
     padding-top: 12px;
     color: white;
@@ -131,16 +133,22 @@ ul.transp li a:hover::after {
 }
 
 .slideshow-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 80%;
     font-family: futura-pt, sans-serif;
     color: white;
-    /* width: 1000px; */
-    margin: auto;
+    margin: 5%;
+    flex-wrap: "wrap";
 }
 
 /* Slideshow image rules */
 .slideshow-img {
-    width: 400px;
-    height: 400px;
+    width: 100%;
+    aspect-ratio: 1/1;
+    display: block;
+    position: relative;
+    /* margin-right: 5%; */
 }
 
 .slideshow-img img {
@@ -150,33 +158,36 @@ ul.transp li a:hover::after {
 .slideshow-imgs {
     /* background-color: #332e35; */
     color:aliceblue;
-    width:400px;
-    height: 450px;
-    max-height: 450px;
+    /* width:400px; */
+    /* height: 450px; */
+    /* max-height: 450px; */
     /* overflow: hidden; */
-    display: block;
+    /* display: block; */
     position:relative;
 }
 
   /* Next & previous buttons */
 .prev, .next {
     cursor: pointer;
-    position: absolute;
-    top: 45%;
-    width: auto;
-    margin-top: -22px;
+    /* margin-top: auto; */
     margin-right: 5px;
     margin-left: 5px;
-    padding: 16px;
+    padding: 3%;
+
+    position: absolute;
+    bottom: calc(47% - 12px);
+
+    width: auto;
+    border-radius: 40%;
+
     color: white;
     font-weight: bold;
     font-size: 24px;
-    transition: 0.6s ease;
-    border-radius: 30px;
+    transition: all 0.6s ease;
     user-select: none;
 }
 .next{
-    right: 0;
+    right: 0px;
 }
 
 /* On hover, add a black background color with a little bit see-through */
@@ -191,12 +202,14 @@ ul.transp li a:hover::after {
 .slideshow-text {
     overflow-wrap: break-word;
     margin: 2%;
+    padding: 10%;
+    margin: auto;
 }
 
 .dot {
     cursor: pointer;
-    height: 20px;
-    width: 20px;
+    height: 1em;
+    width: 1em;
     margin: 4px 4px;
     background-color: #bbb;
     border-radius: 50%;
@@ -234,6 +247,6 @@ ul.transp li a:hover::after {
     }
 }
 
-/* div {
-    border: solid 1px red;
-}  */
+div {
+    /* border: solid 1px red; */
+} 

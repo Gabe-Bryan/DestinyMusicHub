@@ -1,16 +1,22 @@
 import { createElement, useEffect, useState } from 'react';
 import YouTube from 'react-youtube';
-import {CaretRightOutlined, PauseOutlined, StepBackwardOutlined, StepForwardOutlined, UpOutlined, DownOutlined, SoundOutlined} from '@ant-design/icons'
-import {Button, Space, ConfigProvider, Tooltip, Progress, Slider, Row, Col, Flex} from 'antd';
+import {LoadingOutlined, CaretRightOutlined, PauseOutlined, StepBackwardOutlined, 
+        StepForwardOutlined, UpOutlined, DownOutlined, SoundOutlined} from '@ant-design/icons'
+import {Button, Space, ConfigProvider, Tooltip, Spin, Slider, Flex} from 'antd';
 import '../stylesheets/musicPlayerStyle.css';
 import { PlaylistItem } from './PlaylistItem';
 import { linearVectorInterpolation, secondsToTimestamp } from '../util';
 
 const expandTransition = 300;//ms for youtube embed to change size/shape
 const expandPercent = 135/63;//height ratio max/min
+
 const minDim = {width: 63, height: 63};
 const maxDim = {width: 240, height: 135};
+
 const ytMinimizationShift = (112 - minDim.height) / 2 / minDim.height * 100;//(112 - 63)/112
+
+const musicBarMinHeight = 75;
+const musicBarMaxHeight = 300;
 
 //
 /**
@@ -30,6 +36,7 @@ function YTPlayer ({songQueue, prevQueue}) {
     //Info about video playing
     const [duration, setDuration] = useState(1);
     const [time, setTime] = useState(0);
+    const [loading, setLoading] = useState(false);
 
     const ytOpts = {
         width: 112 * pSize, 
@@ -57,6 +64,7 @@ function YTPlayer ({songQueue, prevQueue}) {
     };
 
     const ytStateChange = (event) => {
+        setLoading(event.data == -1 || event.data == 3);
         if(event.data == 0){
             nextSong();
         }
@@ -120,7 +128,7 @@ function YTPlayer ({songQueue, prevQueue}) {
     const ytBlockDim = linearVectorInterpolation(minDim, maxDim, expansionAmount);
     const borderRadius = 50 + (15-50) * expansionAmount;
 
-    console.log("max shift" + ytMinimizationShift);
+    // console.log("max shift" + ytMinimizationShift);
     return (
         <div className = 'music-bar-container'>
             <Tooltip position = 'top' title = 'Expand music bar' mouseLeaveDelay={0.1}>
@@ -137,18 +145,31 @@ function YTPlayer ({songQueue, prevQueue}) {
                         },
                     }
                 }}> 
-                <div className = {`music-bar${expanded? ' expanded' : ''}`}>
+                <div className = 'music-bar' 
+                    style = {{maxHeight: (musicBarMinHeight + (musicBarMaxHeight - musicBarMinHeight) * expansionAmount) + 'px'}}>
             
                     <div className='current-song-container'>
                         <div className={`yt-block${expanded ? ' expanded' : ''}`} 
                             style = {{width: ytBlockDim.x + "px", height: ytBlockDim.y + "px", borderRadius: borderRadius}}>
-                            <YouTube className = 'yt-player' opts = {ytOpts} 
+                            
+                            <YouTube className = {`yt-player${loading && !expanded ? ' loading':''}`} opts = {ytOpts} 
                                 onReady = {readyPlayer} 
                                 onPause={() => setPlaying(false)} 
                                 onPlay={() => setPlaying(true)} 
                                 onStateChange={ytStateChange}
                                 style = {{left: - ytMinimizationShift + ytMinimizationShift * expansionAmount + "%"}}
                                 YouTube/>
+                            {loading && !expanded && 
+                            <div className = 'yt-status-display'>
+                                
+                                <LoadingOutlined
+                                    style={{
+                                    fontSize: 24,
+                                    }}
+                                    spin
+                                />
+                            </div>
+                            }
                         </div>
                         <CurrentSongDisplay currentSong={songQueue[0]} expanded = {expanded}/>
                     </div>

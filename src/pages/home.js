@@ -21,9 +21,13 @@ function Home() {
         </header>
         <body>       
             <h2> Featured Tracks</h2> 
-            <Slideshow images ={[seasonOfPlunder, lightfall]} texts = {[seasonOfPlunderText, lightfallText]} fontsizes = {['24pt', '22pt']}/>
+            <Slideshow images ={[seasonOfPlunder, lightfall]} 
+              texts = {[seasonOfPlunderText, lightfallText]} fontsizes = {['24pt', '22pt']}
+              style = {{margin: 'auto', padding: '2%'}}/>
             
-            <Slideshow images ={[seasonOfPlunder, lightfall]} texts = {[seasonOfPlunderText, lightfallText]} fontsizes = {['24pt', '22pt']}/>
+            <Slideshow images ={[seasonOfPlunder, lightfall]} 
+              texts = {[seasonOfPlunderText, lightfallText]} fontsizes = {['24pt', '22pt']}
+              style = {{margin: 'auto', padding: '2%'}}/>
             
             {/* <div class = 'footer'>
                 <p>Created by Gabriel Bryan 2023</p>

@@ -25,13 +25,6 @@
     background-color: #332e35; 
     border-color:     blue;
     text-align:         center;
-    transition:         all var(--yt-minimization-time) ease;
-    /* height: 75px; */
-    max-height: 75px;
-}
-
-.music-bar-container .music-bar.expanded {
-    max-height: 300px;
 }
 
 .music-bar-container .player-options{
@@ -73,13 +66,26 @@
     /* transform: translate(var(--yt-minimized-offset), 0%); */
 }
 
+.yt-block .yt-player.loading {
+    display: none;
+}
+
 .yt-block.expanded .yt-player {
     
     /* transform: translate(0%, 0%); */
 }
 
-.music-bar-container .player-options.expanded{
-    
+.yt-status-display {
+    /* margin: auto; */
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-color: #1e1621;
+}
+.yt-status-display * {
+    margin: auto;
+    top: 30%;
+    position: relative;
 }
 
 
