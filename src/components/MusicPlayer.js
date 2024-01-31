@@ -9,11 +9,14 @@ import { linearVectorInterpolation, secondsToTimestamp } from '../util';
 
 const expandTransition = 300;//ms for youtube embed to change size/shape
 const expandPercent = 135/63;//height ratio max/min
+const timeToRemoveUI = 3250;//ms yt takes to remove ui after playing (timed with my phone)
 
 const minDim = {width: 63, height: 63};
 const maxDim = {width: 240, height: 135};
 
-const ytMinimizationShift = (112 - minDim.height) / 2 / minDim.height * 100;//(112 - 63)/112
+//calculates the amount that the embed has to shift over since the embed is always 16:9
+//the amount is 50% of the width difference between the yt embed and the cropping div
+const ytMinimizationShift = (112 - minDim.height) / 2 / minDim.height * 100;// 112 is the width of the actual embed
 
 const musicBarMinHeight = 75;
 const musicBarMaxHeight = 300;
@@ -25,24 +28,26 @@ const musicBarMaxHeight = 300;
  * prevQueue: [source1, source2, ...sourceM],  -- This is the list of songs that have been played already
  * The song queue is always plaing songQueue[0]
  */
-function YTPlayer ({songQueue, prevQueue}) {
+function YTPlayer ({songQueue, prevQueue, playing, setPlaying}) {
     //Expansion info
     const [expanded, setExpanded] = useState(false);
     const [expIcon, setExpIcon] = useState(<UpOutlined/>);
     //Player info
     const [ytPlayer, setYtPlayer] = useState(null);
-    const [playing, setPlaying] = useState(false);
     const [pSize, setPSize] = useState(1);
     //Info about video playing
     const [duration, setDuration] = useState(1);
     const [time, setTime] = useState(0);
     const [loading, setLoading] = useState(false);
+    const [loadFinishTime, setLoadFinish] = useState(0);
 
     const ytOpts = {
         width: 112 * pSize, 
         height: 63 * pSize,
         playerVars: {
-            controls: 0
+            controls: 0,
+            disablekb: 1,
+            fs: 0
         }
     }
 
@@ -64,7 +69,11 @@ function YTPlayer ({songQueue, prevQueue}) {
     };
 
     const ytStateChange = (event) => {
-        setLoading(event.data == -1 || event.data == 3);
+        let newLoadStatus = event.data == -1 || event.data == 3;
+        if(!loading && newLoadStatus) {
+            setLoadFinish(new Date().getTime());
+        }
+        setLoading(newLoadStatus);
         if(event.data == 0){
             nextSong();
         }
@@ -91,7 +100,7 @@ function YTPlayer ({songQueue, prevQueue}) {
 
     const expand = () => {
         
-        setStartTime(new Date().getTime());
+        setExpandStartTime(new Date().getTime());
         setExpanded(!expanded);
         if(expanded){
             setExpIcon(<UpOutlined/>);
@@ -99,6 +108,21 @@ function YTPlayer ({songQueue, prevQueue}) {
             setExpIcon(<DownOutlined/>);
         }
     }
+
+    //checks if the youtube ui has been up long enough to disapear
+    // useEffect(() => {
+    //     let time = new Date().getTime();
+    //     if(loading && time - loadFinishTime < timeToRemoveUI) {
+    //         const loop = setInterval(() => {
+    //             console.log('shit:', loadFinishTime);
+    //             time = new Date().getTime();
+    //             if(time - loadFinishTime >= timeToRemoveUI){
+    //                 setLoading(false);
+    //             }
+    //         }, 100)
+    //         return () => clearInterval(loop);
+    //     }
+    // });
 
     useEffect(() => {
         if (playing && ytPlayer){
@@ -110,13 +134,13 @@ function YTPlayer ({songQueue, prevQueue}) {
         }
     });
     //This is used for animating the yt player size changes
-    const [startTime, setStartTime] = useState(0);
+    const [expandStartTime, setExpandStartTime] = useState(0);
     const interval = 5;
     useEffect(() => {
         if ((expanded && pSize != expandPercent) || (!expanded && pSize != 1)) {
             const loop = setInterval(() => {
                 const currTime = new Date().getTime();
-                const change = (currTime-startTime)/expandTransition * (expandPercent - 1) * (expanded ? 1 : -1);
+                const change = (currTime-expandStartTime)/expandTransition * (expandPercent - 1) * (expanded ? 1 : -1);
                 const base = expanded ? 1 : expandPercent;
                 const newSize = base + change;
                 setPSize(Math.max(Math.min(newSize, expandPercent), 1));
@@ -128,6 +152,8 @@ function YTPlayer ({songQueue, prevQueue}) {
     const ytBlockDim = linearVectorInterpolation(minDim, maxDim, expansionAmount);
     const borderRadius = 50 + (15-50) * expansionAmount;
 
+    const currTime = new Date().getTime();
+    const hideEmbed = currTime - loadFinishTime < timeToRemoveUI;
     // console.log("max shift" + ytMinimizationShift);
     return (
         <div className = 'music-bar-container'>
@@ -152,14 +178,14 @@ function YTPlayer ({songQueue, prevQueue}) {
                         <div className={`yt-block${expanded ? ' expanded' : ''}`} 
                             style = {{width: ytBlockDim.x + "px", height: ytBlockDim.y + "px", borderRadius: borderRadius}}>
                             
-                            <YouTube className = {`yt-player${loading && !expanded ? ' loading':''}`} opts = {ytOpts} 
+                            <YouTube className = {`yt-player${hideEmbed && !expanded ? ' loading':''}`} opts = {ytOpts} 
                                 onReady = {readyPlayer} 
                                 onPause={() => setPlaying(false)} 
                                 onPlay={() => setPlaying(true)} 
                                 onStateChange={ytStateChange}
                                 style = {{left: - ytMinimizationShift + ytMinimizationShift * expansionAmount + "%"}}
                                 YouTube/>
-                            {loading && !expanded && 
+                            {hideEmbed && !expanded && 
                             <div className = 'yt-status-display'>
                                 
                                 <LoadingOutlined

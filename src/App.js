@@ -10,6 +10,8 @@ const songQueue =[  {title: "Inner Light", intensity: "Action", videoId: '7Qyu5T
                     {title: "Inner Light", intensity: "Soundtrack Edit", videoId: '4jQ_NbelyZE', duration: 191}];
 const prevQueue = [];
 function App() {
+  //Sets whether a song is currently playing
+  const [playing, setPlaying] = useState(false);
   
   return (
     <div>
@@ -20,7 +22,7 @@ function App() {
           <Route path = '/OfficialMusic' element = {<Home/>}/>
           <Route path = '/CompleteMusic' element = {<Home/>}/>
         </Routes>
-        <YTPlayer songQueue={songQueue} prevQueue={prevQueue}/>
+        <YTPlayer songQueue={songQueue} prevQueue={prevQueue} playing = {playing} setPlaying={setPlaying}/>
       </BrowserRouter>
     </div>
   );
