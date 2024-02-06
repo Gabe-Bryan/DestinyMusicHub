@@ -1,23 +1,30 @@
 import {useState} from 'react'
+import '../stylesheets/SongItem.css'
 //import './styles/PlaylistItem.css'
-import { Playlist } from "./Playlist"
+//import { Playlist } from "./Playlist"
 export function SongItem({ completeTitle,songData, onClick=undefined, expanded = false}) {
-    const [isExpanded, setExpanded] = useState(expanded ? "shown" : "hidden");
+    const [isExpanded, setIsExpanded] = useState(expanded ? "shown" : "hidden");
     function expand(){
-        if (isExpanded==="shown") setExpanded("hidden")
-        else setExpanded("shown")
+        if (isExpanded==="shown"){ 
+            setIsExpanded("hidden")
+            console.log(completeTitle+isExpanded)
+        }
+        else{ 
+            setIsExpanded("shown")
+            console.log(completeTitle+isExpanded)
     }
-    function clickHandler(event) {
-        expand()
-        console.log(`Do thing to play [${songData.track}. ${songData.title}]`)
     }
+    
 
     return (
-        <div id="playlist-item-container">
-            <div id="title" onClick={expand}>{completeTitle}</div>
+        <div id="soundtrack-container">
+            <div id="title" onClick={expand}>
+                {completeTitle}
+            </div>
             <div id="dropdown" className={isExpanded}>
+                <p>does this work</p>
             {/* <Playlist playlistData={songData}/> */}
-        </div>
+            </div>
         </div>
     );
 }

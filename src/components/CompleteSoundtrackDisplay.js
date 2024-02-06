@@ -6,47 +6,43 @@ const songList="hi my name is jeff"
 
 function CompleteDisplay({ expanded = false,SongList,bannerText = "hallo world"}){
     const [isExpanded, setExpanded] = useState(expanded ? "shown" : "hidden");
-    const [cdSize, setcdSize] = useState(['200', '110']);
-    SongList=[
-        {
-            
-_id:"65b06b4ebad846dd6181fc2a",
-title:"a song aaaaaaa",
+    SongList=[{
+        title:"a song aaaaaaa",
 
-meta_data:{
-    destination: undefined,
-    faction: undefined,
-    game: "1",
-    implementation_year: undefined,
-    lead_composer: "b",
-    other_credits: undefined,
-    release_year: undefined,
-},
-
-sources:[{
-video_id:"CDMQgA5Ub3M",
-source_type:"Youtube",
-
-intensity:[
-"Tension",
-"Action",
-"Heavy Action",
-"Light Action",
-"High Action"],
-
-track_number:1,
-is_official:true,
-version_title:"abcded",
-soundtrack_id:"655c08dca00e3d9aec2fec19",
-duration:356}]
+        meta_data:{
+            lead_composer: "b",
         },
-        {
-            track: 2,
-            title: 'The Fallen',
-            length: '4:37',
-            composers: ["Micheal Salvatori", "Martin O'Donnell", "Paul McCartney"],
-            album: "Destiny 1 Official Soundtrack",
-        }
+
+        sources:[{
+            video_id:"CDMQgA5Ub3M",
+            intensity:[
+            "Tension",
+            "Action",
+            "Heavy Action",
+            "Light Action",
+            "High Action"],
+
+            track_number:1,
+            is_official:true,
+            version_title:"abcded",
+            duration:356},{
+                video_id:"CDMQgA5Ub3M",
+                intensity:[
+                "Tension",
+                "Action"],
+    
+                track_number:2,
+                is_official:true,
+                version_title:"a",
+                duration:356}]
+            },
+            {
+                track: 2,
+                title: 'The Fallen',
+                length: '4:37',
+                composers: ["Micheal Salvatori", "Martin O'Donnell", "Paul McCartney"],
+                album: "Destiny 1 Official Soundtrack",
+            }
     ]
 function toggleExpand(event){
     if (isExpanded==="shown") setExpanded("hidden")
