@@ -52,6 +52,7 @@ function YTPlayer ({songQueue, prevQueue, ytPlayer, setYtPlayer, playYt}) {
         }
     }
 
+    //Assigns the useState for the yt embed (a.k.a. ytPlayer)
     const readyPlayer = (event) => {
         if(songQueue.length > 0){
             event.target.loadVideoById({videoId: songQueue[0].videoId, startSeconds: 0});
@@ -61,6 +62,7 @@ function YTPlayer ({songQueue, prevQueue, ytPlayer, setYtPlayer, playYt}) {
     };
 
 
+    //Handles state change so that it can start the visuals during loading
     const ytStateChange = (event) => {
         let newLoadStatus = event.data == -1 || event.data == 3;
         if(!loading && newLoadStatus) {
@@ -72,6 +74,7 @@ function YTPlayer ({songQueue, prevQueue, ytPlayer, setYtPlayer, playYt}) {
         }
     }
 
+    //Skips the currently playing/selected song
     const nextSong = () => {
         if(songQueue.length > 1) {
             const currSong = songQueue.shift();
@@ -79,6 +82,7 @@ function YTPlayer ({songQueue, prevQueue, ytPlayer, setYtPlayer, playYt}) {
             ytPlayer.loadVideoById({videoId: songQueue[0].videoId, startSeconds: 0});
         }
     }
+    //Skips to the prev song (pulling out of prevQueue)
     const prevSong = () => {
         if (prevQueue.length > 0) {
             const prevSong = prevQueue.pop();
@@ -90,16 +94,18 @@ function YTPlayer ({songQueue, prevQueue, ytPlayer, setYtPlayer, playYt}) {
     //Jumps a song to the front of the queue and loads it
     const jumpQueue = (index) => {
         const temp = songQueue[index];
-        songQueue.slice(index, 1);
+        songQueue.splice(index, 1);
         songQueue.unshift(temp);
+        ytPlayer.loadVideoById({videoId: songQueue[0].videoId, startSeconds: 0});
     };
 
+    //Jumps to selected timestamp
     const ytSeek = (timeStamp) => {
         ytPlayer.seekTo(timeStamp);
     }
 
+    //Expands/unexpands music player
     const expand = () => {
-        
         setExpandStartTime(new Date().getTime());
         setExpanded(!expanded);
         if(expanded){
@@ -139,7 +145,6 @@ function YTPlayer ({songQueue, prevQueue, ytPlayer, setYtPlayer, playYt}) {
 
     const currTime = new Date().getTime();
     const hideEmbed = currTime - loadFinishTime < timeToRemoveUI;
-    // console.log("max shift" + ytMinimizationShift);
     return (
         <div className = 'music-bar-container'>
             <Tooltip position = 'top' title = 'Expand music bar' mouseLeaveDelay={0.1}>
@@ -197,8 +202,8 @@ function YTPlayer ({songQueue, prevQueue, ytPlayer, setYtPlayer, playYt}) {
                         <Slider value={time} max = {duration} 
                             onChange={ytSeek}
                             tooltip={{formatter: secondsToTimestamp}}/>
-                        <PlayerQueue songQueue = {songQueue}
-                             disabled={!expanded}/>
+                        <PlayerQueue songQueue = {songQueue} disabled={!expanded}
+                            onPlayClick={jumpQueue}/>
                     </div>
                     <div>
                         <PlayerOptions expanded = {expanded} ytPlayer={ytPlayer}/>
@@ -208,19 +213,22 @@ function YTPlayer ({songQueue, prevQueue, ytPlayer, setYtPlayer, playYt}) {
         </div>);
 }
 
-function PlayerQueue({songQueue, disabled}) {
+function PlayerQueue({songQueue, disabled, onPlayClick}) {
     
     const buildQueue = () => {
         let newQueue = [];
         let count = 1;
         for(let song of songQueue){
+            const i = count -1;
             newQueue.push(
             <li key = {count}>
-                <PlaylistItem songData = {
-                    {track: count, 
+                <PlaylistItem songData = {{
+                    track: count, 
                     title: song.title, 
                     intensity: song.intensity,
-                    length: secondsToTimestamp(song.duration)}}
+                    length: secondsToTimestamp(song.duration)
+                    }} 
+                    hasPlayButton onClick={() => onPlayClick(i)}
                 /> 
             </li>);
             count++;
