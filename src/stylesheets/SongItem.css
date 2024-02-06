@@ -1,15 +1,15 @@
-
-#soundtrack-container #dropdown{
-cursor:crosshair;
+#soundtrack-container #dropdown {
+    cursor: crosshair;
 }
-#soundtrack-container #dropdown .hidden {
+
+#soundtrack-container #dropdown.hidden {
     display: none;
     /* opacity: 0; */
-    
+
 }
 
-#soundtrack-container #dropdown .shown {
+#soundtrack-container #dropdown.shown {
     display: block;
     /* opacity: 1; */
-    
+
 }
