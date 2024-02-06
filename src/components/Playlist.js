@@ -14,7 +14,7 @@ export function Playlist({ playlistData }) {
         for (let songItem of playlistDataIn)
             songList.push(
                 <li key={songItem.track}> 
-                    <PlaylistItem hasPlayButton songData={songItem}/>
+                    <PlaylistItem songData={songItem}/>
                 </li>
             )
         return songList

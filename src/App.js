@@ -11,7 +11,32 @@ const songQueue =[  {title: "Inner Light", intensity: "Action", videoId: '7Qyu5T
 const prevQueue = [];
 function App() {
   //Sets whether a song is currently playing
-  const [playing, setPlaying] = useState(false);
+  const [ytPlayer, setYtPlayer] = useState(null);
+
+  //Changes to pause/play depending on current state
+  const playYt = () => {
+      const pState = ytPlayer.getPlayerState();
+      if(pState == 1 || pState == 3) {
+          ytPlayer.pauseVideo();
+      } else {
+          ytPlayer.playVideo();
+      }
+  };
+
+  //Adds a new song to the end of the queue
+  const queueNewSong = (newSong) => {
+    songQueue.push(newSong);
+  }
+
+  //Adds a new song to the front of the queue and plays it
+  const playNewSong = (newSong) => {
+      songQueue.unshift(newSong);
+
+      ytPlayer.loadVideoById({videoId: songQueue[0].videoId, startSeconds: 0});
+      if(ytPlayer.getPlayerState() == 2) {
+          ytPlayer.playVideo();
+      }
+  }
   
   return (
     <div>
@@ -22,7 +47,7 @@ function App() {
           <Route path = '/OfficialMusic' element = {<Home/>}/>
           <Route path = '/CompleteMusic' element = {<Home/>}/>
         </Routes>
-        <YTPlayer songQueue={songQueue} prevQueue={prevQueue} playing = {playing} setPlaying={setPlaying}/>
+        <YTPlayer songQueue={songQueue} prevQueue={prevQueue} ytPlayer={ytPlayer} setYtPlayer = {setYtPlayer} playYt = {playYt}/>
       </BrowserRouter>
     </div>
   );

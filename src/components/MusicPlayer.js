@@ -6,6 +6,7 @@ import {Button, Space, ConfigProvider, Tooltip, Spin, Slider, Flex} from 'antd';
 import '../stylesheets/musicPlayerStyle.css';
 import { PlaylistItem } from './PlaylistItem';
 import { linearVectorInterpolation, secondsToTimestamp } from '../util';
+import {Playlist} from './Playlist';
 
 const expandTransition = 300;//ms for youtube embed to change size/shape
 const expandPercent = 135/63;//height ratio max/min
@@ -28,13 +29,13 @@ const musicBarMaxHeight = 300;
  * prevQueue: [source1, source2, ...sourceM],  -- This is the list of songs that have been played already
  * The song queue is always plaing songQueue[0]
  */
-function YTPlayer ({songQueue, prevQueue, playing, setPlaying}) {
+function YTPlayer ({songQueue, prevQueue, ytPlayer, setYtPlayer, playYt}) {
     //Expansion info
     const [expanded, setExpanded] = useState(false);
     const [expIcon, setExpIcon] = useState(<UpOutlined/>);
     //Player info
-    const [ytPlayer, setYtPlayer] = useState(null);
     const [pSize, setPSize] = useState(1);
+    const [playing, setPlaying] = useState(false);
     //Info about video playing
     const [duration, setDuration] = useState(1);
     const [time, setTime] = useState(0);
@@ -59,14 +60,6 @@ function YTPlayer ({songQueue, prevQueue, playing, setPlaying}) {
         setYtPlayer(event.target);
     };
 
-    const playYt = () => {
-        const pState = ytPlayer.getPlayerState();
-        if(pState == 1 || pState == 3) {
-            ytPlayer.pauseVideo();
-        } else {
-            ytPlayer.playVideo();
-        }
-    };
 
     const ytStateChange = (event) => {
         let newLoadStatus = event.data == -1 || event.data == 3;
@@ -94,6 +87,13 @@ function YTPlayer ({songQueue, prevQueue, playing, setPlaying}) {
         }
     }
 
+    //Jumps a song to the front of the queue and loads it
+    const jumpQueue = (index) => {
+        const temp = songQueue[index];
+        songQueue.slice(index, 1);
+        songQueue.unshift(temp);
+    };
+
     const ytSeek = (timeStamp) => {
         ytPlayer.seekTo(timeStamp);
     }
@@ -108,21 +108,6 @@ function YTPlayer ({songQueue, prevQueue, playing, setPlaying}) {
             setExpIcon(<DownOutlined/>);
         }
     }
-
-    //checks if the youtube ui has been up long enough to disapear
-    // useEffect(() => {
-    //     let time = new Date().getTime();
-    //     if(loading && time - loadFinishTime < timeToRemoveUI) {
-    //         const loop = setInterval(() => {
-    //             console.log('shit:', loadFinishTime);
-    //             time = new Date().getTime();
-    //             if(time - loadFinishTime >= timeToRemoveUI){
-    //                 setLoading(false);
-    //             }
-    //         }, 100)
-    //         return () => clearInterval(loop);
-    //     }
-    // });
 
     useEffect(() => {
         if (playing && ytPlayer){
@@ -213,7 +198,7 @@ function YTPlayer ({songQueue, prevQueue, playing, setPlaying}) {
                             onChange={ytSeek}
                             tooltip={{formatter: secondsToTimestamp}}/>
                         <PlayerQueue songQueue = {songQueue}
-                            disabled = {!expanded}/>
+                             disabled={!expanded}/>
                     </div>
                     <div>
                         <PlayerOptions expanded = {expanded} ytPlayer={ytPlayer}/>
