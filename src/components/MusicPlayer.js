@@ -3,7 +3,7 @@ import YouTube from 'react-youtube';
 import {LoadingOutlined, CaretRightOutlined, PauseOutlined, StepBackwardOutlined, 
         StepForwardOutlined, UpOutlined, DownOutlined, SoundOutlined} from '@ant-design/icons'
 import {Button, Space, ConfigProvider, Tooltip, Spin, Slider, Flex} from 'antd';
-import '../stylesheets/musicPlayerStyle.css';
+import './styles/musicPlayerStyle.css';
 import { PlaylistItem } from './PlaylistItem';
 import { linearVectorInterpolation, secondsToTimestamp } from '../util';
 import {Playlist} from './Playlist';
