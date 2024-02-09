@@ -11,12 +11,13 @@ export function PlaylistItem({ songData, hasPlayButton = false, onClick = undefi
     // }
 
     return (
-        <div id="playlist-item-container" onClick={!hasPlayButton ? onClick: undefined}>
+        <div id="playlist-item-container" onClick={!hasPlayButton ? onClick : undefined}>
             <span id="track">{songData.track}</span>
             <span id="play-button">{hasPlayButton && (<PlayButton onClick={onClick} />)}</span>
             <span id="title">{songData.title}</span>
             <span id="intensity">{songData.intensity}</span>
             <span id="length">{songData.length}</span>
+            <button id="options-button">{"\u{FE19}"}</button>
         </div>
     )
 }
@@ -32,4 +33,8 @@ function PlayButton({ onClick }) {
             </div>
         </div>
     );
+}
+
+export function OptionsMenu( { options=["Option1","Option2","Option3"] } ) {
+
 }
