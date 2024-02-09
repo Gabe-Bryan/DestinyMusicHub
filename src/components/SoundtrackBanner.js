@@ -4,8 +4,15 @@ import './styles/SoundtrackBanner.css'
 
 import { Playlist } from "./Playlist"
 
-export function SoundtrackBanner({ expanded = false, coverSrc, bannerSrc, bannerText = "" , children}) {
-
+export function SoundtrackBanner(
+    {
+        expanded = false,
+        coverSrc,
+        bannerSrc = "./res/marc-thompson-sanctum-18.jpg",
+        bannerText = "Soundtrack Title",
+        children
+    }
+) {
     const [isExpanded, setIsExpanded] = useState(expanded ? "shown" : "hidden")
 
     function toggleDropdown(event) {
