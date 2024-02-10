@@ -1,3 +1,12 @@
+:root {
+    --span-track-width: 10%;
+    --span-play-button-width: 10%;
+    --span-title-width: 42.5%;
+    --span-intensity-width: 20%;
+    --span-length-width: 7.5%;
+    --span-options-button-width: 3%;
+}
+
 div#playlist-container {
     display: block;
     /* border: solid 1px #fff; */
@@ -8,12 +17,14 @@ div#playlist-container {
     position: relative;
     left: -1.25rem;
     list-style-type: none;
+    /* padding-left: 1rem; */
+    /* padding-right: rem; */
 }
 
 #playlist-container #header {
     font: bold 0.6rem verdana;
     color: #ccc;
-    padding: 0.25rem 1rem;
+    padding: 0.25rem 1.8rem;
     user-select: none;
 }
 
@@ -23,25 +34,25 @@ div#playlist-container {
 
 #playlist-container #header span#track {
     text-align: left;
-    width: 10%;
+    width: var(--span-track-width);
 }
 
 #playlist-container #header span#play-button {
     text-align: left;
-    width: 10%;
+    width: var(--span-play-button-width);
 }
 
 #playlist-container #header span#title {
     text-align: left;
-    width: 50%;
+    width: var(--span-title-width);
 }
 
 #playlist-container #header span#intensity {
     text-align: left;
-    width: 20%;
+    width: var(--span-intensity-width);
 }
 
 #playlist-container #header span#length {
     text-align: right;
-    width: 10%;
+    width: var(--span-length-width);
 }

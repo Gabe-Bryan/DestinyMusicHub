@@ -1,7 +1,7 @@
 import React from 'react'
 import './styles/PlaylistItem.css'
 
-export function PlaylistItem({ songData, hasPlayButton = false, onClick = undefined }) {
+export function PlaylistItem({ songData, hasPlayButton = false, onClick = undefined, hasOptionsButton = false, options = undefined }) {
 
     // function clickHandler(event) {
     //     console.log(`Do thing to play [${songData.track}. ${songData.title}]`)
@@ -11,13 +11,17 @@ export function PlaylistItem({ songData, hasPlayButton = false, onClick = undefi
     // }
 
     return (
-        <div id="playlist-item-container" onClick={!hasPlayButton ? onClick : undefined}>
-            <span id="track">{songData.track}</span>
-            <span id="play-button">{hasPlayButton && (<PlayButton onClick={onClick} />)}</span>
-            <span id="title">{songData.title}</span>
-            <span id="intensity">{songData.intensity}</span>
-            <span id="length">{songData.length}</span>
-            <button id="options-button">{"\u{FE19}"}</button>
+        <div id="item-container" onClick={!hasPlayButton ? onClick : undefined}>
+            <div id="item-track">{songData.track}</div>
+            <div id="item-play-button">
+                {hasPlayButton && (<PlayButton onClick={onClick} />)}
+            </div>
+            <div id="item-title">{songData.title}</div>
+            <div id="item-intensity">{songData.intensity}</div>
+            <div id="item-length">{songData.length}</div>
+            <div id="item-options">
+                {hasOptionsButton && <button id="item-options-button">{"\u{FE19}"}</button>}
+            </div>
         </div>
     )
 }
@@ -27,14 +31,14 @@ function PlayButton({ onClick }) {
     let playChar = "\u{25B6}"
 
     return (
-        <div id="play-button-container">
-            <div id="play-button" onClick={onClick}>
+        <>
+            <button id="play-button" onClick={onClick}>
                 {playChar}
-            </div>
-        </div>
+            </button>
+        </>
     );
 }
 
-export function OptionsMenu( { options=["Option1","Option2","Option3"] } ) {
+export function OptionsMenu({ options = ["Option1", "Option2", "Option3"] }) {
 
 }

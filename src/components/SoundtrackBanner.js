@@ -4,7 +4,15 @@ import './styles/SoundtrackBanner.css'
 
 import { Playlist } from "./Playlist"
 
-export function SoundtrackBanner({ expanded = false, coverSrc, bannerSrc, bannerText = "" , children}) {
+export function SoundtrackBanner(
+    {
+        expanded = false,
+        coverSrc = './res/destiny1soundtrack.jpg',
+        bannerSrc = "./res/marc-thompson-sanctum-18.jpg",
+        bannerText = "",
+        children
+    }
+) {
 
     const [isExpanded, setIsExpanded] = useState(expanded ? "shown" : "hidden")
 

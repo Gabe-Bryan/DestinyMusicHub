@@ -3,18 +3,14 @@ import "./styles/Playlist.css"
 
 import { PlaylistItem } from "./PlaylistItem"
 
-export function Playlist({ playlistData }) {
-
-    function clickHandler(event, songItem) {
-        console.log(`Do play action for [${songItem.track}. ${songItem.title}`)
-    }
+export function Playlist({ playlistData, hasPlayButtons = false, hasOptionsButtons = false }) {
 
     function getSongList(playlistDataIn) {
         let songList = []
         for (let songItem of playlistDataIn)
             songList.push(
-                <li key={songItem.track}> 
-                    <PlaylistItem songData={songItem}/>
+                <li key={songItem.track}>
+                    <PlaylistItem songData={songItem} hasPlayButton={hasPlayButtons} hasOptionsButton={hasOptionsButtons} />
                 </li>
             )
         return songList
