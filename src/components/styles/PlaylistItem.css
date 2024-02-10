@@ -77,10 +77,10 @@ button#options-button {
 :root {
     --track-width: 10%;
     --play-button-width: 10%;
-    --title-width: 40%;
-    --intensity-width: 20%;
+    --title-width: 35%;
+    --intensity-width: 25%;
     --length-width: 10%;
-    --options-button-width: 3%;
+    --options-button-width: 5%;
     --left-cap-border-radius: 0.5rem 0rem 0rem 0.5rem;
     --right-cap-border-radius: 0rem 0.5rem 0.5rem 0rem;
 }
@@ -104,6 +104,7 @@ div#item-container div {
     padding-top: 0.4rem;
     vertical-align: middle;
     height: 1.5rem;
+    /* overflow: hidden; */
 }
 
 div#item-container div#item-track {

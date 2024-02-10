@@ -7,7 +7,7 @@
     --total-container-width: calc(var(--cover-img-width) + var(--banner-img-width));
 
     --dropdown-min-height: 8rem;
-    --dropdown-max-height: 16rem;
+    --dropdown-max-height: 16.5rem;
 }
 
 /* ======================================== */
