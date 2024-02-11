@@ -1,7 +1,32 @@
 import React from 'react'
+import { useState } from 'react'
 import './styles/PlaylistItem.css'
 
-export function PlaylistItem({ songData, hasPlayButton = false, onClick = undefined, hasOptionsButton = false, options = undefined }) {
+let defaultOptions = [
+    {
+        text: "Option 1",
+        onClick: (event) => console.log(event),
+    },
+    {
+        text: "Option 2",
+        onClick: (event) => console.log(event),
+    },
+    {
+        text: "Option 3",
+        onClick: (event) => console.log(event),
+    }
+];
+
+
+export function PlaylistItem(
+    {
+        songData = undefined,
+        hasPlayButton = false,
+        onClick = undefined,
+        hasOptionsButton = false,
+        options = defaultOptions,
+    }
+) {
 
     // function clickHandler(event) {
     //     console.log(`Do thing to play [${songData.track}. ${songData.title}]`)
@@ -20,13 +45,13 @@ export function PlaylistItem({ songData, hasPlayButton = false, onClick = undefi
             <div id="item-intensity">{songData.intensity}</div>
             <div id="item-length">{songData.length}</div>
             <div id="item-options">
-                {hasOptionsButton && <button id="item-options-button">{"\u{FE19}"}</button>}
+                {hasOptionsButton && <OptionsButton options={options} />}
             </div>
         </div>
     )
 }
 
-function PlayButton({ onClick }) {
+function PlayButton({ onClick = undefined }) {
 
     let playChar = "\u{25B6}"
 
@@ -39,6 +64,61 @@ function PlayButton({ onClick }) {
     );
 }
 
-export function OptionsMenu({ options = ["Option1", "Option2", "Option3"] }) {
+function OptionsButton({ options = undefined }) {
 
+    let optionsChar = "\u{FE19}";
+
+    let [isPaneHidden, setPaneHidden] = useState(true);
+
+    return (
+        <>
+            <button id="options-button" onClick={(event) => { console.log(event); setPaneHidden(false) }}>
+                {optionsChar}
+            </button>
+            <OptionsPane options={options} hidden={isPaneHidden} setPaneHidden={setPaneHidden} />
+        </>
+    );
+}
+
+/*
+#######################################
+###  Options array/object template: ###
+#######################################
+
+[
+    {
+        text: "Option text",
+        onClick: (event) => console.log(event),
+    },
+    {
+        text: "More option text",
+        onClick: predefinedClickFunction(),
+    }
+]
+*/
+
+function OptionsPane({ options = undefined, hidden = true, setPaneHidden = undefined }) {
+
+    function getOptionsAsDivs(options) {
+        let returnDivs = [];
+        if (options) {
+            // console.log('###', options)
+            for (let i = 0; i < options.length; i++) {
+                // console.log('###', option)
+                returnDivs.push(
+                    <div key={"option_key_"+i} className={`option ${hidden ? "hidden" : "shown"}`} onClick={options[i].onClick}>
+                        {options[i].text}
+                    </div>
+                );
+            }
+        }
+        return returnDivs.length < 0 ? undefined : returnDivs;
+    }
+
+    return (
+        <div
+            id="options-menu-popup" onMouseOut={(event) => { console.log("### option mouse out"); setPaneHidden(true) }}>
+            {options && getOptionsAsDivs(options)}
+        </div>
+    );
 }

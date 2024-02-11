@@ -182,3 +182,29 @@ div#item-container div#item-options button:hover {
     border-left-color: #bb9;
     color: #bb9;
 }
+
+div#item-container div#options-menu-popup {
+    /* display: none; */
+    border: solid 1px #f00;
+    position: fixed;
+    width: 100px;
+    height: 200px;
+    z-index: 1;
+}
+
+div#item-container div#options-menu-popup div {
+    display: block;
+    padding-left: 0.5rem;
+}
+
+div#item-container div#options-menu-popup div:hover {
+    background-color: #555;
+}
+
+div#item-container div#options-menu-popup.shown {
+    display: block;
+}
+
+/* div#item-container div#options-menu-popup.hidden {
+    display: none;
+} */
