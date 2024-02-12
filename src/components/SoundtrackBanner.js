@@ -2,14 +2,12 @@ import React from 'react'
 import { useState } from 'react'
 import './styles/SoundtrackBanner.css'
 
-import { Playlist } from "./Playlist"
-
 export function SoundtrackBanner(
     {
         expanded = false,
-        coverSrc,
+        coverSrc = "./res/destiny1soundtrack.jpg",
         bannerSrc = "./res/marc-thompson-sanctum-18.jpg",
-        bannerText = "Soundtrack Title",
+        bannerText = "",
         children
     }
 ) {

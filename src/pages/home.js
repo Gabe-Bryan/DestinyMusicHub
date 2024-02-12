@@ -1,5 +1,5 @@
 import React, { createElement } from 'react';
-import {useState} from 'react';
+import { useState } from 'react';
 //import {ScaleText} from 'react-scale-text';
 import '../components/MusicPlayer.js';
 import seasonOfPlunder from "../resources/season_of_plunder.jpg";
@@ -14,28 +14,28 @@ const lightfallText = 'Lightfall was released in 2022. The composers for the sou
 
 
 function Home() {
-  return (
-    <div classname="App">
-        <header className="App-header">
-            <h1> Destiny Music Hub</h1>
-        </header>
-        <body>       
-            <h2> Featured Tracks</h2> 
-            <Slideshow images ={[seasonOfPlunder, lightfall]} 
-              texts = {[seasonOfPlunderText, lightfallText]} fontsizes = {['24pt', '22pt']}
-              style = {{margin: 'auto', padding: '2%'}}/>
-            
-            <Slideshow images ={[seasonOfPlunder, lightfall]} 
-              texts = {[seasonOfPlunderText, lightfallText]} fontsizes = {['24pt', '22pt']}
-              style = {{margin: 'auto', padding: '2%'}}/>
-            
-            {/* <div class = 'footer'>
+	return (
+		<div classname="App">
+			<header className="App-header">
+				<h1> Destiny Music Hub</h1>
+			</header>
+			<div style={{ display: 'inline-block' }}>
+				<h2> Featured Tracks</h2>
+				<Slideshow images={[seasonOfPlunder, lightfall]}
+					texts={[seasonOfPlunderText, lightfallText]} fontsizes={['24pt', '22pt']}
+					style={{ margin: 'auto', padding: '2%' }} />
+
+				<Slideshow images={[seasonOfPlunder, lightfall]}
+					texts={[seasonOfPlunderText, lightfallText]} fontsizes={['24pt', '22pt']}
+					style={{ margin: 'auto', padding: '2%' }} />
+
+				{/* <div class = 'footer'>
                 <p>Created by Gabriel Bryan 2023</p>
                 
             </div> */}
-        </body>
-    </div>
-  );
+			</div>
+		</div>
+	);
 }
 
-export {Home};
+export { Home };
