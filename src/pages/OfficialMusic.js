@@ -57,7 +57,7 @@ let containerStyle = {
     display: "block",
     border: "solid 0px #f00",
     textAlign: "center",
-    marginBottom: "5rem",
+    marginBottom: "13rem",
 }
 
 let colStyle = {
