@@ -5,9 +5,9 @@ import { PlaylistItem } from "./PlaylistItem"
 
 export function Playlist({ playlistData }) {
 
-    function clickHandler(event, songItem) {
-        console.log(`Do play action for [${songItem.track}. ${songItem.title}`)
-    }
+    // function clickHandler(event, songItem) {
+    //     console.log(`Do play action for [${songItem.track}. ${songItem.title}`)
+    // }
 
     function getSongList(playlistDataIn) {
         let songList = []
