@@ -71,12 +71,12 @@ let innerColStyle = {
     margin: "2rem 0rem",
 }
 
-export function OfficialMusic({ twoColumn = true }) {
+export function OfficialMusic({ twoColumn = false }) {
     return (
         <div className="App">
-            <div className="App-header">
+            <header className="App-header">
                 <h1>Official Music Page</h1>
-            </div>
+            </header>
             <body>
                 <h2>Official Soundtracks / Released Music:</h2>
                 <div style={containerStyle}>
