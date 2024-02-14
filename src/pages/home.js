@@ -10,7 +10,7 @@ const lightfallText = 'Lightfall was released in 2022. The composers for the sou
 
 function Home() {
 	return (
-		<div classname="App">
+		<div className="App">
 			<header className="App-header">
 				<h1> Destiny Music Hub</h1>
 			</header>

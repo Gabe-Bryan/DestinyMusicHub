@@ -1,14 +1,13 @@
-import { createElement, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import YouTube from 'react-youtube';
 import {
     LoadingOutlined, CaretRightOutlined, PauseOutlined, StepBackwardOutlined,
     StepForwardOutlined, UpOutlined, DownOutlined, SoundOutlined
 } from '@ant-design/icons'
-import { Button, Space, ConfigProvider, Tooltip, Spin, Slider, Flex } from 'antd';
+import { Button, Space, ConfigProvider, Tooltip, Slider, Flex } from 'antd';
 import './styles/musicPlayerStyle.css';
 import { PlaylistItem } from './PlaylistItem';
 import { linearVectorInterpolation, secondsToTimestamp } from '../util';
-import { Playlist } from './Playlist';
 
 const expandTransition = 300;//ms for youtube embed to change size/shape
 const expandPercent = 135 / 63;//height ratio max/min
@@ -66,12 +65,12 @@ function YTPlayer({ songQueue, prevQueue, ytPlayer, setYtPlayer, playYt }) {
 
     //Handles state change so that it can start the visuals during loading
     const ytStateChange = (event) => {
-        let newLoadStatus = event.data == -1 || event.data == 3;
+        let newLoadStatus = event.data === -1 || event.data === 3;
         if (!loading && newLoadStatus) {
             setLoadFinish(new Date().getTime());
         }
         setLoading(newLoadStatus);
-        if (event.data == 0) {
+        if (event.data === 0) {
             nextSong();
         }
     }
@@ -130,7 +129,7 @@ function YTPlayer({ songQueue, prevQueue, ytPlayer, setYtPlayer, playYt }) {
     const [expandStartTime, setExpandStartTime] = useState(0);
     const interval = 5;
     useEffect(() => {
-        if ((expanded && pSize != expandPercent) || (!expanded && pSize != 1)) {
+        if ((expanded && pSize !== expandPercent) || (!expanded && pSize !== 1)) {
             const loop = setInterval(() => {
                 const currTime = new Date().getTime();
                 const change = (currTime - expandStartTime) / expandTransition * (expandPercent - 1) * (expanded ? 1 : -1);
@@ -195,9 +194,9 @@ function YTPlayer({ songQueue, prevQueue, ytPlayer, setYtPlayer, playYt }) {
                     <div style={{ display: 'block', textAlign: 'center', margin: '10px' }}>
                         <Space>
                             <Button buttonType='primary' onClick={prevSong}
-                                shape='circle' icon={<StepBackwardOutlined />} disabled={prevQueue.length == 0} />
+                                shape='circle' icon={<StepBackwardOutlined />} disabled={prevQueue.length === 0} />
                             <Button buttonType='primary' onClick={playYt}
-                                shape='circle' icon={playing ? <PauseOutlined /> : <CaretRightOutlined />} disabled={songQueue.length == 0} />
+                                shape='circle' icon={playing ? <PauseOutlined /> : <CaretRightOutlined />} disabled={songQueue.length === 0} />
                             <Button buttonType='primary' onClick={nextSong}
                                 shape='circle' icon={<StepForwardOutlined />} disabled={songQueue.length < 2} />
                         </Space>
