@@ -256,6 +256,7 @@ function PlayerQueue({ songQueue, disabled, onPlayClick }) {
 
 function PlayerOptions({ expanded = false, ytPlayer }) {
     const setVolume = (value) => {
+        localStorage.setItem('volume', value);
         ytPlayer.setVolume(value);
     }
     return (
@@ -263,7 +264,7 @@ function PlayerOptions({ expanded = false, ytPlayer }) {
             <div></div>
             <Flex className='volume-bar'>
                 <SoundOutlined style={{ paddingRight: '10px', color: '#ffffff' }} />
-                <Slider defaultValue={100} max={100}
+                <Slider defaultValue={localStorage.getItem('volume') ? localStorage.getItem('volume') : 100} max={100}
                     style={{ width: '100%' }}
                     onChange={setVolume}
                     tooltip={{ formatter: (value) => `${value}%` }} />
