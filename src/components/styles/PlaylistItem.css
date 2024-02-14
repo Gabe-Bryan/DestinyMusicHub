@@ -185,11 +185,14 @@ div#item-container div#item-options button:hover {
 
 div#item-container div#options-menu-popup {
     /* display: none; */
-    border: solid 1px #f00;
+    border: solid 0.1rem #000;
+    background-color: #333;
     position: fixed;
     width: 100px;
     height: 200px;
     z-index: 1;
+    border-radius: 10px;
+
 }
 
 div#item-container div#options-menu-popup div {
@@ -197,12 +200,17 @@ div#item-container div#options-menu-popup div {
     padding-left: 0.5rem;
 }
 
-div#item-container div#options-menu-popup div:hover {
-    background-color: #555;
-}
-
 div#item-container div#options-menu-popup.shown {
     display: block;
+}
+
+div#item-container div#options-menu-popup div.options-item {
+    background-color: #333;
+    border-radius: 0.7em;
+}
+
+div#item-container div#options-menu-popup div.options-item:hover {
+    background-color: #444;
 }
 
 /* div#item-container div#options-menu-popup.hidden {

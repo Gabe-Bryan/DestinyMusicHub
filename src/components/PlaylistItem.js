@@ -106,7 +106,7 @@ function OptionsPane({ options = undefined, hidden = true, setPaneHidden = undef
             for (let i = 0; i < options.length; i++) {
                 // console.log('###', option)
                 returnDivs.push(
-                    <div key={"option_key_"+i} className={`option ${hidden ? "hidden" : "shown"}`} onClick={options[i].onClick}>
+                    <div key={"option_key_" + i} className={"options-item"} onClick={(event) => options[i].onClick(event)}>
                         {options[i].text}
                     </div>
                 );
@@ -117,7 +117,14 @@ function OptionsPane({ options = undefined, hidden = true, setPaneHidden = undef
 
     return (
         <div
-            id="options-menu-popup" onMouseOut={(event) => { console.log("### option mouse out"); setPaneHidden(true) }}>
+            id="options-menu-popup"
+            onMouseOut={
+                (event) => {
+                    setPaneHidden(true);
+                    console.log("#context menu mouseout")
+                }
+            }
+        >
             {options && getOptionsAsDivs(options)}
         </div>
     );
