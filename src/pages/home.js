@@ -8,6 +8,7 @@ import { YTPlayer } from '../components/MusicPlayer.js';
 import Navbar from '../components/Navbar.js';
 import Slideshow from '../components/Slideshow.js';
 import '../stylesheets/style.css'
+import { SongPlaylist } from '../components/SongPlaylist.js';
 //hi does this work
 const seasonOfPlunderText = 'Season of plunder was released in 2022. The composers for the soundtrack were: Michael Salvatori, Skye Lewin, Josh Wosser, and Michael Sechrist.';
 const lightfallText = 'Lightfall was released in 2022. The composers for the soundtrack were: Michael Salvatori, Sky Lewin, Josh Mosser, Michael Sechrist, Rotem Moav, and Peter Schlosser';
@@ -20,6 +21,13 @@ function Home() {
             <h1> Destiny Music Hub</h1>
         </header>
         <body>       
+            <SongPlaylist playlistData={[
+              {track: '1', title: 'Official'}, 
+              {track: '2, 3', title: 'Unofficial/Official'},  
+              {track: '4, 5', title: 'Unofficial/Official'},  
+              {track: '6, 7', title: 'Unofficial/Official'}]}
+            >
+            </SongPlaylist>
             <h2> Featured Tracks</h2> 
             <Slideshow images ={[seasonOfPlunder, lightfall]} 
               texts = {[seasonOfPlunderText, lightfallText]} fontsizes = {['24pt', '22pt']}

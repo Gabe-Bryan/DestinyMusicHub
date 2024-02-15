@@ -1,0 +1,20 @@
+.song-item-container {
+    display: block;
+    background-color: #222;
+    color: #fff;
+    /* border: solid 1px #000; */
+    border-radius: 0.5rem 1rem;
+    padding: 0.25rem 1rem;
+    margin: 0.25rem;
+    user-select: none;
+    min-height: 1.41rem;
+}
+
+.song-item-container div {
+    font: 0.8rem verdana;
+    display: inline-block;
+}
+
+.song-item-container .track {
+    width: 10%;
+}
