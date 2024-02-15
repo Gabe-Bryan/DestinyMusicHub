@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import './styles/SoundtrackBanner.css'
 
-export function SoundtrackBanner({ expanded = false, coverSrc, bannerSrc, bannerText = "" , children}) {
+export function SoundtrackBanner({ expanded = false, coverSrc, bannerSrc, bannerText = "", children }) {
 
     const [isExpanded, setIsExpanded] = useState(expanded ? "shown" : "hidden")
 
