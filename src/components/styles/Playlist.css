@@ -1,10 +1,10 @@
 :root {
-    --span-track-width: 10%;
-    --span-play-button-width: 10%;
-    --span-title-width: 42.5%;
-    --span-intensity-width: 20%;
-    --span-length-width: 7.5%;
-    --span-options-button-width: 3%;
+    --div-track-width: 10%;
+    --div-play-button-width: 10%;
+    --div-title-width: 35%;
+    --div-intensity-width: 25%;
+    --div-length-width: 10%;
+    --div-item-options: 5%;
 }
 
 div#playlist-container {
@@ -26,33 +26,39 @@ div#playlist-container {
     color: #ccc;
     padding: 0.25rem 1.8rem;
     user-select: none;
+    display: block;
 }
 
-#playlist-container #header span {
+#playlist-container div#header div {
     display: inline-block;
 }
 
-#playlist-container #header span#track {
+#playlist-container #header div#track {
     text-align: left;
-    width: var(--span-track-width);
+    width: var(--div-track-width);
 }
 
-#playlist-container #header span#play-button {
+#playlist-container #header div#play-button {
     text-align: left;
-    width: var(--span-play-button-width);
+    width: var(--div-play-button-width);
 }
 
-#playlist-container #header span#title {
+#playlist-container #header div#title {
     text-align: left;
-    width: var(--span-title-width);
+    width: var(--div-title-width);
 }
 
-#playlist-container #header span#intensity {
+#playlist-container #header div#intensity {
     text-align: left;
-    width: var(--span-intensity-width);
+    width: var(--div-intensity-width);
 }
 
-#playlist-container #header span#length {
+#playlist-container #header div#length {
     text-align: right;
-    width: var(--span-length-width);
+    width: var(--div-length-width);
+}
+
+#playlist-container #header div#item-options {
+    text-align: right;
+    width: var(--div-item-options);
 }

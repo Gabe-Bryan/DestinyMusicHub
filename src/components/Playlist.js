@@ -20,16 +20,15 @@ export function Playlist({ playlistData, hasPlayButtons = false, hasOptionsButto
 
     return (
         <div id="playlist-container">
-            <ul id="song-list">
-                <div id="header">
-                    <span id="track">track</span>
-                    <span id="play-button"></span>
-                    <span id="title">title</span>
-                    <span id="intensity">intensity</span>
-                    <span id="length">length</span>
-                </div>
-                {songList}
-            </ul>
+            <div id="header">
+                <div id="track">track</div>
+                <div id="play-button"></div>
+                <div id="title">title</div>
+                <div id="intensity">intensity</div>
+                <div id="length">length</div>
+                <div id="item-options"></div>
+            </div>
+            {songList}
         </div>
     )
 }

@@ -14,7 +14,11 @@ let defaultOptions = [
     {
         text: "Option 3",
         onClick: (event) => console.log(event),
-    }
+    },
+    {
+        text: "Hi gabe",
+        onClick: (event) => alert("hi again gabe"),
+    },
 ];
 
 
@@ -39,7 +43,7 @@ export function PlaylistItem(
         <div id="item-container" onClick={!hasPlayButton ? onClick : undefined}>
             <div id="item-track">{songData.track}</div>
             <div id="item-play-button">
-                {hasPlayButton && (<PlayButton onClick={onClick} />)}
+                {hasPlayButton && <PlayButton onClick={onClick} />}
             </div>
             <div id="item-title">{songData.title}</div>
             <div id="item-intensity">{songData.intensity}</div>
