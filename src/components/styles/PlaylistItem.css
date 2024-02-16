@@ -108,15 +108,16 @@ div#item-container div#item-options button:hover {
 }
 
 div#item-container div#options-menu-popup {
-    /* display: none; */
-    border: solid 0.1rem #000;
+    display: none;
+    border: solid 0.1rem #bb9;
     background-color: #333;
     position: fixed;
-    width: 100px;
-    height: 200px;
-    z-index: 1;
-    border-radius: 10px;
 
+    transform: translate(0.1rem, -1.75rem);
+    min-width: 5rem;
+    height: auto;
+    z-index: 10;
+    border-radius: 10px;
 }
 
 div#item-container div#options-menu-popup div {
@@ -137,6 +138,6 @@ div#item-container div#options-menu-popup div.options-item:hover {
     background-color: #444;
 }
 
-/* div#item-container div#options-menu-popup.hidden {
+div#item-container div#options-menu-popup.hidden {
     display: none;
-} */
+}

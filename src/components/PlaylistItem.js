@@ -1,23 +1,23 @@
 import React from 'react'
-import { useState } from 'react'
 import './styles/PlaylistItem.css'
+
 
 let defaultOptions = [
     {
         text: "Option 1",
-        onClick: (event) => console.log(event),
+        onClick: (event, songData) => console.log(`Option 1 of song -- [${songData.track}. ${songData.title}]`),
     },
     {
         text: "Option 2",
-        onClick: (event) => console.log(event),
+        onClick: (event, songData) => console.log(`Option 2 of song -- [${songData.track}. ${songData.title}]`),
     },
     {
         text: "Option 3",
-        onClick: (event) => console.log(event),
+        onClick: (event, songData) => console.log(`Option 3 of song -- [${songData.track}. ${songData.title}]`),
     },
     {
-        text: "Hi gabe",
-        onClick: (event) => alert("hi again gabe"),
+        text: "HI GABE",
+        onClick: (event, songData) => alert("  :^)  "),
     },
 ];
 
@@ -49,7 +49,7 @@ export function PlaylistItem(
             <div id="item-intensity">{songData.intensity}</div>
             <div id="item-length">{songData.length}</div>
             <div id="item-options">
-                {hasOptionsButton && <OptionsButton options={options} />}
+                {hasOptionsButton && <OptionsButton options={options} songData={songData} />}
             </div>
         </div>
     )
@@ -68,18 +68,28 @@ function PlayButton({ onClick = undefined }) {
     );
 }
 
-function OptionsButton({ options = undefined }) {
+function OptionsButton(
+    {
+        songData = undefined,
+        options = undefined,
+    }
+) {
 
     let optionsChar = "\u{FE19}";
 
-    let [isPaneHidden, setPaneHidden] = useState(true);
-
     return (
         <>
-            <button id="options-button" onClick={(event) => { console.log(event); setPaneHidden(false) }}>
+            <button
+                id="options-button"
+                onClick={
+                    (event) => {
+                        event.currentTarget.children[0].className = "shown";
+                    }
+                }
+            >
                 {optionsChar}
+                <OptionsPane songData={songData} options={options} />
             </button>
-            <OptionsPane options={options} hidden={isPaneHidden} setPaneHidden={setPaneHidden} />
         </>
     );
 }
@@ -92,7 +102,7 @@ function OptionsButton({ options = undefined }) {
 [
     {
         text: "Option text",
-        onClick: (event) => console.log(event),
+        onClick: (event, songData) => console.log(event, songData),
     },
     {
         text: "More option text",
@@ -101,7 +111,12 @@ function OptionsButton({ options = undefined }) {
 ]
 */
 
-function OptionsPane({ options = undefined, hidden = true, setPaneHidden = undefined }) {
+function OptionsPane(
+    {
+        songData = undefined,
+        options = undefined,
+    }
+) {
 
     function getOptionsAsDivs(options) {
         let returnDivs = [];
@@ -110,9 +125,13 @@ function OptionsPane({ options = undefined, hidden = true, setPaneHidden = undef
             for (let i = 0; i < options.length; i++) {
                 // console.log('###', option)
                 returnDivs.push(
-                    <div key={"option_key_" + i} className={"options-item"} onClick={(event) => options[i].onClick(event)}>
+                    <div
+                        key={"option_key_" + i}
+                        className={"options-item"}
+                        onClick={(event) => options[i].onClick(event, songData)}
+                    >
                         {options[i].text}
-                    </div>
+                    </div >
                 );
             }
         }
@@ -120,16 +139,18 @@ function OptionsPane({ options = undefined, hidden = true, setPaneHidden = undef
     }
 
     return (
-        <div
-            id="options-menu-popup"
-            onMouseOut={
-                (event) => {
-                    setPaneHidden(true);
-                    console.log("#context menu mouseout")
+        <>
+            <div
+                id="options-menu-popup"
+                onMouseLeave={
+                    (event) => {
+                        // console.log("#context menu mouseleave", event.currentTarget);
+                        event.currentTarget.className = "hidden";
+                    }
                 }
-            }
-        >
-            {options && getOptionsAsDivs(options)}
-        </div>
+            >
+                {options && getOptionsAsDivs(options, songData)}
+            </div>
+        </>
     );
 }

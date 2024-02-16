@@ -10,7 +10,11 @@ export function Playlist({ playlistData, hasPlayButtons = false, hasOptionsButto
         for (let songItem of playlistDataIn)
             songList.push(
                 <li key={songItem.track}>
-                    <PlaylistItem songData={songItem} hasPlayButton={hasPlayButtons} hasOptionsButton={hasOptionsButtons} />
+                    <PlaylistItem
+                        songData={songItem}
+                        hasPlayButton={hasPlayButtons}
+                        hasOptionsButton={hasOptionsButtons}
+                    />
                 </li>
             )
         return songList

@@ -86,6 +86,7 @@
     min-height: var(--dropdown-min-height);
     max-height: var(--dropdown-max-height);
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 #songbanner-container #overflow-cap {
