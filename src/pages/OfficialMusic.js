@@ -1,4 +1,5 @@
 import React from 'react';
+import { getAllSongs, getAllSoundtracks, getSongDataAsSong, getSoundtrackDataAsSongList } from '../util';
 import { SoundtrackBanner } from '../components/SoundtrackBanner';
 import { Playlist } from '../components/Playlist';
 
@@ -52,6 +53,17 @@ let testData = [
         length: '2:32',
     },
 ];
+
+let allSongData = await getAllSongs();
+console.log('#',allSongData);
+console.log('#',JSON.stringify(allSongData[0]));
+console.log('#',getSongDataAsSong(allSongData[0]));
+
+
+let allSoundtracksData = await getAllSoundtracks();
+console.log('#',allSoundtracksData);
+console.log('#',JSON.stringify(allSoundtracksData[0]));
+
 
 let containerStyle = {
     display: "block",
