@@ -7,7 +7,8 @@
     --total-container-width: calc(var(--cover-img-width) + var(--banner-img-width));
 
     --dropdown-min-height: 8rem;
-    --dropdown-max-height: 16.5rem;
+    /* --dropdown-max-height: 16.5rem; */
+    --dropdown-max-height: auto;
 }
 
 /* ======================================== */
@@ -25,6 +26,10 @@
     object-fit: cover;
     width: var(--banner-img-width);
     height: var(--image-height);
+}
+
+li {
+    list-style: none;
 }
 
 #songbanner-container {
@@ -81,12 +86,12 @@
 #songbanner-container #dropdown {
     /* border: solid 1px #00f; */
 
-    padding: 0.25rem;
+    padding: 0.5rem;
     background-color: #111;
     min-height: var(--dropdown-min-height);
     max-height: var(--dropdown-max-height);
-    overflow-y: scroll;
-    overflow-x: hidden;
+    /* overflow-y: scroll; */
+    overflow-x: visible;
 }
 
 #songbanner-container #overflow-cap {

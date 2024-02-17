@@ -15,7 +15,6 @@ div#item-container {
     min-height: 2rem;
     position: relative;
     left: 2%;
-    overflow-x: hidden;
     padding: 0.1rem;
 }
 
@@ -28,13 +27,13 @@ div#item-container div {
     padding-top: 0.4rem;
     vertical-align: middle;
     height: 1.5rem;
-    /* overflow: hidden; */
 }
 
 div#item-container div#item-track {
     width: var(--track-width);
     text-align: center;
     border-radius: var(--left-cap-border-radius);
+    overflow: hidden;
 }
 
 div#item-container div#item-play-button {
@@ -100,6 +99,7 @@ div#item-container div#item-options button {
     padding-top: 0rem;
     text-align: left;
     width: 1.5rem;
+    height: 1.5rem;
 }
 
 div#item-container div#item-options button:hover {
@@ -111,13 +111,16 @@ div#item-container div#options-menu-popup {
     display: none;
     border: solid 0.1rem #bb9;
     background-color: #333;
-    position: fixed;
-
+    position: relative;
     transform: translate(0.1rem, -1.75rem);
     min-width: 5rem;
     height: auto;
-    z-index: 10;
+    z-index: 999;
     border-radius: 10px;
+}
+
+div, div#item-container {
+    overflow: visible;
 }
 
 div#item-container div#options-menu-popup div {
