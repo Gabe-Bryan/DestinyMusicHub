@@ -33,43 +33,51 @@ function Home() {
                 "sources":[{
                   "video_id":"z60BFLUBEpI","source_type":"Youtube",
                   "intensity":["Ambient","Soundtrack Edition"],
-                  "track_number":{"$numberInt":"32"},
+                  "track_number":32,
                   "is_official":true,
                   "version_title":"Gambit",
                   "soundtrack_id":"65b834f6bad846dd6181fc2b",
-                  "duration":{"$numberInt":"202"}},
+                  "duration":202},
 
                   {"video_id":"358iGrX8gIo",
                   "source_type":"Youtube",
                   "intensity":["Action","Soundtrack Edition"],
-                  "track_number":{"$numberInt":"17"},
+                  "track_number":17,
                   "is_official":true,
                   "version_title":"Shell of What Was",
                   "soundtrack_id":"65b834f6bad846dd6181fc2b",
-                  "duration":{"$numberInt":"106"}},
+                  "duration":106},
 
                   {"video_id":"pCjl94eENa4",
                   "source_type":"Youtube",
                   "intensity":["Ambient"],
                   "version_title":"Gambit",
                   "soundtrack_id":"65b834f6bad846dd6181fc2b",
-                  "duration":{"$numberInt":"209"}},
+                  "duration":209},
                   
                   {"video_id":"tOfGBYS0AjQ",
                   "source_type":"Youtube",
                   "intensity":["Tension"],
                   "soundtrack_id":"65b834f6bad846dd6181fc2b",
-                  "duration":{"$numberInt":"197"}},
+                  "duration":197},
 
                   {"video_id":"UwNeytrnudU",
                   "source_type":"Youtube",
                   "intensity":["Tension"],
                   "add_layers":["+Action Layer"],
                   "soundtrack_id":"65b834f6bad846dd6181fc2b",
-                  "duration":{"$numberInt":"197"}},
+                  "duration":197},
 
                   {"video_id":"avPhyWMWTz8",
-                  "source_type":"Youtube","intensity":["Action"],"version_title":"Shell of What Was","soundtrack_id":"65b834f6bad846dd6181fc2b","duration":{"$numberInt":"241"}},{"video_id":"OlHMM3Hl7ac","source_type":"Youtube","intensity":["High Action"],"version_title":"Shell of What Was","soundtrack_id":"65b834f6bad846dd6181fc2b","duration":{"$numberInt":"270"}},{"video_id":"Hr5kl1A-GOA","source_type":"Youtube","intensity":["Ambient"],"version_title":"Gambit (Queenswalk)","soundtrack_id":"65b834f6bad846dd6181fc2b","duration":{"$numberInt":"206"}},{"video_id":"FeJFRAAf9js","source_type":"Youtube","intensity":["Action"],"version_title":"Shell of What Was (Queenswalk)","soundtrack_id":"65b834f6bad846dd6181fc2b","duration":{"$numberInt":"209"}},{"video_id":"7zYE0YPOd3E","source_type":"Youtube","intensity":["High Action"],"version_title":"Shell of What Was (Queenswalk)","soundtrack_id":"65b834f6bad846dd6181fc2b","duration":{"$numberInt":"271"}}]}]}
+                  "source_type":"Youtube","intensity":["Action"],"version_title":"Shell of What Was","soundtrack_id":"65b834f6bad846dd6181fc2b","duration":241},
+
+                  {"video_id":"OlHMM3Hl7ac","source_type":"Youtube","intensity":["High Action"],"version_title":"Shell of What Was","soundtrack_id":"65b834f6bad846dd6181fc2b","duration":270},
+                  
+                  {"video_id":"Hr5kl1A-GOA","source_type":"Youtube","intensity":["Ambient"],"version_title":"Gambit (Queenswalk)","soundtrack_id":"65b834f6bad846dd6181fc2b","duration":206},
+                  
+                  {"video_id":"FeJFRAAf9js","source_type":"Youtube","intensity":["Action"],"version_title":"Shell of What Was (Queenswalk)","soundtrack_id":"65b834f6bad846dd6181fc2b","duration":209},
+                  
+                  {"video_id":"7zYE0YPOd3E","source_type":"Youtube","intensity":["High Action"],"version_title":"Shell of What Was (Queenswalk)","soundtrack_id":"65b834f6bad846dd6181fc2b","duration":271}]}]}
             >
             </SongPlaylist>
             <h2> Featured Tracks</h2> 
