@@ -46,6 +46,7 @@ export const parseSongVersion = (song, sourceIndex) => {
 export const parseSoundtrack = (soundtrack, officialOnly = false) => {
     let parsedSoundtrack = [];
     for (let song of soundtrack) {
+        console.log(song);
         let songGroup = [];
         for (let i = 0; i < song.sources.length; i++) {
             let parsedSongVersion = parseSongVersion(song, i);
@@ -75,23 +76,46 @@ export const parseSoundtrack = (soundtrack, officialOnly = false) => {
     NOTE: still needs to be tied to in duration resolution, etc.
 */
 
-export function getSongDataAsSong(songData) {
-    return {
-        track: songData.track_number,
-        title: songData.title,
-        length: songData.meta_data.duration,
-        intensity: songData.meta_data.intensity,
+export function generateSongListFromSources(songsData) {
+    let songListFromSources = [];
+    for (let song of songsData) {
+        song.sources.forEach(songSource => {
+            songListFromSources.push({
+                title: songSource.version_title !== "" ? songSource.version_title : songSource.title,
+                track: songSource.track_number || undefined,
+                version_title: songSource.version_title,
+                is_official: songSource.is_official || undefined,
+                soundtrack_id: songSource.soundtrack_id || undefined,
+                length: songSource.duration ? secondsToTimestamp(songSource.duration) : "unknown",
+                video_id: songSource.video_id || undefined,
+                source_type: songSource.source_type || undefined,
+                intensity: songSource.intensity || undefined,
+            });
+        });
     }
+    return songListFromSources;
 }
 
-export function getSoundtrackDataAsSongList(soundtrackData, songsData, officialOnly = false) {
+export function getSongListFromSoundtrackId(soundtrack_id, songsFromSourcesData, officialOnly = false) {
     let soundtrackSongList = [];
-    for (let song of songsData) {
-        if (song.soundtrack_id === soundtrackData._id) {
-            let parsedSong = getSongDataAsSong(song);
-            soundtrackSongList.push(parsedSong);
+    let addedTrackNumbers = [];
+    
+    for (let song of songsFromSourcesData) {
+
+        // skip unofficial songs if officialOnly is set
+        if (officialOnly && !song.is_official) continue;
+
+        // ensures only 1 song per track is added. not sure if needed.
+        // if (addedTrackNumbers.includes(song.track)) continue;
+
+        if (song.soundtrack_id === soundtrack_id) {
+            soundtrackSongList.push(song);
+            addedTrackNumbers.push(song.track);
         }
     }
+    // sort asc by track_number
+    soundtrackSongList.sort((a, b) => a.track - b.track);
+
     return soundtrackSongList;
 }
 

@@ -3,7 +3,7 @@ import "./styles/Playlist.css"
 
 import { PlaylistItem } from "./PlaylistItem"
 
-export function Playlist({ playlistData, hasPlayButtons = false, hasOptionsButtons = false }) {
+export function Playlist({ playlistData, hasPlayButtons = false, hasOptionsButtons = false, options }) {
 
     function getSongList(playlistDataIn) {
         let songList = []
@@ -14,6 +14,7 @@ export function Playlist({ playlistData, hasPlayButtons = false, hasOptionsButto
                         songData={songItem}
                         hasPlayButton={hasPlayButtons}
                         hasOptionsButton={hasOptionsButtons}
+                        options={options}
                     />
                 </li>
             )
