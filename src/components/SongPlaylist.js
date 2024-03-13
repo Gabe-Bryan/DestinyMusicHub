@@ -7,12 +7,28 @@ export function SongPlaylist({ playlistData }) {
 
     function getSongList(playlistDataIn) {
         let songList = []
-        for (let songItem of playlistDataIn)
+        for (let songItem of playlistDataIn){
+            let completeTitle = songItem.title
+            let completeTrack=""
+        songItem.sources.forEach(source => {
+            if(source.is_official!==undefined){
+                completeTrack+="/"+source.track_number
+            }
+            if(source.is_official!==undefined && source.is_official===true){
+                completeTitle+="/"+source.version_title.$numberInt;
+                
+            }else{
+                completeTitle+="/ Unofficial Song "+source.intensity;
+            }
+            })
+            console.log(completeTitle);
+            console.log(completeTrack)
             songList.push(
                 <li key={songItem.track}> 
                     <SongItem data = {songItem}/>
                 </li>
             )
+        }
         return songList
     }
 
