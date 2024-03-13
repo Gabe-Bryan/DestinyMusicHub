@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import { Home } from './pages/home.js';
+import {OfficialMusic} from './pages/OfficialMusic.js';
 import Navbar from './components/Navbar.js';
 import { YTPlayer } from './components/MusicPlayer.js';
 //import {ScaleText} from 'react-scale-text';
@@ -44,7 +45,7 @@ function App() {
                 <Navbar />
                 <Routes>
                     <Route path='/' element={<Home />} />
-                    <Route path='/OfficialMusic' element={<Home />} />
+                    <Route path='/OfficialMusic' element={<OfficialMusic />} />
                     <Route path='/CompleteMusic' element={<Home />} />
                 </Routes>
                 <YTPlayer songQueue={songQueue} prevQueue={prevQueue} ytPlayer={ytPlayer} setYtPlayer={setYtPlayer} playYt={playYt} />
