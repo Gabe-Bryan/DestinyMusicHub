@@ -47,7 +47,7 @@ function App() {
                     <Route path='/OfficialMusic' element={<Home />} />
                     <Route path='/CompleteMusic' element={<Home />} />
                 </Routes>
-                <YTPlayer songQueue={songQueue} prevQueue={prevQueue} ytPlayer={ytPlayer} setYtPlayer={setYtPlayer} playYt={playYt} />
+                {/* <YTPlayer songQueue={songQueue} prevQueue={prevQueue} ytPlayer={ytPlayer} setYtPlayer={setYtPlayer} playYt={playYt} /> */}
             </BrowserRouter>
         </div>
     );
