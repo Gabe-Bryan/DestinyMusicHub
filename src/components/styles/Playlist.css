@@ -15,8 +15,8 @@ div#playlist-container {
 
 #playlist-container #song-list {
     position: relative;
-    left: -1rem;
-    list-style-type: none;
+    left: -2rem;
+    /* list-style-type: square; */
     /* padding-left: 1rem; */
     /* padding-right: rem; */
 }

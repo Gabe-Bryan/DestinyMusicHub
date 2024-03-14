@@ -16,13 +16,7 @@ import { Playlist } from '../components/Playlist';
 */
 let soundtracks = await getAllSoundtracks();
 let songs = await getAllSongs();
-
 let songsFromSources = generateSongListFromSources(songs);
-
-// let witchQueenId = soundtracks[0]._id;
-// let witchQueenParsed = getSongListFromSoundtrackId(witchQueenId, songsFromSources, true);
-
-// console.log("### witch queen soundtrack parsed: ", witchQueenParsed);
 
 
 /*
@@ -30,7 +24,7 @@ let songsFromSources = generateSongListFromSources(songs);
     ###########   HELPER METHODS/MISC   ##########
     ##############################################
 */
-function generateSoundtrackBanner(soundtrack) {
+function generateSoundtrackBanner(soundtrack, playNewSong, queueNewSong) {
 
     let parsedPlaylistData = getSongListFromSoundtrackId(soundtrack._id, songsFromSources, true);
 
@@ -73,17 +67,6 @@ let containerStyle = {
     marginBottom: "13rem",
 }
 
-let colStyle = {
-    display: "inline-block",
-    border: "solid 0px #f00",
-    margin: "1rem",
-    verticalAlign: "top",
-};
-
-let innerColStyle = {
-    margin: "2rem 0rem",
-}
-
 
 /*
     ############################################
@@ -93,37 +76,30 @@ let innerColStyle = {
 
 let soundtrackSongOptions = [
     {
-        text: "Queue song",
+        text: "Add to Queue",
         onClick: (e, songData) => console.log("#event", e, "#songData", songData),
     },
     {
-        text: "Go to source",
+        text: "Open source",
         onClick: (e, songData) => console.log("#event", e, "#songData", songData),
     }
 ]
 
-export function OfficialMusic() {
+export function OfficialMusic({
+    playNewSong = undefined,
+    queueNewSong = undefined,
+}) {
     return (
         <div className="App">
             <header className="App-header">
                 <h1>Official Music Page</h1>
             </header>
             <main>
-                <h2>Official Soundtracks / Released Music:</h2>
+                <h2 style={{ marginTop: "5rem", marginBottom: "5rem" }}>
+                    Official Soundtracks / Released Music:
+                </h2>
                 <div style={containerStyle}>
                     <center>
-                        {/* <SoundtrackBanner
-                            expanded
-                            bannerText={soundtracks[0].title}
-                            coverSrc={getCoverArtBySoundtrackTitle(soundtracks[0].title)}
-                        >
-                            <Playlist
-                                hasPlayButtons
-                                hasOptionsButtons
-                                playlistData={witchQueenParsed}
-                                options={soundtrackSongOptions}
-                            />
-                        </SoundtrackBanner> */}
                         {generateAllSoundtrackBanners(soundtracks)}
                     </center>
                 </div>

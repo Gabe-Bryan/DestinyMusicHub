@@ -142,12 +142,7 @@ function OptionsPane(
         <>
             <div
                 id="options-menu-popup"
-                onMouseLeave={
-                    (event) => {
-                        // console.log("#context menu mouseleave", event.currentTarget);
-                        event.currentTarget.className = "hidden";
-                    }
-                }
+                onMouseLeave={ (event) => event.currentTarget.className = "hidden" }
             >
                 {options && getOptionsAsDivs(options, songData)}
             </div>

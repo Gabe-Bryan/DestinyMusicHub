@@ -3,22 +3,28 @@ import "./styles/Playlist.css"
 
 import { PlaylistItem } from "./PlaylistItem"
 
-export function Playlist({ playlistData, hasPlayButtons = false, hasOptionsButtons = false, options }) {
+let playlistItemKeyVal = 0;
+
+export function Playlist({ playlistData, hasPlayButtons = false, hasOptionsButtons = false, options, onClick }) {
 
     function getSongList(playlistDataIn) {
-        let songList = []
-        for (let songItem of playlistDataIn)
+        let songList = [];
+        for (let songItem of playlistDataIn) {
             songList.push(
-                <li key={songItem.track}>
+                <div key={"div." + songItem.track + "." + songItem.title}>
                     <PlaylistItem
+                        key={songItem.track + "." + songItem.title}
                         songData={songItem}
                         hasPlayButton={hasPlayButtons}
                         hasOptionsButton={hasOptionsButtons}
                         options={options}
+                        onClick={onClick}
                     />
-                </li>
-            )
-        return songList
+                </div>
+            );
+            playlistItemKeyVal++;
+        }
+        return songList;
     }
 
     const songList = getSongList(playlistData)
