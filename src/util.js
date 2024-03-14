@@ -7,7 +7,7 @@ export const secondsToTimestamp = (time) => {
 export const minutesSecondsTimestamp = (minutes, seconds) => {
     let timeStamp = minutes + ':';
     if (seconds < 10) {
-        timeStamp += '0'
+        timeStamp += '0';
     }
     timeStamp += seconds;
     return timeStamp;
@@ -66,19 +66,22 @@ export const parseSoundtrack = (soundtrack, officialOnly = false) => {
 }
 
 
-export function getCoverArtBySoundtrackTitle(soundtrackTitle, fileType="jpg") {
+/*
+    ##############################################
+    ###    cover art/image helper functions    ###
+    ##############################################
+*/
+export function getCoverArtPath(soundtrackTitle, fileType = "jpg") {
     let noSpaceLowerTitle = soundtrackTitle.toLowerCase().split(" ").join("");
     return `./res/coverart/${noSpaceLowerTitle}.${fileType}`;
 }
 
+
 /*
     ##############################################
-    ###   Alan's getSong/getSoundtrack stuff   ###
+    ###   Alan's playlist song parsing stuff   ###
     ##############################################
-
-    NOTE: still needs to be tied to in duration resolution, etc.
 */
-
 export function generateSongListFromSources(songsData) {
     let songListFromSources = [];
     for (let song of songsData) {
@@ -101,7 +104,7 @@ export function generateSongListFromSources(songsData) {
 
 export function getSongListFromSoundtrackId(soundtrack_id, songsFromSourcesData, officialOnly = false) {
     let soundtrackSongList = [];
-    let addedTrackNumbers = [];
+    // let addedTrackNumbers = [];
 
     for (let song of songsFromSourcesData) {
 
@@ -113,7 +116,7 @@ export function getSongListFromSoundtrackId(soundtrack_id, songsFromSourcesData,
 
         if (song.soundtrack_id === soundtrack_id) {
             soundtrackSongList.push(song);
-            addedTrackNumbers.push(song.track);
+            // addedTrackNumbers.push(song.track);
         }
     }
     // sort asc by track_number

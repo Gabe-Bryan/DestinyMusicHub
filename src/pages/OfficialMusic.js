@@ -1,5 +1,10 @@
 import React from 'react';
-import { getAllSongs, getAllSoundtracks, generateSongListFromSources, getSongListFromSoundtrackId, getCoverArtBySoundtrackTitle } from '../util';
+
+import {
+    getAllSongs, getAllSoundtracks, generateSongListFromSources,
+    getSongListFromSoundtrackId, getCoverArtPath
+} from '../util';
+
 import { SoundtrackBanner } from '../components/SoundtrackBanner';
 import { Playlist } from '../components/Playlist';
 
@@ -14,10 +19,45 @@ let songs = await getAllSongs();
 
 let songsFromSources = generateSongListFromSources(songs);
 
-let witchQueenId = soundtracks[0]._id;
-let witchQueenParsed = getSongListFromSoundtrackId(witchQueenId, songsFromSources, true);
+// let witchQueenId = soundtracks[0]._id;
+// let witchQueenParsed = getSongListFromSoundtrackId(witchQueenId, songsFromSources, true);
 
-console.log("### witch queen soundtrack parsed: ", witchQueenParsed);
+// console.log("### witch queen soundtrack parsed: ", witchQueenParsed);
+
+
+/*
+    ##############################################
+    ###########   HELPER METHODS/MISC   ##########
+    ##############################################
+*/
+function generateSoundtrackBanner(soundtrack) {
+
+    let parsedPlaylistData = getSongListFromSoundtrackId(soundtrack._id, songsFromSources, true);
+
+    return (
+        <div key={soundtrack._id}>
+            <SoundtrackBanner
+                bannerText={soundtrack.title}
+                coverSrc={getCoverArtPath(soundtrack.title)}
+            >
+                <Playlist
+                    hasPlayButtons
+                    hasOptionsButtons
+                    playlistData={parsedPlaylistData}
+                    options={soundtrackSongOptions}
+                />
+            </SoundtrackBanner>
+        </div>
+    );
+}
+
+function generateAllSoundtrackBanners(soundtracks) {
+    let allBanners = [];
+    for (let soundtrack of soundtracks) {
+        allBanners.push(generateSoundtrackBanner(soundtrack));
+    }
+    return allBanners;
+}
 
 
 /*
@@ -29,7 +69,7 @@ let containerStyle = {
     display: "block",
     border: "solid 0px #f00",
     textAlign: "center",
-    
+
     marginBottom: "13rem",
 }
 
@@ -50,6 +90,18 @@ let innerColStyle = {
     #############   COMPONENT JSX   ############
     ############################################
 */
+
+let soundtrackSongOptions = [
+    {
+        text: "Queue song",
+        onClick: (e, songData) => console.log("#event", e, "#songData", songData),
+    },
+    {
+        text: "Go to source",
+        onClick: (e, songData) => console.log("#event", e, "#songData", songData),
+    }
+]
+
 export function OfficialMusic() {
     return (
         <div className="App">
@@ -60,29 +112,19 @@ export function OfficialMusic() {
                 <h2>Official Soundtracks / Released Music:</h2>
                 <div style={containerStyle}>
                     <center>
-                    <SoundtrackBanner 
-                        expanded 
-                        bannerText={soundtracks[0].title} 
-                        coverSrc={getCoverArtBySoundtrackTitle(soundtracks[0].title)}
-                    >
-                        <Playlist
-                            hasPlayButtons
-                            hasOptionsButtons
-                            playlistData={witchQueenParsed}
-                            options={
-                                [
-                                    {
-                                        text: "Queue song",
-                                        onClick: (e, songData) => console.log("#event", e, "#songData", songData),
-                                    },
-                                    {
-                                        text: "Go to source",
-                                        onClick: (e, songData) => console.log("#event", e, "#songData", songData),
-                                    }
-                                ]
-                            }
-                        />
-                    </SoundtrackBanner>
+                        {/* <SoundtrackBanner
+                            expanded
+                            bannerText={soundtracks[0].title}
+                            coverSrc={getCoverArtBySoundtrackTitle(soundtracks[0].title)}
+                        >
+                            <Playlist
+                                hasPlayButtons
+                                hasOptionsButtons
+                                playlistData={witchQueenParsed}
+                                options={soundtrackSongOptions}
+                            />
+                        </SoundtrackBanner> */}
+                        {generateAllSoundtrackBanners(soundtracks)}
                     </center>
                 </div>
             </main>
