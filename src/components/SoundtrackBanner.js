@@ -2,8 +2,6 @@ import React from 'react'
 import { useState } from 'react'
 import './styles/SoundtrackBanner.css'
 
-import { Playlist } from "./Playlist"
-
 export function SoundtrackBanner(
     {
         expanded = false,
@@ -14,11 +12,11 @@ export function SoundtrackBanner(
     }
 ) {
 
-    const [isExpanded, setIsExpanded] = useState(expanded ? "shown" : "hidden")
+    const [isExpanded, setIsExpanded] = useState(expanded ? "shown" : "hidden");
 
     function toggleDropdown(event) {
-        if (isExpanded === "shown") setIsExpanded("hidden")
-        else setIsExpanded("shown")
+        if (isExpanded === "shown") setIsExpanded("hidden");
+        else setIsExpanded("shown");
     }
 
     return (

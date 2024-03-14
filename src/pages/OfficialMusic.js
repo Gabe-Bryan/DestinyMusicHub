@@ -1,5 +1,5 @@
 import React from 'react';
-import { getAllSongs, getAllSoundtracks, generateSongListFromSources, getSongListFromSoundtrackId } from '../util';
+import { getAllSongs, getAllSoundtracks, generateSongListFromSources, getSongListFromSoundtrackId, getCoverArtBySoundtrackTitle } from '../util';
 import { SoundtrackBanner } from '../components/SoundtrackBanner';
 import { Playlist } from '../components/Playlist';
 
@@ -60,7 +60,11 @@ export function OfficialMusic() {
                 <h2>Official Soundtracks / Released Music:</h2>
                 <div style={containerStyle}>
                     <center>
-                    <SoundtrackBanner expanded>
+                    <SoundtrackBanner 
+                        expanded 
+                        bannerText={soundtracks[0].title} 
+                        coverSrc={getCoverArtBySoundtrackTitle(soundtracks[0].title)}
+                    >
                         <Playlist
                             hasPlayButtons
                             hasOptionsButtons
@@ -69,9 +73,11 @@ export function OfficialMusic() {
                                 [
                                     {
                                         text: "Queue song",
-                                        onClick: (e, songData) => {
-                                            console.log("#event", e, "#songData", songData);
-                                        },
+                                        onClick: (e, songData) => console.log("#event", e, "#songData", songData),
+                                    },
+                                    {
+                                        text: "Go to source",
+                                        onClick: (e, songData) => console.log("#event", e, "#songData", songData),
                                     }
                                 ]
                             }

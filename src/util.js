@@ -66,7 +66,10 @@ export const parseSoundtrack = (soundtrack, officialOnly = false) => {
 }
 
 
-
+export function getCoverArtBySoundtrackTitle(soundtrackTitle, fileType="jpg") {
+    let noSpaceLowerTitle = soundtrackTitle.toLowerCase().split(" ").join("");
+    return `./res/coverart/${noSpaceLowerTitle}.${fileType}`;
+}
 
 /*
     ##############################################
@@ -81,7 +84,7 @@ export function generateSongListFromSources(songsData) {
     for (let song of songsData) {
         song.sources.forEach(songSource => {
             songListFromSources.push({
-                title: songSource.version_title !== "" ? songSource.version_title : songSource.title,
+                title: songSource.version_title || song.title,
                 track: songSource.track_number || undefined,
                 version_title: songSource.version_title,
                 is_official: songSource.is_official || undefined,
@@ -99,7 +102,7 @@ export function generateSongListFromSources(songsData) {
 export function getSongListFromSoundtrackId(soundtrack_id, songsFromSourcesData, officialOnly = false) {
     let soundtrackSongList = [];
     let addedTrackNumbers = [];
-    
+
     for (let song of songsFromSourcesData) {
 
         // skip unofficial songs if officialOnly is set

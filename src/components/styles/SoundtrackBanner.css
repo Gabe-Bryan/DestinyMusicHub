@@ -58,6 +58,8 @@ li {
     position: relative;
 }
 
+
+
 #songbanner-container #banner-text-container {
     /* background: linear-gradient( to right, 
         rgba(0, 0, 0, 1),
@@ -69,16 +71,16 @@ li {
     left: 0%;
     width: 100%;
     height: 100%;
-    text-align: left;
+    text-align: center;
 }
 
 #songbanner-container #banner-text {
-    padding-left: 2rem;
+    padding-left: 0rem;
     position: absolute;
+    width: 100%;
     top: 50%;
-    left: 0%;
-    transform: translate(0%, -50%);
-    font: 2rem arial;
+    transform: translate(0, -50%);
+    font: 4rem arial;
     color: #fff;
     user-select: none;
     filter: drop-shadow(rgba(0, 0, 0, .5) .1rem .1rem);
