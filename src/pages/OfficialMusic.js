@@ -28,6 +28,9 @@ function generateSoundtrackBanner(soundtrack, playNewSong, queueNewSong) {
 
     let parsedPlaylistData = getSongListFromSoundtrackId(soundtrack._id, songsFromSources, true);
 
+    // dont return soundtracks with no tracks
+    // if (parsedPlaylistData.length <= 0) return;
+
     return (
         <div key={soundtrack._id}>
             <SoundtrackBanner
