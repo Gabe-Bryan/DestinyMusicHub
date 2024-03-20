@@ -1,6 +1,6 @@
 import './styles/SongItem.css';
 import { useState } from "react";
-
+import { SoundtrackBanner } from '../components/SoundtrackBanner';
 function SongItem ({data, onClick = undefined, expanded = false}) {
 	const [isExpanded, setIsExpanded] = useState(expanded ? "shown" : "hidden");
 	function expand() {
@@ -13,13 +13,19 @@ function SongItem ({data, onClick = undefined, expanded = false}) {
 		}
 	}
 	return (
-		<div className='song-item-container'>
+		<div className='song-item-container' onClick={expand}>
+			
 			<div className = 'track' >{data.track}</div>
-			<div className = 'title' onClick={expand}>{data.title}</div>
-			<div id="dropdown" className={isExpanded}>
-				<p>does this work</p>
+			<SoundtrackBanner
+        expanded
+        coverSrc="./res/destiny1soundtrack.jpg"
+        bannerSrc="./res/marc-thompson-sanctum-18.jpg"
+        bannerText={data.title}
+		children={<p></p>}
+      ></SoundtrackBanner>
+				
 				{/* <Playlist playlistData={songData}/> */}
-			</div>
+			
 		</div>
 	);
 }

@@ -1,3 +1,9 @@
+:root{
+    --dropdown-min-height: 8rem;
+    --dropdown-max-height: 16rem;
+    --image-height: 16rem;
+    --img-width: var(--image-height);
+}
 .song-item-container {
     display: block;
     background-color: #222;
@@ -8,6 +14,10 @@
     margin: 0.25rem;
     user-select: none;
     min-height: 1.41rem;
+}
+.song-item-container img{
+    width: var(--img-width);
+    height: var(--image-height);
 }
 .song-item-container #dropdown {
     cursor: crosshair;
@@ -22,10 +32,17 @@
     width: 10%;
 }
 
+.song-item-container #song {
+    font: 1rem verdana;
+    transform: translate(10%,0%); 
+}
 .song-item-container #dropdown.hidden{
     display: none;
 }
 
 .song-item-container #dropdown.shown{
     display: block;
+    min-height: var(--dropdown-min-height);
+    max-height: var(--dropdown-max-height);
+    overflow-y: scroll;
 }

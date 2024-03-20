@@ -4,7 +4,7 @@ import './styles/SoundtrackBanner.css'
 
 import { Playlist } from "./Playlist"
 
-export function SoundtrackBanner({ expanded = false, coverSrc, bannerSrc, bannerText = "" , children}) {
+export function SoundtrackBanner({ expanded = false, coverSrc="", bannerSrc, bannerText = "" , children}) {
 
     const [isExpanded, setIsExpanded] = useState(expanded ? "shown" : "hidden")
 
@@ -31,5 +31,5 @@ export function SoundtrackBanner({ expanded = false, coverSrc, bannerSrc, banner
             </div>
             <div id="overflow-cap" className={isExpanded} />
         </div>
-    )
+    ) 
 }
