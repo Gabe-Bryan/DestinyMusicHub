@@ -28,11 +28,13 @@ function App() {
 
     //Adds a new song to the end of the queue
     const queueNewSong = (newSong) => {
+        console.log("### queue song trigger", newSong);
         songQueue.push(newSong);
     }
 
     //Adds a new song to the front of the queue and plays it
     const playNewSong = (newSong) => {
+        console.log("### play song trigger", newSong);
         songQueue.unshift(newSong);
 
         ytPlayer.loadVideoById({ videoId: songQueue[0].videoId, startSeconds: 0 });

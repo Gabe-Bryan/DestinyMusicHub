@@ -5,7 +5,7 @@ import { PlaylistItem } from "./PlaylistItem"
 
 let playlistItemKeyVal = 0;
 
-export function Playlist({ playlistData, hasPlayButtons = false, hasOptionsButtons = false, options, onClick }) {
+export function Playlist({ playlistData, hasPlayButtons = false, hasOptionsButtons = false, options, playNewSong, queueNewSong }) {
 
     function getSongList(playlistDataIn) {
         let songList = [];
@@ -18,7 +18,7 @@ export function Playlist({ playlistData, hasPlayButtons = false, hasOptionsButto
                         hasPlayButton={hasPlayButtons}
                         hasOptionsButton={hasOptionsButtons}
                         options={options}
-                        onClick={onClick}
+                        onClick={() => playNewSong(songItem)}
                     />
                 </div>
             );

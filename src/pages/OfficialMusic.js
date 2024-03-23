@@ -16,15 +16,15 @@ import { Playlist } from '../components/Playlist';
 */
 let soundtracks = await getAllSoundtracks();
 let songs = await getAllSongs();
-let songsFromSources = generateSongListFromSources(songs);
 
+let songsFromSources = generateSongListFromSources(songs);
 
 /*
     ##############################################
     ###########   HELPER METHODS/MISC   ##########
     ##############################################
 */
-function generateSoundtrackBanner(soundtrack, playNewSong, queueNewSong) {
+function generateSoundtrackBanner(soundtrack, playNewSong, queueNewSong, soundtrackSongOptions) {
 
     let parsedPlaylistData = getSongListFromSoundtrackId(soundtrack._id, songsFromSources, true);
 
@@ -42,16 +42,18 @@ function generateSoundtrackBanner(soundtrack, playNewSong, queueNewSong) {
                     hasOptionsButtons
                     playlistData={parsedPlaylistData}
                     options={soundtrackSongOptions}
+                    playNewSong={playNewSong}
+                    queueNewSong={queueNewSong}
                 />
             </SoundtrackBanner>
         </div>
     );
 }
 
-function generateAllSoundtrackBanners(soundtracks) {
+function generateAllSoundtrackBanners(soundtracks, playNewSong, queueNewSong, soundtrackSongOptions) {
     let allBanners = [];
     for (let soundtrack of soundtracks) {
-        allBanners.push(generateSoundtrackBanner(soundtrack));
+        allBanners.push(generateSoundtrackBanner(soundtrack, playNewSong, queueNewSong, soundtrackSongOptions));
     }
     return allBanners;
 }
@@ -77,21 +79,29 @@ let containerStyle = {
     ############################################
 */
 
-let soundtrackSongOptions = [
-    {
-        text: "Add to Queue",
-        onClick: (e, songData) => console.log("#event", e, "#songData", songData),
-    },
-    {
-        text: "Open source",
-        onClick: (e, songData) => console.log("#event", e, "#songData", songData),
-    }
-]
 
 export function OfficialMusic({
-    playNewSong = undefined,
-    queueNewSong = undefined,
+    playNewSong,
+    queueNewSong,
 }) {
+    
+    
+    let soundtrackSongOptions = [
+        {
+            text: "Add to Queue",
+            onClick: (e, songData) => {
+                // console.log("#event", e, "#songData", songData);
+                queueNewSong(songData);
+            },
+        },
+        {
+            text: "Open source",
+            onClick: (e, songData) => {
+                // console.log("#event", e, "#songData", songData)
+            }
+        }
+    ];
+
     return (
         <div className="App">
             <header className="App-header">
@@ -103,7 +113,7 @@ export function OfficialMusic({
                 </h2>
                 <div style={containerStyle}>
                     <center>
-                        {generateAllSoundtrackBanners(soundtracks)}
+                        {generateAllSoundtrackBanners(soundtracks, playNewSong, queueNewSong, soundtrackSongOptions)}
                     </center>
                 </div>
             </main>
