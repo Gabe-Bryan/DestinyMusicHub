@@ -4,9 +4,9 @@ import { Home } from './pages/home.js';
 import { OfficialMusic } from './pages/OfficialMusic.js';
 import Navbar from './components/Navbar.js';
 import { YTPlayer } from './components/MusicPlayer.js';
+import { CompleteMusic } from './pages/CompleteMusic.js';
 //import {ScaleText} from 'react-scale-text';
 import './stylesheets/style.css'
-import { CompleteMusic } from './pages/CompleteMusic.js';
 const songQueue = [
     { title: "Inner Light", intensity: "Action", videoId: '7Qyu5TtvhfA', duration: 500 },
     { title: "The Hunted", intensity: "Action, High Action", videoId: 'YKQvTsHIVAg', duration: 230 },
@@ -48,10 +48,10 @@ function App() {
                 <Navbar />
                 <Routes>
                     <Route path='/' element={<Home />} />
-                    <Route path='/OfficialMusic' element={<Home />} />
-                    <Route path='/CompleteMusic' element={<Home />} />
+                    <Route path='/OfficialMusic' element={<OfficialMusic playNewSong={playNewSong} queueNewSong={queueNewSong} />} />
+                    <Route path='/CompleteMusic' element={<CompleteMusic/>} />
                 </Routes>
-                {/* <YTPlayer songQueue={songQueue} prevQueue={prevQueue} ytPlayer={ytPlayer} setYtPlayer={setYtPlayer} playYt={playYt} /> */}
+                <YTPlayer songQueue={songQueue} prevQueue={prevQueue} ytPlayer={ytPlayer} setYtPlayer={setYtPlayer} playYt={playYt} />
             </BrowserRouter>
         </div>
     );
