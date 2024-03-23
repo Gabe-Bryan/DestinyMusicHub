@@ -3,37 +3,43 @@ import "./styles/Playlist.css"
 
 import { PlaylistItem } from "./PlaylistItem"
 
-export function Playlist({ playlistData }) {
+let playlistItemKeyVal = 0;
 
-    function clickHandler(event, songItem) {
-        console.log(`Do play action for [${songItem.track}. ${songItem.title}`)
-    }
+export function Playlist({ playlistData, hasPlayButtons = false, hasOptionsButtons = false, options, onClick }) {
 
     function getSongList(playlistDataIn) {
-        let songList = []
-        for (let songItem of playlistDataIn)
+        let songList = [];
+        for (let songItem of playlistDataIn) {
             songList.push(
-                <li key={songItem.track}> 
-                    <PlaylistItem songData={songItem}/>
-                </li>
-            )
-        return songList
+                <div key={"div." + songItem.track + "." + songItem.title}>
+                    <PlaylistItem
+                        key={songItem.track + "." + songItem.title}
+                        songData={songItem}
+                        hasPlayButton={hasPlayButtons}
+                        hasOptionsButton={hasOptionsButtons}
+                        options={options}
+                        onClick={onClick}
+                    />
+                </div>
+            );
+            playlistItemKeyVal++;
+        }
+        return songList;
     }
 
     const songList = getSongList(playlistData)
 
     return (
         <div id="playlist-container">
-            <ul id="song-list">
-                <div id="header">
-                    <span id="track">track</span>
-                    <span id="play-button"></span>
-                    <span id="title">title</span>
-                    <span id="intensity">intensity</span>
-                    <span id="length">length</span>
-                </div>
-                {songList}
-            </ul>
+            <div id="header">
+                <div id="track">track</div>
+                <div id="play-button"></div>
+                <div id="title">title</div>
+                <div id="intensity">intensity</div>
+                <div id="length">length</div>
+                <div id="item-options"></div>
+            </div>
+            {songList}
         </div>
     )
 }

@@ -1,18 +1,13 @@
-import React, { createElement } from 'react';
-import {useState} from 'react';
-//import {ScaleText} from 'react-scale-text';
+import React from 'react';
 import '../components/MusicPlayer.js';
 import seasonOfPlunder from "../resources/season_of_plunder.jpg";
 import lightfall from '../resources/lightfall.jpg';
-import { YTPlayer } from '../components/MusicPlayer.js';
-import Navbar from '../components/Navbar.js';
 import Slideshow from '../components/Slideshow.js';
 import '../stylesheets/style.css'
 import { SongPlaylist } from '../components/SongPlaylist.js';
-//hi does this work
+
 const seasonOfPlunderText = 'Season of plunder was released in 2022. The composers for the soundtrack were: Michael Salvatori, Skye Lewin, Josh Wosser, and Michael Sechrist.';
 const lightfallText = 'Lightfall was released in 2022. The composers for the soundtrack were: Michael Salvatori, Sky Lewin, Josh Mosser, Michael Sechrist, Rotem Moav, and Peter Schlosser';
-
 
 function Home() {
   return (
@@ -98,4 +93,4 @@ function Home() {
   );
 }
 
-export {Home};
+export { Home };

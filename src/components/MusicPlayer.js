@@ -194,11 +194,11 @@ function YTPlayer({ songQueue, prevQueue, ytPlayer, setYtPlayer, playYt }) {
 
                     <div style={{ display: 'block', textAlign: 'center', margin: '10px' }}>
                         <Space>
-                            <Button buttonType='primary' onClick={prevSong}
+                            <Button buttontype='primary' onClick={prevSong}
                                 shape='circle' icon={<StepBackwardOutlined />} disabled={prevQueue.length == 0} />
-                            <Button buttonType='primary' onClick={playYt}
+                            <Button buttontype='primary' onClick={playYt}
                                 shape='circle' icon={playing ? <PauseOutlined /> : <CaretRightOutlined />} disabled={songQueue.length == 0} />
-                            <Button buttonType='primary' onClick={nextSong}
+                            <Button buttontype='primary' onClick={nextSong}
                                 shape='circle' icon={<StepForwardOutlined />} disabled={songQueue.length < 2} />
                         </Space>
                         <Slider value={time} max={duration}
