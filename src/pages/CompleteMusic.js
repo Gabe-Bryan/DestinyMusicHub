@@ -4,10 +4,10 @@ import { generateSongListFromSources, generateSongSourceList, getAllSongs } from
 
 const allSongs= await getAllSongs();
 const allSongSources = generateSongSourceList(allSongs)
-console.log("#####allsongsources####",allSongSources)
-// for(let songs of allSongSources ){
-//     console.log(songs)
-// }
+//console.log("#####allsongsources####",allSongSources)
+ for(let songs of allSongSources ){
+     console.log(songs)
+ }
 
 export function CompleteMusic({ twoColumn = false }) {
     

@@ -118,10 +118,10 @@ export function generateSongSourceList(songsData) {
                 source_type: songSource.source_type || undefined,
                 intensity: songSource.intensity || undefined,
             });
-           
         });
         SongList.push(SongSourceList)
     }
+    SongList=SongList.filter(val=>val.length !==0)
     return SongList;
 }
 
