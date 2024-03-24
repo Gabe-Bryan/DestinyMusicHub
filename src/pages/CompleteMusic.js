@@ -1,10 +1,16 @@
 import { SongItem } from "../components/SongItem";
 import { SongPlaylist } from '../components/SongPlaylist.js';   
-import { getAllSongs } from "../util.js";
+import { generateSongListFromSources, generateSongSourceList, getAllSongs } from "../util.js";
 
 const allSongs= await getAllSongs();
+const allSongSources = generateSongSourceList(allSongs)
+console.log("#####allsongsources####",allSongSources)
+// for(let songs of allSongSources ){
+//     console.log(songs)
+// }
 
 export function CompleteMusic({ twoColumn = false }) {
+    
     return (
         <div className="App">
             <header className="App-header">
@@ -12,7 +18,8 @@ export function CompleteMusic({ twoColumn = false }) {
             </header>
             <div>
                 <h2>Unofficial Soundtracks / Released Music:</h2>
-                <SongPlaylist playlistData={allSongs}/>
+                
+                {/* <SongPlaylist playlistData={allSongs}/> */}
             
             </div>
         </div>

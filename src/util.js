@@ -102,6 +102,29 @@ export function generateSongListFromSources(songsData) {
     return songListFromSources;
 }
 
+export function generateSongSourceList(songsData) {
+    let SongList = [];
+    for (let song of songsData) {
+        let SongSourceList = []
+        song.sources.forEach(songSource => {
+            SongSourceList.push({
+                title: songSource.version_title || song.title,
+                track: songSource.track_number || undefined,
+                version_title: songSource.version_title,
+                is_official: songSource.is_official || undefined,
+                soundtrack_id: songSource.soundtrack_id || undefined,
+                length: songSource.duration ? secondsToTimestamp(songSource.duration) : "unknown",
+                video_id: songSource.video_id || undefined,
+                source_type: songSource.source_type || undefined,
+                intensity: songSource.intensity || undefined,
+            });
+           
+        });
+        SongList.push(SongSourceList)
+    }
+    return SongList;
+}
+
 export function getSongListFromSoundtrackId(soundtrack_id, songsFromSourcesData, officialOnly = false) {
     let soundtrackSongList = [];
     // let addedTrackNumbers = [];

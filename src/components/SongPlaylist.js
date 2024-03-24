@@ -8,18 +8,18 @@ export function SongPlaylist({ playlistData }) {
     function getSongList(playlistDataIn) {
         let songList = []
         for (let songItem of playlistDataIn) {
-            let completeTrack = ""
-            if (songItem.sources !== undefined) {
-                songItem.sources.forEach(source => {
-                    if (source.track_number !== undefined) {
-                        completeTrack += "," + source.track_number
-                    }
-                })
-            }
-            songItem.track = completeTrack.substring(1)
+            // let completeTrack = ""
+            // if (songItem.sources !== undefined) {
+            //     songItem.sources.forEach(source => {
+            //         if (source.track_number !== undefined) {
+            //             completeTrack += "," + source.track_number
+            //         }
+            //     })
+            // }
+            // songItem.track = completeTrack.substring(1)
             songList.push(
                 <div key={songItem.track}>
-                    <SongItem data={songItem} key={songItem.track + " songItem"} />
+                    <SongItem data={songItem} />
                 </div>
             )
         }
