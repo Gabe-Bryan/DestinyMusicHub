@@ -103,9 +103,10 @@ export function generateSongListFromSources(songsData) {
 }
 
 export function generateSongSourceList(songsData) {
-    let SongList = [];
+    let SongList = []
     for (let song of songsData) {
         let SongSourceList = []
+        let songTrackAmount = ""
         song.sources.forEach(songSource => {
             SongSourceList.push({
                 title: songSource.version_title || song.title,
@@ -118,10 +119,13 @@ export function generateSongSourceList(songsData) {
                 source_type: songSource.source_type || undefined,
                 intensity: songSource.intensity || undefined,
             });
+            if (songSource.track_number){
+                songTrackAmount+=","+songSource.track_number
+            }
         });
-        SongList.push(SongSourceList)
+        SongList.push({SongSources:SongSourceList,track:songTrackAmount.substring(1),title:song.title})
     }
-    SongList=SongList.filter(val=>val.length !==0)
+    SongList=SongList.filter(val=>val["SongSources"].length !==0)
     return SongList;
 }
 

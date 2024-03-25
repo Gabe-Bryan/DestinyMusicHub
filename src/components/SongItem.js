@@ -3,6 +3,8 @@ import { useState } from "react";
 import { SoundtrackBanner } from '../components/SoundtrackBanner';
 import { Playlist } from './Playlist';
 import { generateSongListFromSources } from "../util"
+
+
 function SongItem({ data, onClick = undefined, expanded = false }) {
 	const [isExpanded, setIsExpanded] = useState(expanded ? "shown" : "hidden");
 	function expand() {
@@ -25,7 +27,7 @@ function SongItem({ data, onClick = undefined, expanded = false }) {
 
 			</div>
 
-			{/* <Playlist playlistData={songData}/> */}
+			 <Playlist playlistData={data.SongSources}/>
 
 		</div>
 	);
