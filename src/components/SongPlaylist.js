@@ -15,9 +15,9 @@ export function SongPlaylist({ playlistData }) {
 
     return (
         <div className="song-playlist-container">
-            <ul className="song-list">
+            <div className="song-list">
                 {songList}
-            </ul>
+            </div>
         </div>
     )
 }
