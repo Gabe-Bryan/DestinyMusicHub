@@ -21,11 +21,11 @@
 }
 .song-item-container #dropdown {
     cursor: crosshair;
+    
 }
 
 .song-item-container div {
     font: 0.8rem verdana;
-    display: inline-block;
 }
 
 .song-item-container .track {

@@ -24,7 +24,9 @@ function SongItem({ data, onClick = undefined, expanded = false }) {
 				{console.log(data.SongSources)}
 				{/* <p>{data}</p> */}
 				
-				<Playlist playlistData={data.SongSources}/>
+				<Playlist 	playlistData={data.SongSources} 
+							hasPlayButtons = {true}
+							hasOptionsButtons = {true}/>
 
 			</div>
 
