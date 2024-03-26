@@ -17,7 +17,7 @@ function SongItem({ data, onClick = undefined, expanded = false }) {
 		}
 	}
 	return (
-		<div className='song-item-container' onClick={expand}>
+		<div className='song-item-container' >
 			<div className='track' >{data.track}</div>
 			<div className='title' onClick={expand}>{data.title}</div>
 			<div id="dropdown" className={isExpanded}>
