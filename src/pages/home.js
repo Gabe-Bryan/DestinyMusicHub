@@ -9,26 +9,28 @@ const seasonOfPlunderText = 'Season of plunder was released in 2022. The compose
 const lightfallText = 'Lightfall was released in 2022. The composers for the soundtrack were: Michael Salvatori, Sky Lewin, Josh Mosser, Michael Sechrist, Rotem Moav, and Peter Schlosser';
 
 function Home() {
-	return (
-		<div className="App">
-			<header className="App-header">
-				<h1> Destiny Music Hub</h1>
-			</header>
-			<div>
-				<h2> Featured Tracks</h2>
-				<Slideshow images={[seasonOfPlunder, lightfall]}
-					texts={[seasonOfPlunderText, lightfallText]} fontsizes={['24pt', '22pt']}
-					style={{ margin: 'auto', padding: '2%' }} />
-
-				<Slideshow images={[seasonOfPlunder, lightfall]}
-					texts={[seasonOfPlunderText, lightfallText]} fontsizes={['24pt', '22pt']}
-					style={{ margin: 'auto', padding: '2%' }} />
-
-				{/* <div className = 'footer'>
-                <p>Created by Gabriel Bryan 2023</p> */}
-			</div>
-		</div>
-	);
+  return (
+    <div classname="App">
+        <header className="App-header">
+            <h1> Destiny Music Hub</h1>
+        </header>
+        <div>       
+            <h2> Featured Tracks</h2> 
+            <Slideshow images ={[seasonOfPlunder, lightfall]} 
+              texts = {[seasonOfPlunderText, lightfallText]} fontsizes = {['24pt', '22pt']}
+              style = {{margin: 'auto', padding: '2%'}}/>
+            
+            <Slideshow images ={[seasonOfPlunder, lightfall]} 
+              texts = {[seasonOfPlunderText, lightfallText]} fontsizes = {['24pt', '22pt']}
+              style = {{margin: 'auto', padding: '2%'}}/>
+            
+            {/* <div class = 'footer'>
+                <p>Created by Gabriel Bryan 2023</p>
+                
+            </div> */}
+        </div>
+    </div>
+  );
 }
 
 export { Home };
