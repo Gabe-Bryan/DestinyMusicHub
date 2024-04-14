@@ -18,7 +18,7 @@ export function Playlist({ playlistData, hasPlayButtons = false, hasOptionsButto
                         hasPlayButton={hasPlayButtons}
                         hasOptionsButton={hasOptionsButtons}
                         options={options}
-                        onClick={() => playNewSong(songItem)}
+                        onPlayClick={() => playNewSong(songItem)}
                     />
                 </div>
             );
