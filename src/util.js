@@ -107,6 +107,8 @@ export function generateSongSourceList(songsData) {
     for (let song of songsData) {
         let SongSourceList = []
         let songTrackAmount = ""
+        let min = Number.MAX_VALUE
+        let main_soundtrack_id = ""
         song.sources.forEach(songSource => {
             SongSourceList.push({
                 title: songSource.version_title || song.title,
@@ -120,10 +122,26 @@ export function generateSongSourceList(songsData) {
                 intensity: songSource.intensity || undefined,
             });
             if (songSource.track_number){
-                songTrackAmount+=","+songSource.track_number
+                if(min<songSource.track_number){
+                    
+                    songTrackAmount+=","+songSource.track_number
+                }else{
+                    
+                    if(min===Number.MAX_VALUE){
+                        songTrackAmount=","+songSource.track_number+songTrackAmount.substring(1)
+                    }else{
+                    songTrackAmount=","+songSource.track_number+","+songTrackAmount.substring(1)
+                    }
+                    min=songSource.track_number
+                }
+            console.log(songTrackAmount)
+            }
+            if (songSource.soundtrack_id){
+                main_soundtrack_id = songSource.soundtrack_id
             }
         });
-        SongList.push({SongSources:SongSourceList,track:songTrackAmount.substring(1),title:song.title})
+        
+        SongList.push({SongSources:SongSourceList,track:songTrackAmount.substring(1),title:song.title,soundtrack_id:main_soundtrack_id, min_track:min})
     }
     SongList=SongList.filter(val=>val["SongSources"].length !==0)
     return SongList;

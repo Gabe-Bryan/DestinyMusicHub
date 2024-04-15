@@ -1,7 +1,8 @@
 import { SongItem } from "../components/SongItem";
 import { SongPlaylist } from '../components/SongPlaylist.js';
-import { generateSongListFromSources, generateSongSourceList, getAllSongs } from "../util.js";
+import { getSongListFromSoundtrackId,getAllSoundtracks, generateSongSourceList, getAllSongs } from "../util.js";
 
+let soundtracks = await getAllSoundtracks();
 const allSongs = await getAllSongs();
 const allSongSources = generateSongSourceList(allSongs)
 //console.log("#####allsongsources####",allSongSources)
@@ -13,7 +14,13 @@ function generateAllSourceSongs() {
     }
     return allSourceSong
 }
-
+function generateAllSongsFromSoundtrack(soundtracks){
+    let allBanners = [];
+    for (let soundtrack of soundtracks) {
+        allBanners.push();
+    }
+    return allBanners
+}
 function generateSongItems(songItem) {
     return (
         <div>

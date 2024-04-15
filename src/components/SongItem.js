@@ -21,7 +21,7 @@ function SongItem({ data, onClick = undefined, expanded = false }) {
 			<div className='track' >{data.track}</div>
 			<div className='title' onClick={expand}>{data.title}</div>
 			<div id="dropdown" className={isExpanded}>
-				{console.log(data.SongSources)}
+				{/*console.log(data.SongSources)*/}
 				{/* <p>{data}</p> */}
 				
 				<Playlist 	playlistData={data.SongSources} 
