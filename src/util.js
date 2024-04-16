@@ -134,25 +134,26 @@ export function generateSongSourceList(songsData) {
                     }
                     min=songSource.track_number
                 }
-            console.log(songTrackAmount)
+            
             }
             if (songSource.soundtrack_id){
                 main_soundtrack_id = songSource.soundtrack_id
             }
         });
         
-        SongList.push({SongSources:SongSourceList,track:songTrackAmount.substring(1),title:song.title,soundtrack_id:main_soundtrack_id, min_track:min})
+        SongList.push({SongSources:SongSourceList,all_track:songTrackAmount.substring(1),title:song.title,soundtrack_id:main_soundtrack_id, track:min})
     }
     SongList=SongList.filter(val=>val["SongSources"].length !==0)
     return SongList;
 }
 
 export function getSongListFromSoundtrackId(soundtrack_id, songsFromSourcesData, officialOnly = false) {
+    
     let soundtrackSongList = [];
     // let addedTrackNumbers = [];
 
     for (let song of songsFromSourcesData) {
-
+        
         // skip unofficial songs if officialOnly is set
         if (officialOnly && !song.is_official) continue;
 

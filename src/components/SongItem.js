@@ -19,7 +19,7 @@ function SongItem({ data, onClick = undefined, expanded = false }) {
 	data.SongSources.sort((a, b) => a.track - b.track)
 	return (
 		<div className='song-item-container' >
-			<div className='track' >{data.track}</div>
+			<div className='track' >{data.all_track}</div>
 			<div className='title' onClick={expand}>{data.title}</div>
 			<div id="dropdown" className={isExpanded}>
 				{/*console.log(data.SongSources)*/}
