@@ -1,25 +1,30 @@
 import { SongItem } from "../components/SongItem";
 import { SongPlaylist } from '../components/SongPlaylist.js';
 import { SoundtrackBanner } from "../components/SoundtrackBanner.js";
-import { getSongListFromSoundtrackId,getAllSoundtracks, generateSongSourceList, getAllSongs } from "../util.js";
+import { getSongListFromSoundtrackId,getAllSoundtracks, generateSongSourceList, getAllSongs,getCoverArtPath } from "../util.js";
 
 let soundtracks = await getAllSoundtracks();
 const allSongs = await getAllSongs();
 const allSongSources = generateSongSourceList(allSongs)
 //console.log("#####allsongsources####",allSongSources)
 
-function generateSourceSongsFromSoundtrack(soundtracks) {
+function generateSourceSongsFromSoundtrack(soundtrack,title) {
     let allSourceSong = []
-    for (let songs of soundtracks) {
+    for (let songs of soundtrack) {
         allSourceSong.push(generateSongItems(songs));
     }
-    return (<SoundtrackBanner>{allSourceSong}</SoundtrackBanner>)
+    return (<SoundtrackBanner
+        bannerText={title}
+        coverSrc={getCoverArtPath(title)}
+        >
+            {allSourceSong}
+            </SoundtrackBanner>)
 }
 function generateAllSongsFromSoundtrack(soundtracks){
     let allBanners = [];
     for (let soundtrack of soundtracks) {
         let songlist=getSongListFromSoundtrackId(soundtrack._id,allSongSources,false)
-        allBanners.push(generateSourceSongsFromSoundtrack(songlist));
+        allBanners.push(generateSourceSongsFromSoundtrack(songlist,soundtrack.title));
     }
     console.log(allBanners,soundtracks,allSongSources)
     return allBanners
