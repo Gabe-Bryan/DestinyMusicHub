@@ -7,15 +7,12 @@ import { YTPlayer } from './components/MusicPlayer.js';
 import { CompleteMusic } from './pages/CompleteMusic.js';
 //import {ScaleText} from 'react-scale-text';
 import './stylesheets/style.css'
-const songQueue = [
-    { title: "Inner Light", intensity: "Action", videoId: '7Qyu5TtvhfA', duration: 500 },
-    { title: "The Hunted", intensity: "Action, High Action", videoId: 'YKQvTsHIVAg', duration: 230 },
-    { title: "Inner Light", intensity: "Soundtrack Edit", videoId: '4jQ_NbelyZE', duration: 191 }
-];
+const songQueue = [];
 const prevQueue = [];
 function App() {
     //Sets whether a song is currently playing
     const [ytPlayer, setYtPlayer] = useState(null);
+    const [a, setA] = useState(3);
 
     //Changes to pause/play depending on current state
     const playYt = () => {
@@ -30,6 +27,7 @@ function App() {
     //Adds a new song to the end of the queue, pass down through components to use
     const queueNewSong = (newSong) => {
         console.log("### queue song trigger", newSong);
+        setA((a+1)%100);
         songQueue.push(newSong);
     }
 
@@ -38,7 +36,7 @@ function App() {
         console.log("### play song trigger", newSong);
         songQueue.unshift(newSong);
 
-        ytPlayer.loadVideoById({ videoId: songQueue[0].videoId, startSeconds: 0 });
+        ytPlayer.loadVideoById({ videoId: songQueue[0].video_id, startSeconds: 0 });
         if (ytPlayer.getPlayerState() === 2) {
             ytPlayer.playVideo();
         }

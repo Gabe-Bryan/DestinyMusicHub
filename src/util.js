@@ -92,7 +92,7 @@ export function generateSongListFromSources(songsData) {
                 version_title: songSource.version_title,
                 is_official: songSource.is_official || undefined,
                 soundtrack_id: songSource.soundtrack_id || undefined,
-                length: songSource.duration ? secondsToTimestamp(songSource.duration) : "unknown",
+                duration: songSource.duration ? secondsToTimestamp(songSource.duration) : "unknown",
                 video_id: songSource.video_id || undefined,
                 source_type: songSource.source_type || undefined,
                 intensity: songSource.intensity || undefined,
