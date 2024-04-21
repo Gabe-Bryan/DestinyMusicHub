@@ -8,10 +8,22 @@ const allSongs = await getAllSongs();
 const allSongSources = generateSongSourceList(allSongs)
 //console.log("#####allsongsources####",allSongSources)
 
-function generateSourceSongsFromSoundtrack(soundtrack,title) {
+function generateAllSongsFromSoundtrack(soundtracks,playNewSong,queueNewSong,soundtrackSongOptions){
+    let allBanners = [];
+    for (let soundtrack of soundtracks) {
+        let songlist=getSongListFromSoundtrackId(soundtrack._id,allSongSources,false)
+        allBanners.push(generateSourceSongsFromSoundtrack(songlist,soundtrack.title,playNewSong,queueNewSong,soundtrackSongOptions));
+    }
+    console.log(allBanners,soundtracks,allSongSources)
+    return allBanners
+}
+
+
+
+function generateSourceSongsFromSoundtrack(soundtrack,title,playNewSong,queueNewSong,soundtrackSongOptions) {
     let allSourceSong = []
     for (let songs of soundtrack) {
-        allSourceSong.push(generateSongItems(songs));
+        allSourceSong.push(generateSongItems(songs,playNewSong,queueNewSong,soundtrackSongOptions));
     }
     return (<SoundtrackBanner
         bannerText={title}
@@ -20,24 +32,34 @@ function generateSourceSongsFromSoundtrack(soundtrack,title) {
             {allSourceSong}
             </SoundtrackBanner>)
 }
-function generateAllSongsFromSoundtrack(soundtracks){
-    let allBanners = [];
-    for (let soundtrack of soundtracks) {
-        let songlist=getSongListFromSoundtrackId(soundtrack._id,allSongSources,false)
-        allBanners.push(generateSourceSongsFromSoundtrack(songlist,soundtrack.title));
-    }
-    console.log(allBanners,soundtracks,allSongSources)
-    return allBanners
-}
-function generateSongItems(songItem) {
+
+
+
+function generateSongItems(songItem,playNewSong,queueNewSong,soundtrackSongOptions) {
     return (
         <div>
-            <SongPlaylist playlistData={songItem} />
+            <SongPlaylist playlistData={songItem} playNewSong={playNewSong} queueNewSong={queueNewSong} soundtrackSongOptions={soundtrackSongOptions} />
         </div>
     )
 }
 
-export function CompleteMusic({ twoColumn = false, Song }) {
+export function CompleteMusic({ playNewSong, queueNewSong}) {
+
+    let soundtrackSongOptions = [
+        {
+            text: "Add to Queue",
+            onClick: (e, songData) => {
+                // console.log("#event", e, "#songData", songData);
+                queueNewSong(songData);
+            },
+        },
+        {
+            text: "Open source",
+            onClick: (e, songData) => {
+                // console.log("#event", e, "#songData", songData)
+            }
+        }
+    ];
 
     return (
         <div className="App">
@@ -52,7 +74,7 @@ export function CompleteMusic({ twoColumn = false, Song }) {
                             <div className="title">title</div>
                         </div>
                         {/*generateAllSourceSongs()*/}
-                        {generateAllSongsFromSoundtrack(soundtracks)}
+                        {generateAllSongsFromSoundtrack(soundtracks,playNewSong,queueNewSong,soundtrackSongOptions)}
                 </div>
             </div>
         </div>

@@ -5,7 +5,7 @@ import { Playlist } from './Playlist';
 import { generateSongListFromSources } from "../util"
 
 
-function SongItem({ data, onClick = undefined, expanded = false }) {
+function SongItem({ data, onClick = undefined, expanded = false,playNewSong,queueNewSong,soundtrackSongOptions }) {
 	const [isExpanded, setIsExpanded] = useState(expanded ? "shown" : "hidden");
 	function expand() {
 		if (isExpanded === "shown") {
@@ -27,7 +27,10 @@ function SongItem({ data, onClick = undefined, expanded = false }) {
 				
 				<Playlist 	playlistData={data.SongSources} 
 							hasPlayButtons = {true}
-							hasOptionsButtons = {true}/>
+							hasOptionsButtons = {true}
+							options={soundtrackSongOptions}
+							playNewSong={playNewSong}
+							queueNewSong={queueNewSong}/>
 
 			</div>
 

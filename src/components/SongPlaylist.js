@@ -3,11 +3,11 @@ import "./styles/SongPlaylist.css"
 
 import { SongItem } from "./SongItem"
 
-export function SongPlaylist({ playlistData }) {
+export function SongPlaylist({ playlistData,playNewSong,queueNewSong,soundtrackSongOptions }) {
 
     function getSongList(playlistDataIn) {
                     
-        return (<SongItem data={playlistDataIn} />);
+        return (<SongItem data={playlistDataIn} playNewSong={playNewSong} queueNewSong={queueNewSong} soundtrackSongOptions={soundtrackSongOptions}/>);
     }
 
     const songList = getSongList(playlistData)
