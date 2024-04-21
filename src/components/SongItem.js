@@ -16,7 +16,7 @@ function SongItem({ data, onClick = undefined, expanded = false,playNewSong,queu
 			console.log(data.title + isExpanded);
 		}
 	}
-	data.SongSources.sort((a, b) => a.track - b.track)
+	data.SongSources.sort((a, b) => a.track - b.track);
 	return (
 		<div className='song-item-container' >
 			<div className='track' >{data.all_track}</div>

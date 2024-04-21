@@ -69,10 +69,7 @@ export function CompleteMusic({ playNewSong, queueNewSong}) {
             <div>
                 <h2>Unofficial Soundtracks / Released Music:</h2>
                 <div className="song-playlist-container">
-                        <div className="header">
-                            <div className="track">track #'s</div>
-                            <div className="title">title</div>
-                        </div>
+
                         {/*generateAllSourceSongs()*/}
                         {generateAllSongsFromSoundtrack(soundtracks,playNewSong,queueNewSong,soundtrackSongOptions)}
                 </div>
