@@ -238,7 +238,7 @@ function PlayerQueue({ songQueue, disabled, onPlayClick }) {
     }
 
     return (
-        <div id="playlist-container" style={{ display: disabled ? "none" : "block" }}>
+        <div id="playlist-container" style={{ display: disabled ? "none" : "block", overflowY: "scroll"}}>
             <div id="header">
                 <div id="track">position</div>
                 <div id="play-button"></div>

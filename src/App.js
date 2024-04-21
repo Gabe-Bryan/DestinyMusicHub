@@ -11,6 +11,7 @@ const prevQueue = [];
 function App() {
     //Sets whether a song is currently playing
     const [ytPlayer, setYtPlayer] = useState(null);
+    const [a, setA] = useState(3);
 
     //Changes to pause/play depending on current state
     const playYt = () => {
@@ -25,6 +26,7 @@ function App() {
     //Adds a new song to the end of the queue, pass down through components to use
     const queueNewSong = (newSong) => {
         console.log("### queue song trigger", newSong);
+        setA((a+1)%100);
         songQueue.push(newSong);
     }
 
