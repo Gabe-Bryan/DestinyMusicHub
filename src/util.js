@@ -110,7 +110,10 @@ export function getSongListFromSoundtrackId(soundtrack_id, songsFromSourcesData,
 
         // skip unofficial songs if officialOnly is set
         if (officialOnly && !song.is_official) continue;
-
+        
+        // skip songs with no vide_id or track number
+        if (song.video_id === undefined || song.video_id === "" || song.track === undefined) continue;
+        
         // ensures only 1 song per track is added. not sure if needed.
         // if (addedTrackNumbers.includes(song.track)) continue;
 
