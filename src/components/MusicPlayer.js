@@ -56,7 +56,7 @@ function YTPlayer({ songQueue, prevQueue, ytPlayer, setYtPlayer, playYt }) {
     //Assigns the useState for the yt embed (a.k.a. ytPlayer)
     const readyPlayer = (event) => {
         if (songQueue.length > 0) {
-            event.target.loadVideoById({ videoId: songQueue[0].videoId, startSeconds: 0 });
+            event.target.loadVideoById({ videoId: songQueue[0].video_id, startSeconds: 0 });
         }
         //Assigns the player as soon as it's ready
         setYtPlayer(event.target);
@@ -80,7 +80,7 @@ function YTPlayer({ songQueue, prevQueue, ytPlayer, setYtPlayer, playYt }) {
         if (songQueue.length > 1) {
             const currSong = songQueue.shift();
             prevQueue.push(currSong);
-            ytPlayer.loadVideoById({ videoId: songQueue[0].videoId, startSeconds: 0 });
+            ytPlayer.loadVideoById({ videoId: songQueue[0].video_id, startSeconds: 0 });
         }
     }
     //Skips to the prev song (pulling out of prevQueue)
@@ -88,7 +88,7 @@ function YTPlayer({ songQueue, prevQueue, ytPlayer, setYtPlayer, playYt }) {
         if (prevQueue.length > 0) {
             const prevSong = prevQueue.pop();
             songQueue.unshift(prevSong);
-            ytPlayer.loadVideoById({ videoId: songQueue[0].videoId, startSeconds: 0 });
+            ytPlayer.loadVideoById({ videoId: songQueue[0].video_id, startSeconds: 0 });
         }
     }
 
@@ -97,7 +97,7 @@ function YTPlayer({ songQueue, prevQueue, ytPlayer, setYtPlayer, playYt }) {
         const temp = songQueue[index];
         songQueue.splice(index, 1);
         songQueue.unshift(temp);
-        ytPlayer.loadVideoById({ videoId: songQueue[0].videoId, startSeconds: 0 });
+        ytPlayer.loadVideoById({ videoId: songQueue[0].video_id, startSeconds: 0 });
     };
 
     //Jumps to selected timestamp
@@ -227,9 +227,9 @@ function PlayerQueue({ songQueue, disabled, onPlayClick }) {
                         track: count,
                         title: song.title,
                         intensity: song.intensity,
-                        length: secondsToTimestamp(song.duration)
+                        duration: song.duration
                     }}
-                        hasPlayButton onClick={() => onPlayClick(i)}
+                        hasPlayButton onPlayClick={() => onPlayClick(i)}
                     />
                 </li>);
             count++;
@@ -239,16 +239,14 @@ function PlayerQueue({ songQueue, disabled, onPlayClick }) {
 
     return (
         <div id="playlist-container" style={{ display: disabled ? "none" : "block" }}>
-            <ul id="song-list">
-                <li id="header">
-                    <span id="track">track</span>
-                    <span id="play-button"></span>
-                    <span id="title">title</span>
-                    <span id="intensity">intensity</span>
-                    <span id="length">length</span>
-                </li>
-                {buildQueue()}
-            </ul>
+            <div id="header">
+                <div id="track">position</div>
+                <div id="play-button"></div>
+                <div id="title">title</div>
+                <div id="intensity">intensity</div>
+                <div id="duration">length</div>
+            </div>
+            {buildQueue()}
         </div>
     );
 }
@@ -277,10 +275,10 @@ function CurrentSongDisplay({ currentSong, expanded }) {
     return (
         <div className={`current-song-display${expanded ? ' expanded' : ''}`}>
             <div className='song-title'>
-                {currentSong.title}
+                {currentSong ? currentSong.title : "No Song Playing..."}
             </div>
             <div className='song-intensity'>
-                {currentSong.intensity}
+                {currentSong ? currentSong.intensity : ""}
             </div>
         </div>
     );

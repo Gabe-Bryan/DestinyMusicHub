@@ -6,11 +6,7 @@ import Navbar from './components/Navbar.js';
 import { YTPlayer } from './components/MusicPlayer.js';
 //import {ScaleText} from 'react-scale-text';
 import './stylesheets/style.css'
-const songQueue = [
-    { title: "Inner Light", intensity: "Action", videoId: '7Qyu5TtvhfA', duration: 500 },
-    { title: "The Hunted", intensity: "Action, High Action", videoId: 'YKQvTsHIVAg', duration: 230 },
-    { title: "Inner Light", intensity: "Soundtrack Edit", videoId: '4jQ_NbelyZE', duration: 191 }
-];
+const songQueue = [];
 const prevQueue = [];
 function App() {
     //Sets whether a song is currently playing
@@ -37,7 +33,7 @@ function App() {
         console.log("### play song trigger", newSong);
         songQueue.unshift(newSong);
 
-        ytPlayer.loadVideoById({ videoId: songQueue[0].videoId, startSeconds: 0 });
+        ytPlayer.loadVideoById({ videoId: songQueue[0].video_id, startSeconds: 0 });
         if (ytPlayer.getPlayerState() === 2) {
             ytPlayer.playVideo();
         }

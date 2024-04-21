@@ -48,7 +48,7 @@ export function PlaylistItem(
             </div>
             <div id="item-title">{songData.title}</div>
             <div id="item-intensity">{songData.intensity}</div>
-            <div id="item-length">{songData.length}</div>
+            <div id="item-length">{songData.duration}</div>
             <div id="item-options">
                 {hasOptionsButton && <OptionsButton options={options} songData={songData} />}
             </div>
