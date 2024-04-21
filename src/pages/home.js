@@ -15,7 +15,7 @@ function Home() {
         <header className="App-header">
             <h1> Destiny Music Hub</h1>
         </header>
-        <body>       
+        <div>       
             <h2> Featured Tracks</h2> 
             <Slideshow images ={[seasonOfPlunder, lightfall]} 
               texts = {[seasonOfPlunderText, lightfallText]} fontsizes = {['24pt', '22pt']}
@@ -29,7 +29,7 @@ function Home() {
                 <p>Created by Gabriel Bryan 2023</p>
                 
             </div> */}
-        </body>
+        </div>
     </div>
   );
 }

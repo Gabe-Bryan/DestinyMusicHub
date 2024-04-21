@@ -27,6 +27,7 @@ export function PlaylistItem(
         songData = undefined,
         hasPlayButton = false,
         onClick = undefined,
+        onPlayClick = undefined,
         hasOptionsButton = false,
         options = defaultOptions,
     }
@@ -43,7 +44,7 @@ export function PlaylistItem(
         <div id="item-container" onClick={!hasPlayButton ? onClick : undefined}>
             <div id="item-track">{songData.track}</div>
             <div id="item-play-button">
-                {hasPlayButton && <PlayButton onClick={onClick} />}
+                {hasPlayButton && <PlayButton onClick={onPlayClick} />}
             </div>
             <div id="item-title">{songData.title}</div>
             <div id="item-intensity">{songData.intensity}</div>

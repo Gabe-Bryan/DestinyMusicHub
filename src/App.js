@@ -20,24 +20,26 @@ function App() {
     //Changes to pause/play depending on current state
     const playYt = () => {
         const pState = ytPlayer.getPlayerState();
-        if (pState == 1 || pState == 3) {
+        if (pState === 1 || pState === 3) {
             ytPlayer.pauseVideo();
         } else {
             ytPlayer.playVideo();
         }
     };
 
-    //Adds a new song to the end of the queue
+    //Adds a new song to the end of the queue, pass down through components to use
     const queueNewSong = (newSong) => {
+        console.log("### queue song trigger", newSong);
         songQueue.push(newSong);
     }
 
-    //Adds a new song to the front of the queue and plays it
+    //Adds a new song to the front of the queue and plays it, pass down through components to use
     const playNewSong = (newSong) => {
+        console.log("### play song trigger", newSong);
         songQueue.unshift(newSong);
 
         ytPlayer.loadVideoById({ videoId: songQueue[0].videoId, startSeconds: 0 });
-        if (ytPlayer.getPlayerState() == 2) {
+        if (ytPlayer.getPlayerState() === 2) {
             ytPlayer.playVideo();
         }
     }
