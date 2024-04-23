@@ -14,7 +14,7 @@ function generateAllSongsFromSoundtrack(soundtracks,playNewSong,queueNewSong,sou
         let songlist=getSongListFromSoundtrackId(soundtrack._id,allSongSources,false)
         allBanners.push(generateSourceSongsFromSoundtrack(songlist,soundtrack.title,playNewSong,queueNewSong,soundtrackSongOptions));
     }
-    console.log(allBanners,soundtracks,allSongSources)
+    // console.log(allBanners,soundtracks,allSongSources)
     return (<center>{allBanners}</center>)
 }
 

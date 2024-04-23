@@ -11,7 +11,7 @@ export function SongPlaylist({ playlistData,playNewSong,queueNewSong,soundtrackS
     }
 
     const songList = getSongList(playlistData)
-    console.log(playlistData)
+    // console.log(playlistData)
 
     return (
         <div className="song-playlist-container">

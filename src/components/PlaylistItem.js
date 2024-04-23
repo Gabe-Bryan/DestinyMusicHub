@@ -32,7 +32,15 @@ export function PlaylistItem(
         options = defaultOptions,
     }
 ) {
-
+   
+    if (songData.intensity&&songData.intensity.length>1){
+        for(let i =0; i<songData.intensity.length-1; i++){
+            
+            songData.intensity[i] = songData.intensity[i]+", "
+        }
+        
+        console.log(songData.intensity)
+    }
     // function clickHandler(event) {
     //     console.log(`Do thing to play [${songData.track}. ${songData.title}]`)
     //     console.log(event.currentTarget);
