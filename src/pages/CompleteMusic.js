@@ -18,7 +18,13 @@ function generateAllSongsFromSoundtrack(soundtracks,playNewSong,queueNewSong,sou
     return allBanners
 }
 
+let containerStyle = {
+    display: "block",
+    border: "solid 0px #f00",
+    textAlign: "center",
 
+    marginBottom: "13rem",
+}
 
 function generateSourceSongsFromSoundtrack(soundtrack,title,playNewSong,queueNewSong,soundtrackSongOptions) {
     let allSourceSong = []
@@ -68,10 +74,11 @@ export function CompleteMusic({ playNewSong, queueNewSong}) {
             </header>
             <div>
                 <h2>Unofficial Soundtracks / Released Music:</h2>
-                <div className="song-playlist-container">
-
+                <div className="song-playlist-container" >
+                        <center>
                         {/*generateAllSourceSongs()*/}
                         {generateAllSongsFromSoundtrack(soundtracks,playNewSong,queueNewSong,soundtrackSongOptions)}
+                        </center>
                 </div>
             </div>
         </div>
