@@ -15,7 +15,7 @@ function generateAllSongsFromSoundtrack(soundtracks,playNewSong,queueNewSong,sou
         allBanners.push(generateSourceSongsFromSoundtrack(songlist,soundtrack.title,playNewSong,queueNewSong,soundtrackSongOptions));
     }
     console.log(allBanners,soundtracks,allSongSources)
-    return allBanners
+    return (<center>{allBanners}</center>)
 }
 
 let containerStyle = {
@@ -35,7 +35,7 @@ function generateSourceSongsFromSoundtrack(soundtrack,title,playNewSong,queueNew
         bannerText={title}
         coverSrc={getCoverArtPath(title)}
         >
-            {allSourceSong}
+            {<div style={{textAlign: "left", padding:"rem 1rem"}}>{allSourceSong}</div>}
             </SoundtrackBanner>)
 }
 
@@ -75,10 +75,9 @@ export function CompleteMusic({ playNewSong, queueNewSong}) {
             <div>
                 <h2>Unofficial Soundtracks / Released Music:</h2>
                 <div className="song-playlist-container" >
-                        <center>
-                        {/*generateAllSourceSongs()*/}
+                        
                         {generateAllSongsFromSoundtrack(soundtracks,playNewSong,queueNewSong,soundtrackSongOptions)}
-                        </center>
+                        
                 </div>
             </div>
         </div>

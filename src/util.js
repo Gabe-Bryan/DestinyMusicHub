@@ -86,6 +86,11 @@ export function generateSongListFromSources(songsData) {
     let songListFromSources = [];
     for (let song of songsData) {
         song.sources.forEach(songSource => {
+            if (songSource.intensity&&songSource.intensity.length>1){
+                for(let i =0; i<songSource.intensity.length-1; i++){
+                    songSource.intensity[i] = songSource.intensity[i]+", "
+                }
+            }
             songListFromSources.push({
                 title: songSource.version_title || song.title,
                 track: songSource.track_number || undefined,
@@ -102,6 +107,11 @@ export function generateSongListFromSources(songsData) {
     return songListFromSources;
 }
 
+/*
+    ###########################################################
+    ###   Austin's playlist song parsing/recoupling stuff   ###
+    ###########################################################
+*/
 export function generateSongSourceList(songsData) {
     let SongList = []
     for (let song of songsData) {
@@ -110,20 +120,24 @@ export function generateSongSourceList(songsData) {
         let min = Number.MAX_VALUE
         let main_soundtrack_id = ""
         song.sources.forEach(songSource => {
+            if (songSource.intensity&&songSource.intensity.length>1){
+                for(let i =0; i<songSource.intensity.length-1; i++){
+                    songSource.intensity[i] = songSource.intensity[i]+", "
+                }
+            }
             SongSourceList.push({
                 title: songSource.version_title || song.title,
                 track: songSource.track_number || undefined,
                 version_title: songSource.version_title,
                 is_official: songSource.is_official || undefined,
                 soundtrack_id: songSource.soundtrack_id || undefined,
-                length: songSource.duration ? secondsToTimestamp(songSource.duration) : "unknown",
+                duration: songSource.duration ? secondsToTimestamp(songSource.duration) : "unknown",
                 video_id: songSource.video_id || undefined,
                 source_type: songSource.source_type || undefined,
                 intensity: songSource.intensity || undefined,
             });
             if (songSource.track_number){
                 if(min<songSource.track_number){
-                    
                     songTrackAmount+=","+songSource.track_number
                 }else{
                     
