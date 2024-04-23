@@ -1,8 +1,6 @@
 import './styles/SongItem.css';
 import { useState } from "react";
-import { SoundtrackBanner } from '../components/SoundtrackBanner';
 import { Playlist } from './Playlist';
-import { generateSongListFromSources } from "../util"
 
 
 function SongItem({ data, onClick = undefined, expanded = false,playNewSong,queueNewSong,soundtrackSongOptions }) {

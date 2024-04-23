@@ -1,4 +1,3 @@
-import { SongItem } from "../components/SongItem";
 import { SongPlaylist } from '../components/SongPlaylist.js';
 import { SoundtrackBanner } from "../components/SoundtrackBanner.js";
 import { getSongListFromSoundtrackId,getAllSoundtracks, generateSongSourceList, getAllSongs,getCoverArtPath } from "../util.js";
@@ -18,13 +17,7 @@ function generateAllSongsFromSoundtrack(soundtracks,playNewSong,queueNewSong,sou
     return (<center>{allBanners}</center>)
 }
 
-let containerStyle = {
-    display: "block",
-    border: "solid 0px #f00",
-    textAlign: "center",
 
-    marginBottom: "13rem",
-}
 
 function generateSourceSongsFromSoundtrack(soundtrack,title,playNewSong,queueNewSong,soundtrackSongOptions) {
     let allSourceSong = []
