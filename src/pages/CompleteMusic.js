@@ -35,7 +35,7 @@ function generateSourceSongsFromSoundtrack(soundtrack,title,playNewSong,queueNew
         bannerText={title}
         coverSrc={getCoverArtPath(title)}
         >
-            {<div style={{textAlign: "left", padding:"rem 1rem"}}>{allSourceSong}</div>}
+            {<div style={{textAlign: "left", padding:"0rem 1rem"}}>{allSourceSong}</div>}
             </SoundtrackBanner>)
 }
 
