@@ -5,12 +5,13 @@ import { getSongListFromSoundtrackId,getAllSoundtracks, generateSongSourceList, 
 let soundtracks = await getAllSoundtracks();
 const allSongs = await getAllSongs();
 const allSongSources = generateSongSourceList(allSongs)
-//console.log("#####allsongsources####",allSongSources)
+// console.log("#####allsongsources####",allSongSources)
 
 function generateAllSongsFromSoundtrack(soundtracks,playNewSong,queueNewSong,soundtrackSongOptions){
     let allBanners = [];
     for (let soundtrack of soundtracks) {
-        let songlist=getSongListFromSoundtrackId(soundtrack._id,allSongSources,false)
+        let songlist=getSongListFromSoundtrackId(soundtrack._id,allSongSources,false);
+        console.log("### SONGLIST ###", songlist);
         allBanners.push(generateSourceSongsFromSoundtrack(songlist,soundtrack.title,playNewSong,queueNewSong,soundtrackSongOptions));
     }
     // console.log(allBanners,soundtracks,allSongSources)
@@ -23,6 +24,7 @@ function generateSourceSongsFromSoundtrack(soundtrack,title,playNewSong,queueNew
     let allSourceSong = []
     for (let songs of soundtrack) {
         allSourceSong.push(generateSongItems(songs,playNewSong,queueNewSong,soundtrackSongOptions));
+        console.log("### ALLSONGSOURCE ###", allSourceSong);
     }
     return (<SoundtrackBanner
         bannerText={title}

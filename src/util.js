@@ -86,7 +86,7 @@ export function generateSongListFromSources(songsData) {
     let songListFromSources = [];
     for (let song of songsData) {
         song.sources.forEach(songSource => {
-            
+
             songListFromSources.push({
                 title: songSource.version_title || song.title,
                 track: songSource.track_number || undefined,
@@ -116,7 +116,7 @@ export function generateSongSourceList(songsData) {
         let min = Number.MAX_VALUE
         let main_soundtrack_id = ""
         song.sources.forEach(songSource => {
-           
+
             SongSourceList.push({
                 title: songSource.version_title || song.title,
                 track: songSource.track_number || undefined,
@@ -128,44 +128,44 @@ export function generateSongSourceList(songsData) {
                 source_type: songSource.source_type || undefined,
                 intensity: songSource.intensity || undefined,
             });
-            if (songSource.track_number){
-                if(min<songSource.track_number){
-                    songTrackAmount+=","+songSource.track_number
-                }else{
-                    
-                    if(min===Number.MAX_VALUE){
-                        songTrackAmount=","+songSource.track_number+songTrackAmount.substring(1)
-                    }else{
-                    songTrackAmount=","+songSource.track_number+","+songTrackAmount.substring(1)
+            if (songSource.track_number) {
+                if (min < songSource.track_number) {
+                    songTrackAmount += "," + songSource.track_number
+                } else {
+
+                    if (min === Number.MAX_VALUE) {
+                        songTrackAmount = "," + songSource.track_number + songTrackAmount.substring(1)
+                    } else {
+                        songTrackAmount = "," + songSource.track_number + "," + songTrackAmount.substring(1)
                     }
-                    min=songSource.track_number
+                    min = songSource.track_number
                 }
-            
+
             }
-            if (songSource.soundtrack_id){
+            if (songSource.soundtrack_id) {
                 main_soundtrack_id = songSource.soundtrack_id
             }
         });
-        
-        SongList.push({SongSources:SongSourceList,all_track:songTrackAmount.substring(1),title:song.title,soundtrack_id:main_soundtrack_id, track:min})
+
+        SongList.push({ SongSources: SongSourceList, all_track: songTrackAmount.substring(1), title: song.title, soundtrack_id: main_soundtrack_id, track: min })
     }
-    SongList=SongList.filter(val=>val["SongSources"].length !==0)
+    SongList = SongList.filter(val => val["SongSources"].length !== 0)
     return SongList;
 }
 
 export function getSongListFromSoundtrackId(soundtrack_id, songsFromSourcesData, officialOnly = false) {
-    
+
     let soundtrackSongList = [];
     // let addedTrackNumbers = [];
 
     for (let song of songsFromSourcesData) {
-        
+
         // skip unofficial songs if officialOnly is set
         if (officialOnly && !song.is_official) continue;
-        
+
         // skip songs with no video_id or track number
-        if (song.video_id === undefined || song.video_id === "" || song.track === undefined) continue;
-        
+        if (officialOnly && (song.video_id === undefined || song.video_id === "" || song.track === undefined)) continue;
+
         // ensures only 1 song per track is added. not sure if needed.
         // if (addedTrackNumbers.includes(song.track)) continue;
 
