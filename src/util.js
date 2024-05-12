@@ -46,7 +46,7 @@ export const parseSongVersion = (song, sourceIndex) => {
 export const parseSoundtrack = (soundtrack, officialOnly = false) => {
     let parsedSoundtrack = [];
     for (let song of soundtrack) {
-        console.log(song);
+        // console.log(song);
         let songGroup = [];
         for (let i = 0; i < song.sources.length; i++) {
             let parsedSongVersion = parseSongVersion(song, i);

@@ -39,7 +39,7 @@ export function PlaylistItem(
             songData.intensity[i] = songData.intensity[i]+", "
         }
         
-        console.log(songData.intensity)
+        // console.log(songData.intensity)
     }
     // function clickHandler(event) {
     //     console.log(`Do thing to play [${songData.track}. ${songData.title}]`)
