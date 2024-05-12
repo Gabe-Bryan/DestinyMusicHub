@@ -86,13 +86,14 @@ export function generateSongListFromSources(songsData) {
     let songListFromSources = [];
     for (let song of songsData) {
         song.sources.forEach(songSource => {
+            
             songListFromSources.push({
                 title: songSource.version_title || song.title,
                 track: songSource.track_number || undefined,
                 version_title: songSource.version_title,
                 is_official: songSource.is_official || undefined,
                 soundtrack_id: songSource.soundtrack_id || undefined,
-                length: songSource.duration ? secondsToTimestamp(songSource.duration) : "unknown",
+                duration: songSource.duration ? secondsToTimestamp(songSource.duration) : "unknown",
                 video_id: songSource.video_id || undefined,
                 source_type: songSource.source_type || undefined,
                 intensity: songSource.intensity || undefined,
@@ -102,12 +103,63 @@ export function generateSongListFromSources(songsData) {
     return songListFromSources;
 }
 
+/*
+    ###########################################################
+    ###   Austin's playlist song parsing/recoupling stuff   ###
+    ###########################################################
+*/
+export function generateSongSourceList(songsData) {
+    let SongList = []
+    for (let song of songsData) {
+        let SongSourceList = []
+        let songTrackAmount = ""
+        let min = Number.MAX_VALUE
+        let main_soundtrack_id = ""
+        song.sources.forEach(songSource => {
+           
+            SongSourceList.push({
+                title: songSource.version_title || song.title,
+                track: songSource.track_number || undefined,
+                version_title: songSource.version_title,
+                is_official: songSource.is_official || undefined,
+                soundtrack_id: songSource.soundtrack_id || undefined,
+                duration: songSource.duration ? secondsToTimestamp(songSource.duration) : "unknown",
+                video_id: songSource.video_id || undefined,
+                source_type: songSource.source_type || undefined,
+                intensity: songSource.intensity || undefined,
+            });
+            if (songSource.track_number){
+                if(min<songSource.track_number){
+                    songTrackAmount+=","+songSource.track_number
+                }else{
+                    
+                    if(min===Number.MAX_VALUE){
+                        songTrackAmount=","+songSource.track_number+songTrackAmount.substring(1)
+                    }else{
+                    songTrackAmount=","+songSource.track_number+","+songTrackAmount.substring(1)
+                    }
+                    min=songSource.track_number
+                }
+            
+            }
+            if (songSource.soundtrack_id){
+                main_soundtrack_id = songSource.soundtrack_id
+            }
+        });
+        
+        SongList.push({SongSources:SongSourceList,all_track:songTrackAmount.substring(1),title:song.title,soundtrack_id:main_soundtrack_id, track:min})
+    }
+    SongList=SongList.filter(val=>val["SongSources"].length !==0)
+    return SongList;
+}
+
 export function getSongListFromSoundtrackId(soundtrack_id, songsFromSourcesData, officialOnly = false) {
+    
     let soundtrackSongList = [];
     // let addedTrackNumbers = [];
 
     for (let song of songsFromSourcesData) {
-
+        
         // skip unofficial songs if officialOnly is set
         if (officialOnly && !song.is_official) continue;
         

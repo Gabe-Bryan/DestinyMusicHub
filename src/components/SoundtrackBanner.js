@@ -48,5 +48,5 @@ export function SoundtrackBanner(
             </div>
             <div id="overflow-cap" className={isExpanded} />
         </div>
-    )
+    ) 
 }

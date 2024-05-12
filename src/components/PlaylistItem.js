@@ -32,7 +32,15 @@ export function PlaylistItem(
         options = defaultOptions,
     }
 ) {
-
+   
+    if (songData.intensity&&songData.intensity.length>1){
+        for(let i =0; i<songData.intensity.length-1; i++){
+            
+            songData.intensity[i] = songData.intensity[i]+", "
+        }
+        
+        console.log(songData.intensity)
+    }
     // function clickHandler(event) {
     //     console.log(`Do thing to play [${songData.track}. ${songData.title}]`)
     //     console.log(event.currentTarget);
@@ -48,7 +56,7 @@ export function PlaylistItem(
             </div>
             <div id="item-title">{songData.title}</div>
             <div id="item-intensity">{songData.intensity}</div>
-            <div id="item-length">{songData.length}</div>
+            <div id="item-length">{songData.duration}</div>
             <div id="item-options">
                 {hasOptionsButton && <OptionsButton options={options} songData={songData} />}
             </div>

@@ -1,14 +1,13 @@
-import { createElement, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import YouTube from 'react-youtube';
 import {
     LoadingOutlined, CaretRightOutlined, PauseOutlined, StepBackwardOutlined,
     StepForwardOutlined, UpOutlined, DownOutlined, SoundOutlined
 } from '@ant-design/icons'
-import { Button, Space, ConfigProvider, Tooltip, Spin, Slider, Flex } from 'antd';
+import { Button, Space, ConfigProvider, Tooltip, Slider, Flex } from 'antd';
 import './styles/musicPlayerStyle.css';
 import { PlaylistItem } from './PlaylistItem';
 import { linearVectorInterpolation, secondsToTimestamp } from '../util';
-import { Playlist } from './Playlist';
 
 const expandTransition = 300;//ms for youtube embed to change size/shape
 const expandPercent = 135 / 63;//height ratio max/min
@@ -57,7 +56,7 @@ function YTPlayer({ songQueue, prevQueue, ytPlayer, setYtPlayer, playYt }) {
     //Assigns the useState for the yt embed (a.k.a. ytPlayer)
     const readyPlayer = (event) => {
         if (songQueue.length > 0) {
-            event.target.loadVideoById({ videoId: songQueue[0].videoId, startSeconds: 0 });
+            event.target.loadVideoById({ videoId: songQueue[0].video_id, startSeconds: 0 });
         }
         //Assigns the player as soon as it's ready
         setYtPlayer(event.target);
@@ -66,12 +65,12 @@ function YTPlayer({ songQueue, prevQueue, ytPlayer, setYtPlayer, playYt }) {
 
     //Handles state change so that it can start the visuals during loading
     const ytStateChange = (event) => {
-        let newLoadStatus = event.data == -1 || event.data == 3;
+        let newLoadStatus = event.data === -1 || event.data === 3;
         if (!loading && newLoadStatus) {
             setLoadFinish(new Date().getTime());
         }
         setLoading(newLoadStatus);
-        if (event.data == 0) {
+        if (event.data === 0) {
             nextSong();
         }
     }
@@ -81,7 +80,7 @@ function YTPlayer({ songQueue, prevQueue, ytPlayer, setYtPlayer, playYt }) {
         if (songQueue.length > 1) {
             const currSong = songQueue.shift();
             prevQueue.push(currSong);
-            ytPlayer.loadVideoById({ videoId: songQueue[0].videoId, startSeconds: 0 });
+            ytPlayer.loadVideoById({ videoId: songQueue[0].video_id, startSeconds: 0 });
         }
     }
     //Skips to the prev song (pulling out of prevQueue)
@@ -89,7 +88,7 @@ function YTPlayer({ songQueue, prevQueue, ytPlayer, setYtPlayer, playYt }) {
         if (prevQueue.length > 0) {
             const prevSong = prevQueue.pop();
             songQueue.unshift(prevSong);
-            ytPlayer.loadVideoById({ videoId: songQueue[0].videoId, startSeconds: 0 });
+            ytPlayer.loadVideoById({ videoId: songQueue[0].video_id, startSeconds: 0 });
         }
     }
 
@@ -98,7 +97,7 @@ function YTPlayer({ songQueue, prevQueue, ytPlayer, setYtPlayer, playYt }) {
         const temp = songQueue[index];
         songQueue.splice(index, 1);
         songQueue.unshift(temp);
-        ytPlayer.loadVideoById({ videoId: songQueue[0].videoId, startSeconds: 0 });
+        ytPlayer.loadVideoById({ videoId: songQueue[0].video_id, startSeconds: 0 });
     };
 
     //Jumps to selected timestamp
@@ -130,7 +129,7 @@ function YTPlayer({ songQueue, prevQueue, ytPlayer, setYtPlayer, playYt }) {
     const [expandStartTime, setExpandStartTime] = useState(0);
     const interval = 5;
     useEffect(() => {
-        if ((expanded && pSize != expandPercent) || (!expanded && pSize != 1)) {
+        if ((expanded && pSize !== expandPercent) || (!expanded && pSize !== 1)) {
             const loop = setInterval(() => {
                 const currTime = new Date().getTime();
                 const change = (currTime - expandStartTime) / expandTransition * (expandPercent - 1) * (expanded ? 1 : -1);
@@ -228,9 +227,9 @@ function PlayerQueue({ songQueue, disabled, onPlayClick }) {
                         track: count,
                         title: song.title,
                         intensity: song.intensity,
-                        length: secondsToTimestamp(song.duration)
+                        duration: song.duration
                     }}
-                        hasPlayButton onClick={() => onPlayClick(i)}
+                        hasPlayButton onPlayClick={() => onPlayClick(i)}
                     />
                 </li>);
             count++;
@@ -239,23 +238,22 @@ function PlayerQueue({ songQueue, disabled, onPlayClick }) {
     }
 
     return (
-        <div id="playlist-container" style={{ display: disabled ? "none" : "block" }}>
-            <ul id="song-list">
-                <li id="header">
-                    <span id="track">track</span>
-                    <span id="play-button"></span>
-                    <span id="title">title</span>
-                    <span id="intensity">intensity</span>
-                    <span id="length">length</span>
-                </li>
-                {buildQueue()}
-            </ul>
+        <div id="playlist-container" style={{ display: disabled ? "none" : "block", overflowY: "scroll"}}>
+            <div id="header">
+                <div id="track">position</div>
+                <div id="play-button"></div>
+                <div id="title">title</div>
+                <div id="intensity">intensity</div>
+                <div id="duration">length</div>
+            </div>
+            {buildQueue()}
         </div>
     );
 }
 
 function PlayerOptions({ expanded = false, ytPlayer }) {
     const setVolume = (value) => {
+        localStorage.setItem('volume', value);
         ytPlayer.setVolume(value);
     }
     return (
@@ -263,7 +261,7 @@ function PlayerOptions({ expanded = false, ytPlayer }) {
             <div></div>
             <Flex className='volume-bar'>
                 <SoundOutlined style={{ paddingRight: '10px', color: '#ffffff' }} />
-                <Slider defaultValue={100} max={100}
+                <Slider defaultValue={localStorage.getItem('volume') ? localStorage.getItem('volume') : 100} max={100}
                     style={{ width: '100%' }}
                     onChange={setVolume}
                     tooltip={{ formatter: (value) => `${value}%` }} />
@@ -277,10 +275,10 @@ function CurrentSongDisplay({ currentSong, expanded }) {
     return (
         <div className={`current-song-display${expanded ? ' expanded' : ''}`}>
             <div className='song-title'>
-                {currentSong.title}
+                {currentSong ? currentSong.title : "No Song Playing..."}
             </div>
             <div className='song-intensity'>
-                {currentSong.intensity}
+                {currentSong ? currentSong.intensity : ""}
             </div>
         </div>
     );

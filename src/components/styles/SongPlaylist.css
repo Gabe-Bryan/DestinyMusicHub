@@ -1,0 +1,25 @@
+.song-playlist-container {
+    display: block;
+}
+
+.song-playlist-container .song-list {
+    position: relative;
+    left: -1.25rem;
+    list-style-type: none;
+}
+
+.song-playlist-container .header {
+    font: bold 0.6rem verdana;
+    color: #ccc;
+    padding: 0.25rem 1rem;
+    user-select: none;
+    text-align: left;
+}
+
+.song-playlist-container .header div {
+    display: inline-block;
+}
+
+.song-playlist-container .header .track {
+    width: 10%;
+}
