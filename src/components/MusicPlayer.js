@@ -7,7 +7,7 @@ import {
 import { Button, Space, ConfigProvider, Tooltip, Slider, Flex } from 'antd';
 import './styles/musicPlayerStyle.css';
 import { PlaylistItem } from './PlaylistItem';
-import { linearVectorInterpolation, secondsToTimestamp } from '../util';
+import { linearVectorInterpolation, secondsToTimestamp, intensityStr } from '../util';
 
 const expandTransition = 300;//ms for youtube embed to change size/shape
 const expandPercent = 135 / 63;//height ratio max/min
@@ -30,7 +30,7 @@ const musicBarMaxHeight = 300;
  * prevQueue: [source1, source2, ...sourceM],  -- This is the list of songs that have been played already
  * The song queue is always plaing songQueue[0]
  */
-function YTPlayer({ songQueue, prevQueue, ytPlayer, setYtPlayer, playYt }) {
+function YTPlayer({ currSong, setCurrSong, songQueue, autoQueue, prevQueue, ytPlayer, setYtPlayer, playYt }) {
     //Expansion info
     const [expanded, setExpanded] = useState(false);
     const [expIcon, setExpIcon] = useState(<UpOutlined />);
@@ -55,8 +55,8 @@ function YTPlayer({ songQueue, prevQueue, ytPlayer, setYtPlayer, playYt }) {
 
     //Assigns the useState for the yt embed (a.k.a. ytPlayer)
     const readyPlayer = (event) => {
-        if (songQueue.length > 0) {
-            event.target.loadVideoById({ videoId: songQueue[0].video_id, startSeconds: 0 });
+        if (currSong !== undefined) {
+            event.target.loadVideoById({ videoId: currSong.video_id, startSeconds: 0 });
         }
         //Assigns the player as soon as it's ready
         setYtPlayer(event.target);
@@ -77,27 +77,34 @@ function YTPlayer({ songQueue, prevQueue, ytPlayer, setYtPlayer, playYt }) {
 
     //Skips the currently playing/selected song
     const nextSong = () => {
-        if (songQueue.length > 1) {
-            const currSong = songQueue.shift();
+        if (currSong !== undefined) {
+            let newSong = songQueue.shift()
+            setCurrSong(newSong);
             prevQueue.push(currSong);
-            ytPlayer.loadVideoById({ videoId: songQueue[0].video_id, startSeconds: 0 });
+            ytPlayer.loadVideoById({ videoId: newSong.video_id, startSeconds: 0 });
         }
     }
     //Skips to the prev song (pulling out of prevQueue)
     const prevSong = () => {
-        if (prevQueue.length > 0) {
+        if (currSong !== undefined) {
             const prevSong = prevQueue.pop();
-            songQueue.unshift(prevSong);
-            ytPlayer.loadVideoById({ videoId: songQueue[0].video_id, startSeconds: 0 });
+            songQueue.unshift(currSong);
+            setCurrSong(prevSong);
+            ytPlayer.loadVideoById({ videoId: prevSong.video_id, startSeconds: 0 });
         }
     }
 
-    //Jumps a song to the front of the queue and loads it
-    const jumpQueue = (index) => {
+    const dequeueSong = (index) => {
+        songQueue.splice(index, 1);
+    }
+
+    //Jumps a song to the front of the queue
+    const playNow = (index) => {
         const temp = songQueue[index];
         songQueue.splice(index, 1);
-        songQueue.unshift(temp);
-        ytPlayer.loadVideoById({ videoId: songQueue[0].video_id, startSeconds: 0 });
+        prevQueue.push(currSong);
+        setCurrSong(temp);
+        ytPlayer.loadVideoById({ videoId: temp.video_id, startSeconds: 0 });
     };
 
     //Jumps to selected timestamp
@@ -188,23 +195,23 @@ function YTPlayer({ songQueue, prevQueue, ytPlayer, setYtPlayer, playYt }) {
                                 </div>
                             }
                         </div>
-                        <CurrentSongDisplay currentSong={songQueue[0]} expanded={expanded} />
+                        <CurrentSongDisplay currentSong={currSong} expanded={expanded} />
                     </div>
 
                     <div style={{ display: 'block', textAlign: 'center', margin: '10px' }}>
                         <Space>
                             <Button buttontype='primary' onClick={prevSong}
-                                shape='circle' icon={<StepBackwardOutlined />} disabled={prevQueue.length == 0} />
+                                shape='circle' icon={<StepBackwardOutlined />} disabled={prevQueue.length === 0} />
                             <Button buttontype='primary' onClick={playYt}
-                                shape='circle' icon={playing ? <PauseOutlined /> : <CaretRightOutlined />} disabled={songQueue.length == 0} />
+                                shape='circle' icon={playing ? <PauseOutlined /> : <CaretRightOutlined />} disabled={currSong === undefined} />
                             <Button buttontype='primary' onClick={nextSong}
-                                shape='circle' icon={<StepForwardOutlined />} disabled={songQueue.length < 2} />
+                                shape='circle' icon={<StepForwardOutlined />} disabled={songQueue.length === 0 && autoQueue.length === 0} />
                         </Space>
                         <Slider value={time} max={duration}
                             onChange={ytSeek}
                             tooltip={{ formatter: secondsToTimestamp }} />
                         <PlayerQueue songQueue={songQueue} disabled={!expanded}
-                            onPlayClick={jumpQueue} />
+                            onPlayClick={playNow} dequeueSong={dequeueSong}/>
                     </div>
                     <div>
                         <PlayerOptions expanded={expanded} ytPlayer={ytPlayer} />
@@ -214,7 +221,7 @@ function YTPlayer({ songQueue, prevQueue, ytPlayer, setYtPlayer, playYt }) {
         </div>);
 }
 
-function PlayerQueue({ songQueue, disabled, onPlayClick }) {
+function PlayerQueue({ songQueue, disabled, onPlayClick, dequeueSong}) {
 
     const buildQueue = () => {
         let newQueue = [];
@@ -227,9 +234,12 @@ function PlayerQueue({ songQueue, disabled, onPlayClick }) {
                         track: count,
                         title: song.title,
                         intensity: song.intensity,
-                        duration: song.duration
+                        duration: song.duration,
                     }}
-                        hasPlayButton onPlayClick={() => onPlayClick(i)}
+                        options = {[{text: "Dequeue", onClick: () => dequeueSong(i)}]}
+                        hasOptionsButton
+                        hasPlayButton 
+                        onPlayClick={() => onPlayClick(i)}
                     />
                 </li>);
             count++;
@@ -272,13 +282,14 @@ function PlayerOptions({ expanded = false, ytPlayer }) {
 }
 
 function CurrentSongDisplay({ currentSong, expanded }) {
+    console.log("current song", currentSong);
     return (
         <div className={`current-song-display${expanded ? ' expanded' : ''}`}>
             <div className='song-title'>
                 {currentSong ? currentSong.title : "No Song Playing..."}
             </div>
             <div className='song-intensity'>
-                {currentSong ? currentSong.intensity : ""}
+                {currentSong ? intensityStr(currentSong.intensity) : ""}
             </div>
         </div>
     );

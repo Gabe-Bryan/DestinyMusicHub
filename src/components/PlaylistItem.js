@@ -1,5 +1,6 @@
 import React from 'react'
 import './styles/PlaylistItem.css'
+import { intensityStr } from '../util';
 
 
 let defaultOptions = [
@@ -32,15 +33,6 @@ export function PlaylistItem(
         options = defaultOptions,
     }
 ) {
-   
-    if (songData.intensity&&songData.intensity.length>1){
-        for(let i =0; i<songData.intensity.length-1; i++){
-            
-            songData.intensity[i] = songData.intensity[i]+", "
-        }
-        
-        console.log(songData.intensity)
-    }
     // function clickHandler(event) {
     //     console.log(`Do thing to play [${songData.track}. ${songData.title}]`)
     //     console.log(event.currentTarget);
@@ -55,7 +47,7 @@ export function PlaylistItem(
                 {hasPlayButton && <PlayButton onClick={onPlayClick} />}
             </div>
             <div id="item-title">{songData.title}</div>
-            <div id="item-intensity">{songData.intensity}</div>
+            <div id="item-intensity">{intensityStr(songData.intensity)}</div>
             <div id="item-length">{songData.duration}</div>
             <div id="item-options">
                 {hasOptionsButton && <OptionsButton options={options} songData={songData} />}
@@ -130,9 +122,7 @@ function OptionsPane(
     function getOptionsAsDivs(options) {
         let returnDivs = [];
         if (options) {
-            // console.log('###', options)
             for (let i = 0; i < options.length; i++) {
-                // console.log('###', option)
                 returnDivs.push(
                     <div
                         key={"option_key_" + i}

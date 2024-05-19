@@ -7,12 +7,13 @@ import { YTPlayer } from './components/MusicPlayer.js';
 import { CompleteMusic } from './pages/CompleteMusic.js';
 //import {ScaleText} from 'react-scale-text';
 import './stylesheets/style.css'
-const songQueue = [];
-const prevQueue = [];
+const songQueue = []; // manual queue
+const prevQueue = []; // graveyard of songs
+const autoQueue = []; // auto-play (playing playlists in order)
 function App() {
     //Sets whether a song is currently playing
     const [ytPlayer, setYtPlayer] = useState(null);
-    const [a, setA] = useState(3);
+    const [currSong, setCurrSong] = useState(undefined); //current song playing
 
     //Changes to pause/play depending on current state
     const playYt = () => {
@@ -27,16 +28,17 @@ function App() {
     //Adds a new song to the end of the queue, pass down through components to use
     const queueNewSong = (newSong) => {
         console.log("### queue song trigger", newSong);
-        setA((a+1)%100);
+        // setCurrSong(newSong);
         songQueue.push(newSong);
     }
 
     //Adds a new song to the front of the queue and plays it, pass down through components to use
     const playNewSong = (newSong) => {
         console.log("### play song trigger", newSong);
-        songQueue.unshift(newSong);
+        // songQueue.unshift(newSong);
+        setCurrSong(newSong);
 
-        ytPlayer.loadVideoById({ videoId: songQueue[0].video_id, startSeconds: 0 });
+        ytPlayer.loadVideoById({ videoId: newSong.video_id, startSeconds: 0 });
         if (ytPlayer.getPlayerState() === 2) {
             ytPlayer.playVideo();
         }
@@ -51,7 +53,7 @@ function App() {
                     <Route path='/OfficialMusic' element={<OfficialMusic playNewSong={playNewSong} queueNewSong={queueNewSong} />} />
                     <Route path='/CompleteMusic' element={<CompleteMusic playNewSong={playNewSong} queueNewSong={queueNewSong}/>} />
                 </Routes>
-                <YTPlayer songQueue={songQueue} prevQueue={prevQueue} ytPlayer={ytPlayer} setYtPlayer={setYtPlayer} playYt={playYt} />
+                <YTPlayer currSong = {currSong} setCurrSong={setCurrSong} songQueue={songQueue} autoQueue = {autoQueue} prevQueue={prevQueue} ytPlayer={ytPlayer} setYtPlayer={setYtPlayer} playYt={playYt} />
             </BrowserRouter>
         </div>
     );
