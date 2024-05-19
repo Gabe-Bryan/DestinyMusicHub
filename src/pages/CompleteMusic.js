@@ -11,7 +11,7 @@ function generateAllSongsFromSoundtrack(soundtracks,playNewSong,queueNewSong,sou
     let allBanners = [];
     for (let soundtrack of soundtracks) {
         let songlist=getSongListFromSoundtrackId(soundtrack._id,allSongSources,false);
-        console.log("### SONGLIST ###", songlist);
+        // console.log("### SONGLIST ###", songlist);
         allBanners.push(generateSourceSongsFromSoundtrack(songlist,soundtrack.title,playNewSong,queueNewSong,soundtrackSongOptions));
     }
     // console.log(allBanners,soundtracks,allSongSources)
@@ -24,7 +24,7 @@ function generateSourceSongsFromSoundtrack(soundtrack,title,playNewSong,queueNew
     let allSourceSong = []
     for (let songs of soundtrack) {
         allSourceSong.push(generateSongItems(songs,playNewSong,queueNewSong,soundtrackSongOptions));
-        console.log("### ALLSONGSOURCE ###", allSourceSong);
+        // console.log("### ALLSONGSOURCE ###", allSourceSong);
     }
     return (<SoundtrackBanner
         bannerText={title}

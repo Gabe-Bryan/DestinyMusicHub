@@ -33,6 +33,8 @@ export function PlaylistItem(
         options = defaultOptions,
     }
 ) {
+   
+    
     // function clickHandler(event) {
     //     console.log(`Do thing to play [${songData.track}. ${songData.title}]`)
     //     console.log(event.currentTarget);
