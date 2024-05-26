@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Route, BrowserRouter, Routes } from 'react-router-dom';
-import { Home } from './pages/home.js';
-import { OfficialMusic } from './pages/OfficialMusic.js';
+import { Route, HashRouter, Routes } from 'react-router-dom';
+import { Home } from './routes/home.js';
+import { OfficialMusic } from './routes/OfficialMusic.js';
 import Navbar from './components/Navbar.js';
 import { YTPlayer } from './components/MusicPlayer.js';
-import { CompleteMusic } from './pages/CompleteMusic.js';
+import { CompleteMusic } from './routes/CompleteMusic.js';
 //import {ScaleText} from 'react-scale-text';
 import './stylesheets/style.css'
 const songQueue = []; // manual queue
@@ -46,7 +46,7 @@ function App() {
 
     return (
         <div>
-            <BrowserRouter>
+            <HashRouter>
                 <Navbar />
                 <Routes>
                     <Route path='/' element={<Home />} />
@@ -54,7 +54,7 @@ function App() {
                     <Route path='/CompleteMusic' element={<CompleteMusic playNewSong={playNewSong} queueNewSong={queueNewSong}/>} />
                 </Routes>
                 <YTPlayer currSong = {currSong} setCurrSong={setCurrSong} songQueue={songQueue} autoQueue = {autoQueue} prevQueue={prevQueue} ytPlayer={ytPlayer} setYtPlayer={setYtPlayer} playYt={playYt} />
-            </BrowserRouter>
+            </HashRouter>
         </div>
     );
 }
