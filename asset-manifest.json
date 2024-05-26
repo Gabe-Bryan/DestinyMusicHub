@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/DestinyMusicHub/static/css/main.b5995a71.css",
-    "main.js": "/DestinyMusicHub/static/js/main.9273c749.js",
-    "static/media/marc-thompson-sanctum-18.jpg": "/DestinyMusicHub/static/media/marc-thompson-sanctum-18.76b7a9bf30f8a6a1bc13.jpg",
-    "static/media/lightfall.jpg": "/DestinyMusicHub/static/media/lightfall.47af7307adb2655f944f.jpg",
-    "static/media/season_of_plunder.jpg": "/DestinyMusicHub/static/media/season_of_plunder.3022b86ca65120481835.jpg",
-    "index.html": "/DestinyMusicHub/index.html",
-    "main.b5995a71.css.map": "/DestinyMusicHub/static/css/main.b5995a71.css.map",
-    "main.9273c749.js.map": "/DestinyMusicHub/static/js/main.9273c749.js.map"
+    "main.css": "/DestinyMusicHub/home/static/css/main.80f9cbe8.css",
+    "main.js": "/DestinyMusicHub/home/static/js/main.d34e8a39.js",
+    "static/media/marc-thompson-sanctum-18.jpg": "/DestinyMusicHub/home/static/media/marc-thompson-sanctum-18.76b7a9bf30f8a6a1bc13.jpg",
+    "static/media/lightfall.jpg": "/DestinyMusicHub/home/static/media/lightfall.47af7307adb2655f944f.jpg",
+    "static/media/season_of_plunder.jpg": "/DestinyMusicHub/home/static/media/season_of_plunder.3022b86ca65120481835.jpg",
+    "index.html": "/DestinyMusicHub/home/index.html",
+    "main.80f9cbe8.css.map": "/DestinyMusicHub/home/static/css/main.80f9cbe8.css.map",
+    "main.d34e8a39.js.map": "/DestinyMusicHub/home/static/js/main.d34e8a39.js.map"
   },
   "entrypoints": [
-    "static/css/main.b5995a71.css",
-    "static/js/main.9273c749.js"
+    "static/css/main.80f9cbe8.css",
+    "static/js/main.d34e8a39.js"
   ]
 }
