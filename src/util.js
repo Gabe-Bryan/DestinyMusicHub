@@ -86,7 +86,8 @@ export function generateSongListFromSources(songsData) {
     let songListFromSources = [];
     for (let song of songsData) {
         song.sources.forEach(songSource => {
-
+            if (songSource.intensity && songSource.intensity.length > 1)
+                console.log("Song sources:", songSource.intensity);
             songListFromSources.push({
                 title: songSource.version_title || song.title,
                 track: songSource.track_number || undefined,
@@ -101,6 +102,19 @@ export function generateSongListFromSources(songsData) {
         });
     }
     return songListFromSources;
+}
+
+export function intensityStr(intensity){
+    let intensityStr = '';
+    if(intensity){
+        for(let i =0; i < intensity.length; i++){
+            if(intensityStr.length > 0){
+                intensityStr += ", ";
+            }
+            intensityStr += intensity[i];
+        }
+    }
+    return intensityStr;
 }
 
 /*
