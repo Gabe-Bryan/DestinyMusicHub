@@ -109,9 +109,7 @@ export function OfficialMusic({
                 <h1>Official Music Page</h1>
             </header>
             <main>
-                <h2 style={{ marginTop: "5rem", marginBottom: "5rem" }}>
-                    Official Soundtracks / Released Music:
-                </h2>
+                <h2></h2>
                 <div style={containerStyle}>
                     <center>
                         {generateAllSoundtrackBanners(soundtracks, playNewSong, queueNewSong, soundtrackSongOptions)}
