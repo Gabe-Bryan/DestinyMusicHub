@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.29ffe7eb.css",
+    "main.js": "/static/js/main.79b102e0.js",
+    "static/media/marc-thompson-sanctum-18.jpg": "/static/media/marc-thompson-sanctum-18.76b7a9bf30f8a6a1bc13.jpg",
+    "static/media/lightfall.jpg": "/static/media/lightfall.47af7307adb2655f944f.jpg",
+    "static/media/season_of_plunder.jpg": "/static/media/season_of_plunder.3022b86ca65120481835.jpg",
+    "index.html": "/index.html",
+    "main.29ffe7eb.css.map": "/static/css/main.29ffe7eb.css.map",
+    "main.79b102e0.js.map": "/static/js/main.79b102e0.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.29ffe7eb.css",
+    "static/js/main.79b102e0.js"
+  ]
+}
