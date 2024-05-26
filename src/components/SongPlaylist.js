@@ -5,6 +5,7 @@ import { SongItem } from "./SongItem"
 
 export function SongPlaylist({ playlistData,playNewSong,queueNewSong,soundtrackSongOptions }) {
 
+    //console.log(playlistData)
     function getSongList(playlistDataIn) {
                     
         return (<SongItem data={playlistDataIn} playNewSong={playNewSong} queueNewSong={queueNewSong} soundtrackSongOptions={soundtrackSongOptions}/>);

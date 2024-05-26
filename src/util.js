@@ -109,15 +109,16 @@ export function generateSongListFromSources(songsData) {
     ###########################################################
 */
 export function generateSongSourceList(songsData) {
+    let tempID=""
     let SongList = []
     for (let song of songsData) {
         let SongSourceList = []
         let songTrackAmount = ""
         let min = Number.MAX_VALUE
-        let main_soundtrack_id = ""
+        let main_soundtrack_id = "655c0edbbe75426d08b590d1"
+        
         song.sources.forEach(songSource => {
-
-            SongSourceList.push({
+            let temp={
                 title: songSource.version_title || song.title,
                 track: songSource.track_number || undefined,
                 version_title: songSource.version_title,
@@ -127,7 +128,15 @@ export function generateSongSourceList(songsData) {
                 video_id: songSource.video_id || undefined,
                 source_type: songSource.source_type || undefined,
                 intensity: songSource.intensity || undefined,
-            });
+            } 
+            //if(temp.title==="Main") {tempID=temp.soundtrack_id}
+            
+            let offline = (temp.video_id===undefined|| temp.video_id === "" )
+
+            
+            if(true){
+                SongSourceList.push(temp);
+            }
             if (songSource.track_number) {
                 if (min < songSource.track_number) {
                     songTrackAmount += "," + songSource.track_number
@@ -143,13 +152,16 @@ export function generateSongSourceList(songsData) {
 
             }
             if (songSource.soundtrack_id) {
+                console.log(song.title,temp.title , tempID,temp.soundtrack_id)
                 main_soundtrack_id = songSource.soundtrack_id
+                
             }
         });
 
         SongList.push({ SongSources: SongSourceList, all_track: songTrackAmount.substring(1), title: song.title, soundtrack_id: main_soundtrack_id, track: min })
     }
-    SongList = SongList.filter(val => val["SongSources"].length !== 0)
+    console.log("###mainID Found###",tempID in SongList)
+    //SongList = SongList.filter(val => val["SongSources"].length !== 0)
     return SongList;
 }
 

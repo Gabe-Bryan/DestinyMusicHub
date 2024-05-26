@@ -7,6 +7,7 @@ function SongItem({ data, onClick = undefined, expanded = false,playNewSong,queu
 	const [isExpanded, setIsExpanded] = useState(expanded ? "shown" : "hidden");
 	function expand() {
 		if (isExpanded === "shown") {
+			
 			setIsExpanded("hidden");
 			console.log(data.title + isExpanded);
 		} else {
@@ -16,9 +17,9 @@ function SongItem({ data, onClick = undefined, expanded = false,playNewSong,queu
 	}
 	data.SongSources.sort((a, b) => a.track - b.track);
 	return (
-		<div className='song-item-container' >
+		<div className='song-item-container' onClick={expand}>
 			<div className='track' >{data.all_track}</div>
-			<div className='title' onClick={expand}>{data.title}</div>
+			<div className='title' >{data.title}</div>
 			<div id="dropdown" className={isExpanded}>
 				{/*console.log(data.SongSources)*/}
 				{/* <p>{data}</p> */}

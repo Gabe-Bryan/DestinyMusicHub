@@ -11,8 +11,12 @@ function generateAllSongsFromSoundtrack(soundtracks,playNewSong,queueNewSong,sou
     let allBanners = [];
     for (let soundtrack of soundtracks) {
         let songlist=getSongListFromSoundtrackId(soundtrack._id,allSongSources,false);
-        // console.log("### SONGLIST ###", songlist);
-        allBanners.push(generateSourceSongsFromSoundtrack(songlist,soundtrack.title,playNewSong,queueNewSong,soundtrackSongOptions));
+        //console.log("### SONGLIST ###", songlist);
+        //allBanners.push(generateSourceSongsFromSoundtrack(songlist,soundtrack.title,playNewSong,queueNewSong,soundtrackSongOptions));
+        if (songlist.length>0){
+            //console.log("is this working")
+            allBanners.push(generateSourceSongsFromSoundtrack(songlist,soundtrack.title,playNewSong,queueNewSong,soundtrackSongOptions));
+        }
     }
     // console.log(allBanners,soundtracks,allSongSources)
     return (<center>{allBanners}</center>)
@@ -23,14 +27,17 @@ function generateAllSongsFromSoundtrack(soundtracks,playNewSong,queueNewSong,sou
 function generateSourceSongsFromSoundtrack(soundtrack,title,playNewSong,queueNewSong,soundtrackSongOptions) {
     let allSourceSong = []
     for (let songs of soundtrack) {
+        //console.log("###SONGS FROM SOUNDTRACK COMPLETE###",songs)
+        
         allSourceSong.push(generateSongItems(songs,playNewSong,queueNewSong,soundtrackSongOptions));
         // console.log("### ALLSONGSOURCE ###", allSourceSong);
     }
     return (<SoundtrackBanner
         bannerText={title}
         coverSrc={getCoverArtPath(title)}
+        key={"songTrackBanner "+title}
         >
-            {<div style={{textAlign: "left", padding:"0rem 1rem"}}>{allSourceSong}</div>}
+            {<div key = {"songTrack "+title}style={{textAlign: "left", padding:"0rem 1rem"}}>{allSourceSong}</div>}
             </SoundtrackBanner>)
 }
 
@@ -38,9 +45,7 @@ function generateSourceSongsFromSoundtrack(soundtrack,title,playNewSong,queueNew
 
 function generateSongItems(songItem,playNewSong,queueNewSong,soundtrackSongOptions) {
     return (
-        <div>
             <SongPlaylist playlistData={songItem} playNewSong={playNewSong} queueNewSong={queueNewSong} soundtrackSongOptions={soundtrackSongOptions} />
-        </div>
     )
 }
 
