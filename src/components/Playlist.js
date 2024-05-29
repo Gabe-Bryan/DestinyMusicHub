@@ -5,7 +5,7 @@ import { PlaylistItem } from "./PlaylistItem"
 
 let playlistItemKeyVal = 0;
 
-export function Playlist({ playlistData, hasPlayButtons = false, hasOptionsButtons = false, options, playNewSong, queueNewSong }) {
+export function Playlist({ playlistData, hasPlayButtons = false, hasOptionsButtons = false, options, playNewSong }) {
 
     function getSongList(playlistDataIn) {
         let songList = [];
