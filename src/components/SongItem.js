@@ -15,9 +15,12 @@ function SongItem({ data, onClick = undefined, expanded = false,playNewSong,queu
 	}
 	data.SongSources.sort((a, b) => a.track - b.track);
 	return (
-		<div className='song-item-container' onClick={expand}>
-			<div className='track' >{data.all_track}</div>
-			<div className='title' >{data.title}</div>
+		
+		<div className='song-item-container'>
+			<div className='top' onClick={expand}>
+				<div className='track' >{data.all_track}</div>
+				<div className='title' >{data.title}</div>
+			</div>
 			<div id="dropdown" className={isExpanded}>
 				{/* <p>{data}</p> */}
 				
